@@ -17,7 +17,7 @@ LABn/
 ├── evidence/photos/               회로별 보드 동작 사진
 ├── evidence/videos/                회로별 보드 동작 영상
 ├── LABn_실험전보고서.html          실험 전 보고서
-└── LABn_실험후보고서.html·pdf      실험 후 보고서
+└── LABn_실험후보고서.html          실험 후 보고서
 ```
 
 ## 제출 태그
@@ -25,7 +25,7 @@ LABn/
 | LAB | 태그 | 커밋 |
 |---|---|---|
 | LAB1 | [`lab1-submit`](../../releases/tag/lab1-submit) | `3be4c53` |
-| LAB2 | [`lab2-submit`](../../releases/tag/lab2-submit) | (제출 시 릴리스 예정) |
+| LAB2 | [`lab2-submit`](../../releases/tag/lab2-submit) | `dac086e` |
 
 ## 도구
 
