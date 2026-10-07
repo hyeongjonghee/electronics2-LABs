@@ -1,0 +1,8 @@
+STAGE=SIM_START
+STAGE=SIM_DONE status=ok
+STAGE=SYNTH_START
+STAGE=SYNTH_DONE status=synth_design Complete!
+STAGE=IMPL_START
+STAGE=IMPL_DONE status=write_bitstream Complete!
+RESULT synth_status={synth_design Complete!} impl_status={write_bitstream Complete!} wns=0.000000 whs=0.000000 bit_exists=1 bit_path=./vivado/lab4_mult_4bit.runs/impl_1/lab4_mult_4bit_top.bit
+STAGE=ALL_DONE
