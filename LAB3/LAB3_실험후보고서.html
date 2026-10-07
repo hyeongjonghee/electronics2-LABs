@@ -1,0 +1,1476 @@
+<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>LAB3 실험 후 보고서 — 형종희</title>
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js"></script>
+<style>
+:root{
+  --bg:#ffffff; --fg:#1d2433; --muted:#5b6478; --line:#d9deea; --soft:#f4f6fb;
+  --accent:#0b5fc0; --accent-soft:#e8f0fc; --ok:#137a3c; --ok-soft:#e6f5ec;
+  --warn:#9a5b00; --warn-soft:#fff4de; --bad:#b3261e; --bad-soft:#fdecea;
+  --code-bg:#f6f7fa;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);
+  font-family:'Noto Sans KR','Pretendard','Malgun Gothic','Apple SD Gothic Neo',system-ui,sans-serif;
+  line-height:1.75;font-size:16px}
+.page{max-width:840px;margin:0 auto;padding:28px 22px 90px}
+header.cover{background:linear-gradient(135deg,#0b3d91,#062a6b);color:#fff;border-radius:14px;padding:28px 30px 24px;margin-bottom:22px}
+header.cover .kicker{color:#cfe0ff;font-weight:600;font-size:.95rem}
+header.cover h1{color:#fff;margin:.25em 0 .2em;font-size:2rem;line-height:1.3}
+header.cover .sub{color:#d6e4ff}
+.meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px 14px;margin-top:16px}
+.meta div{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.3);color:#fff;border-radius:10px;padding:8px 12px;font-size:.92rem}
+.meta b{display:block;color:#c5d8ff;font-weight:600;font-size:.78rem}
+.github-box{background:var(--accent-soft);border:1.5px solid var(--accent);border-radius:12px;padding:14px 18px;margin:16px 0}
+.github-box h3{margin:.1em 0 .5em;color:var(--accent)}
+.github-box table{margin:0}
+h2{font-size:1.55rem;margin:2.2em 0 .6em;padding-bottom:.25em;border-bottom:2px solid var(--line);scroll-margin-top:12px}
+h3{font-size:1.2rem;margin:1.6em 0 .5em;color:var(--accent)}
+h4{font-size:1.02rem;margin:1.2em 0 .35em}
+p{margin:.55em 0}
+code,pre,.mono{font-family:'D2Coding','Cascadia Mono','Consolas','Noto Sans Mono CJK KR',monospace;
+  font-variant-ligatures:none;-webkit-font-feature-settings:"liga" 0,"calt" 0;font-feature-settings:"liga" 0,"calt" 0}
+code{background:var(--code-bg);padding:.08em .35em;border-radius:5px;font-size:.9em}
+pre{background:var(--code-bg) !important;color:var(--fg);border:1px solid var(--line);border-radius:10px;padding:12px 14px;overflow-x:auto;
+  font-size:.86rem;line-height:1.55;margin:.6em 0}
+pre code{background:transparent !important;padding:0}
+table{border-collapse:collapse;width:100%;margin:.7em 0;font-size:.94rem}
+th,td{border:1px solid var(--line);padding:7px 10px;text-align:left;vertical-align:top;overflow-wrap:anywhere}
+th{background:var(--soft);font-weight:700}
+td.c,th.c{text-align:center}
+.tblwrap{overflow-x:auto}
+.box{border-radius:12px;padding:12px 16px;margin:1em 0;border:1px solid var(--line);background:var(--soft)}
+.box.ok{background:var(--ok-soft);border-color:var(--ok)}
+.box.ok .t{color:var(--ok);font-weight:700}
+.box.warn{background:var(--warn-soft);border-color:var(--warn)}
+.box.warn .t{color:var(--warn);font-weight:700}
+.box.info{background:var(--accent-soft);border-color:var(--accent)}
+.box.info .t{color:var(--accent);font-weight:700}
+.status-ok{color:var(--ok);font-weight:700}
+.status-warn{color:var(--warn);font-weight:700}
+figure{margin:1em 0}
+figure img{max-width:100%;max-height:195mm;height:auto;display:block;margin:0 auto;border:1px solid var(--line);border-radius:8px}
+figcaption{font-size:.88rem;color:var(--muted);margin-top:5px}
+video{max-width:100%;max-height:195mm;display:block;margin:.4em auto;border:1px solid var(--line);border-radius:8px;background:#000}
+.videolink{display:inline-block;margin-top:6px;font-size:.9rem}
+nav.toc{background:var(--soft);border:1px solid var(--line);border-radius:12px;padding:14px 20px;margin:18px 0}
+nav.toc ol{margin:.3em 0;padding-left:1.3em;columns:2;column-gap:24px}
+nav.toc a{color:var(--accent);text-decoration:none}
+.circuit{border-top:4px solid var(--accent);padding-top:6px;margin-top:3em}
+.badge{display:inline-block;border-radius:999px;padding:2px 11px;font-size:.8rem;font-weight:700;margin-right:6px}
+.badge.pass{background:var(--ok-soft);color:var(--ok);border:1px solid var(--ok)}
+.src{color:var(--muted);font-size:.82rem}
+@media print{
+  @page{size:A4;margin:14mm}
+  body{font-size:11pt}
+  .page{max-width:none;padding:0}
+  header.cover{padding:16px 20px}
+  table,figure,pre,.box{page-break-inside:avoid}
+  video{display:none}
+  .videolink{display:block}
+}
+
+.svgwrap{border:1px solid var(--line);border-radius:8px;padding:6px;background:#fff;overflow-x:auto}
+.svgwrap svg{min-width:560px;display:block}
+mjx-container[display="true"]{overflow-x:auto;overflow-y:hidden;padding:2px 0}
+@media print{h2,h3,h4{break-after:avoid;page-break-after:avoid}pre{break-inside:auto !important;page-break-inside:auto !important}section.circuit{break-before:page;page-break-before:always;margin-top:0}figure{break-inside:avoid}}
+</style></head><body><div class="page">
+<header class="cover"><div class="kicker">서울시립대학교 · 전자전기컴퓨터설계실험Ⅱ</div>
+<h1>LAB3 실험 후 보고서</h1>
+<div class="sub">주변장치 제어 7종 — PWM · 피에조 · 스텝 모터 · 시계 · 문자 LCD · UART</div>
+<div class="meta">
+<div><b>이름</b>형종희</div><div><b>학번</b>2023440145</div><div><b>조</b>C조</div>
+<div><b>실습일</b>2026-09-28</div><div><b>작성일</b>2026-09-28</div><div><b>대상 보드</b>Combo II-DLD S75 · xc7s75fgga484-1</div><div><b>도구</b>Vivado 2026.1 · Icarus Verilog 12.0</div>
+</div></header>
+<div class="github-box"><h3>📦 GitHub 제출 정보</h3>
+<div class="tblwrap"><table><thead><tr><th>항목</th><th>값</th></tr></thead><tbody><tr><td>저장소</td><td><a href="https://github.com/hyeongjonghee/electronics2-LABs" target="_blank">https://github.com/hyeongjonghee/electronics2-LABs</a> (Public)</td></tr><tr><td>구조</td><td><code>LAB1/</code> · <code>LAB2/</code> · <code>LAB3/</code>가 형제 폴더</td></tr><tr><td>LAB3 설계 소스 커밋</td><td><code>d1479db</code> — 7개 회로의 RTL · 테스트벤치 · XDC (30개 파일)</td></tr><tr><td>LAB3 경로</td><td><code>LAB3/circuits/LAB3-01~07/</code>, <code>LAB3/evidence/</code>, <code>LAB3/LAB3_실험후보고서.html</code> · <code>.pdf</code>, 보드 검증 영상 9개</td></tr><tr><td>제출 태그</td><td><a href="https://github.com/hyeongjonghee/electronics2-LABs/tree/lab3-submit/LAB3" target="_blank">lab3-submit</a> ✅ — 이 보고서(HTML · PDF)와 보드 검증 영상이 모두 들어간 최종 커밋</td></tr><tr><td>실험 전 보고서 태그</td><td><a href="https://github.com/hyeongjonghee/electronics2-LABs/tree/lab3-prelab/LAB3" target="_blank">lab3-prelab</a> (커밋 <code>2398f6f</code>)</td></tr><tr><td>회로 번호</td><td>01 LED PWM · 02 RGB PWM · 03 피에조 · 04 스텝 모터 · 05 MM:SS 시계 · 06 Character LCD · 07 UART 에코</td></tr></tbody></table></div></div>
+<h2 id="overview">0. 7개 회로 결과 요약</h2>
+<p>7개 회로 모두 RTL 작성 → 두 시뮬레이터(Vivado XSim, Icarus)의 자기검사 통과 → 합성 · 구현 · 비트스트림 생성까지 마쳤다. 2026-09-28 실습에서 새 장치 핀 30개를 매뉴얼과 대조한 뒤, 7개 회로 모두 보드에서 설계대로 동작하는 것을 확인했다.</p>
+<div class="tblwrap"><table><thead><tr><th>#</th><th>회로</th><th>XSim · Icarus</th><th>LUT</th><th>FF</th><th>IOB</th><th>WNS (ns)</th><th>핀 근거</th><th>보드</th></tr></thead><tbody><tr><td>1</td><td>LED PWM</td><td>checks=4</td><td>92</td><td>52</td><td>11</td><td>8.971</td><td>p.423</td><td>✔</td></tr><tr><td>2</td><td>RGB PWM</td><td>checks=2</td><td>276</td><td>144</td><td>17</td><td>8.629</td><td>p.555</td><td>✔</td></tr><tr><td>3</td><td>피에조</td><td>edges=5</td><td>21</td><td>18</td><td>3</td><td>16.761</td><td>매뉴얼</td><td>✔</td></tr><tr><td>4</td><td>스텝 모터</td><td>checks=8</td><td>20</td><td>25</td><td>8</td><td>16.252</td><td>p.555</td><td>✔</td></tr><tr><td>5</td><td>MM:SS 시계</td><td>checks=7</td><td>83</td><td>58</td><td>18</td><td>15.118</td><td>p.555</td><td>✔</td></tr><tr><td>6</td><td>Character LCD</td><td>bytes=40</td><td>111</td><td>93</td><td>13</td><td>14.220</td><td>p.568</td><td>✔</td></tr><tr><td>7</td><td>UART 에코</td><td>checks=3</td><td>134</td><td>118</td><td>12</td><td>14.617</td><td>p.586</td><td>✔</td></tr></tbody></table></div>
+<div class="box info"><span class="t">공통 설계 규칙</span>
+<ul>
+<li><b>클록</b>: 메인 클록 B6, 보드 다이얼 <b>F = 50 MHz</b>. 7개 XDC 모두 <code>create_clock -period 20.000</code>.</li>
+<li><b>리셋</b>: 키패드 1(K4), 누르면 High → 비동기 리셋 <code>rst_p</code>.</li>
+<li><b>시간 만들기</b>: 원하는 시간 \(t\)는 클록 수 \(n=t\cdot f_{clk}\)를 세서 만든다. 예) 20 ms = 1,000,000클록, 1 s = 50,000,000클록.</li>
+<li><b>시뮬레이션 축소</b>: 테스트벤치는 CLK_HZ 같은 파라미터를 작게 바꿔 같은 동작을 수천~수만 배 빨리 확인한다. RTL은 바꾸지 않는다.</li>
+</ul></div>
+<div class="box ok"><span class="t">핀 확인 완료</span> — 새 장치 핀 30개를 매뉴얼 p.555 · 568 · 578 · 586과 대조했다. 매뉴얼 오타 1건(CLED_R4)은 보드로 확인했고, 핀 수정 없이 실험 전 빌드를 그대로 사용했다.</div>
+<nav class="toc"><b>목차</b><ol><li><a href="#c01">실험 1 · LED 밝기 조절 (PWM)</a></li><li><a href="#c02">실험 2 · RGB LED 색 조합 (3채널 PWM)</a></li><li><a href="#c03">실험 3 · 피에조 부저 (주파수 분주로 음 만들기)</a></li><li><a href="#c04">실험 4 · 스텝 모터 (2상 여자 순서 만들기)</a></li><li><a href="#c05">실험 5 · MM:SS 디지털 시계 (7세그먼트 4자리)</a></li><li><a href="#c06">실험 6 · Character LCD (HD44780 호환 16×2)</a></li><li><a href="#c07">실험 7 · UART 에코 (9600 bps, 8N1)</a></li></ol></nav>
+<section class="circuit" id="c01"><h2>1. 실험 1 · LED 밝기 조절 (PWM)</h2>
+<h3>① 목적</h3>
+<p>버튼을 누를 때마다 LED 8개의 밝기가 0 → 10% → … → 100% → 0으로 한 단계씩 바뀌게 한다. LED는 켜짐·꺼짐 두 상태만 있지만, 1초에 1,000번씩 "켜진 시간의 비율"을 바꾸면 눈에는 밝기가 바뀐 것처럼 보인다. 선풍기 날개가 빨리 돌면 하나의 원판처럼 보이는 것과 같은 원리다.</p>
+<h3>② 이론 · 설계 계산</h3>
+<p>한 PWM 주기의 클록 수 \(N\)과, 밝기 단계 \(L\,(0\le L\le 10)\)에서 High를 유지하는 클록 수 \(T_{on}\)은 다음과 같다.</p>
+$$N=\frac{f_{clk}}{f_{PWM}}=\frac{50\,000\,000}{1\,000}=50\,000,\qquad T_{on}=\frac{N\cdot L}{10}=5\,000\,L$$
+$$D=\frac{T_{on}}{N}=\frac{L}{10}\quad(L=3 \Rightarrow D=30\%)$$
+<p>버튼은 기계 접점이라 누르는 순간 수 ms 동안 0과 1을 오간다(채터링). <code>button_onepulse</code>는 2단 플립플롭으로 비동기 입력을 클록에 맞춘 뒤, 값이 \(1\,000\,000\) 클록 = <b>20 ms</b> 동안 그대로일 때만 한 클록짜리 펄스를 낸다.</p>
+<div class="tblwrap"><table><thead><tr><th>파라미터</th><th>값</th><th>의미</th></tr></thead><tbody><tr><td>CLK_HZ</td><td>50,000,000</td><td>메인 클록(다이얼 F)</td></tr><tr><td>PWM_HZ</td><td>1,000</td><td>깜빡임 주파수 1 kHz</td></tr><tr><td>LEVELS</td><td>10</td><td>밝기 11단계(0~10)</td></tr><tr><td>DEBOUNCE_CYCLES</td><td>1,000,000</td><td>20 ms 안정 판정</td></tr></tbody></table></div>
+<h3>③ 포트 · 보드 매핑</h3>
+<div class="tblwrap"><table><thead><tr><th>포트</th><th>핀</th><th>보드 장치</th></tr></thead><tbody><tr><td>clk_50mhz</td><td>B6</td><td>MAIN_CLOCK1</td></tr><tr><td>rst_p</td><td>K4</td><td>키패드 1 (누르면 리셋)</td></tr><tr><td>button</td><td>N8</td><td>키패드 2 (밝기 한 단계 올림)</td></tr><tr><td>led[7:0]</td><td>L4 M4 M2 N7 M7 M3 M1 N5</td><td>LED1~LED8 (led[0] = LED8)</td></tr></tbody></table></div>
+<h3>④ RTL</h3>
+<pre><code>`timescale 1ns/1ps
+module lab3_led_pwm #(
+    parameter integer CLK_HZ = 50_000_000,
+    parameter integer PWM_HZ = 1_000,
+    parameter integer LEVELS = 10,
+    parameter integer DEBOUNCE_CYCLES = 1_000_000
+) (
+    input  wire clk_50mhz,
+    input  wire rst_p,
+    input  wire button,
+    output wire [7:0] led
+);
+
+    wire press;
+    wire pwm;
+    reg [3:0] level;
+
+    button_onepulse #(.STABLE_CYCLES(DEBOUNCE_CYCLES)) u_button (
+        .clk(clk_50mhz), .rst_p(rst_p), .button(button), .pulse(press)
+    );
+
+    always @(posedge clk_50mhz or posedge rst_p) begin
+        if (rst_p)
+            level &lt;= 4&#x27;d0;
+        else if (press)
+            level &lt;= (level == LEVELS) ? 4&#x27;d0 : level + 1&#x27;b1;
+    end
+
+    pwm_channel #(.PERIOD_CYCLES(CLK_HZ / PWM_HZ), .LEVELS(LEVELS)) u_pwm (
+        .clk(clk_50mhz), .rst_p(rst_p), .level(level), .pwm(pwm)
+    );
+
+    assign led = {8{pwm}};
+endmodule</code></pre>
+<pre><code>`timescale 1ns/1ps
+module pwm_channel #(
+    parameter integer PERIOD_CYCLES = 50_000,
+    parameter integer LEVELS = 10
+) (
+    input  wire clk,
+    input  wire rst_p,
+    input  wire [3:0] level,
+    output reg  pwm
+);
+    localparam integer COUNT_WIDTH = (PERIOD_CYCLES &lt; 2) ? 1 : $clog2(PERIOD_CYCLES);
+    reg [COUNT_WIDTH-1:0] count;
+    integer threshold;
+
+    always @* begin
+        if (level &gt;= LEVELS)
+            threshold = PERIOD_CYCLES;
+        else
+            threshold = (PERIOD_CYCLES * level) / LEVELS;
+    end
+
+    always @(posedge clk or posedge rst_p) begin
+        if (rst_p) begin
+            count &lt;= {COUNT_WIDTH{1&#x27;b0}};
+            pwm &lt;= 1&#x27;b0;
+        end else begin
+            pwm &lt;= (count &lt; threshold);
+            if (count == PERIOD_CYCLES - 1)
+                count &lt;= {COUNT_WIDTH{1&#x27;b0}};
+            else
+                count &lt;= count + 1&#x27;b1;
+        end
+    end
+endmodule</code></pre>
+<pre><code>`timescale 1ns/1ps
+module button_onepulse #(
+    parameter integer STABLE_CYCLES = 1_000_000
+) (
+    input  wire clk,
+    input  wire rst_p,
+    input  wire button,
+    output reg  pulse
+);
+
+    (* ASYNC_REG = &quot;TRUE&quot; *) reg button_meta;
+    (* ASYNC_REG = &quot;TRUE&quot; *) reg button_sync;
+    localparam integer COUNT_WIDTH = (STABLE_CYCLES &lt; 2) ? 1 : $clog2(STABLE_CYCLES);
+    reg [COUNT_WIDTH-1:0] stable_count;
+    reg accepted;
+
+    always @(posedge clk or posedge rst_p) begin
+        if (rst_p) begin
+            button_meta &lt;= 1&#x27;b0;
+            button_sync &lt;= 1&#x27;b0;
+        end else begin
+            button_meta &lt;= button;
+            button_sync &lt;= button_meta;
+        end
+    end
+
+    always @(posedge clk or posedge rst_p) begin
+        if (rst_p) begin
+            stable_count &lt;= {COUNT_WIDTH{1&#x27;b0}};
+            accepted &lt;= 1&#x27;b0;
+            pulse &lt;= 1&#x27;b0;
+        end else begin
+            pulse &lt;= 1&#x27;b0;
+            if (button_sync == accepted) begin
+                stable_count &lt;= {COUNT_WIDTH{1&#x27;b0}};
+            end else if (stable_count == STABLE_CYCLES - 1) begin
+                stable_count &lt;= {COUNT_WIDTH{1&#x27;b0}};
+                accepted &lt;= button_sync;
+                pulse &lt;= button_sync;
+            end else begin
+                stable_count &lt;= stable_count + 1&#x27;b1;
+            end
+        end
+    end
+endmodule</code></pre>
+<h3>⑤ 시뮬레이션</h3>
+<p>50,000클록짜리 주기를 그대로 돌리면 파형이 너무 길어진다. 테스트벤치는 파라미터만 줄여(CLK_HZ=1000, PWM_HZ=100) 한 주기를 10클록으로 만들고, 한 주기 안의 High 개수가 단계 값과 같은지 센다. 영화를 빨리 감기로 보되, 줄거리는 그대로인 것과 같다.</p>
+<p><span class="badge pass">PASS</span> Vivado XSim과 Icarus Verilog 12.0에서 같은 결과를 확인했다: <code>LAB3_LED_PWM_PASS checks=4</code></p><p>검사 4개: 리셋 직후 0, 3번 눌러 3, 7번 더 눌러 10(항상 켜짐), 한 번 더 눌러 0으로 되돌아감.</p>
+<figure><div class="svgwrap"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 202" width="100%" role="img" aria-label="XSim · tb_led_pwm (CLK_HZ=1000, PWM_HZ=100 → 한 주기 10클록)" style="background:#fff;font-family:Consolas,monospace">
+<text x="118" y="16" font-size="12" fill="#5b6478">XSim · tb_led_pwm (CLK_HZ=1000, PWM_HZ=100 → 한 주기 10클록)</text>
+<line x1="118.0" y1="22" x2="118.0" y2="180" stroke="#eef1f7"/>
+<text x="118.0" y="194" font-size="10" fill="#5b6478" text-anchor="middle">0 ns</text>
+<line x1="178.8" y1="22" x2="178.8" y2="180" stroke="#eef1f7"/>
+<text x="178.8" y="194" font-size="10" fill="#5b6478" text-anchor="middle">383 ns</text>
+<line x1="239.6" y1="22" x2="239.6" y2="180" stroke="#eef1f7"/>
+<text x="239.6" y="194" font-size="10" fill="#5b6478" text-anchor="middle">766 ns</text>
+<line x1="300.4" y1="22" x2="300.4" y2="180" stroke="#eef1f7"/>
+<text x="300.4" y="194" font-size="10" fill="#5b6478" text-anchor="middle">1,149 ns</text>
+<line x1="361.2" y1="22" x2="361.2" y2="180" stroke="#eef1f7"/>
+<text x="361.2" y="194" font-size="10" fill="#5b6478" text-anchor="middle">1,532 ns</text>
+<line x1="422.0" y1="22" x2="422.0" y2="180" stroke="#eef1f7"/>
+<text x="422.0" y="194" font-size="10" fill="#5b6478" text-anchor="middle">1,916 ns</text>
+<line x1="482.8" y1="22" x2="482.8" y2="180" stroke="#eef1f7"/>
+<text x="482.8" y="194" font-size="10" fill="#5b6478" text-anchor="middle">2,299 ns</text>
+<line x1="543.6" y1="22" x2="543.6" y2="180" stroke="#eef1f7"/>
+<text x="543.6" y="194" font-size="10" fill="#5b6478" text-anchor="middle">2,682 ns</text>
+<line x1="604.4" y1="22" x2="604.4" y2="180" stroke="#eef1f7"/>
+<text x="604.4" y="194" font-size="10" fill="#5b6478" text-anchor="middle">3,065 ns</text>
+<line x1="665.2" y1="22" x2="665.2" y2="180" stroke="#eef1f7"/>
+<text x="665.2" y="194" font-size="10" fill="#5b6478" text-anchor="middle">3,448 ns</text>
+<line x1="726.0" y1="22" x2="726.0" y2="180" stroke="#eef1f7"/>
+<text x="726.0" y="194" font-size="10" fill="#5b6478" text-anchor="middle">3,831 ns</text>
+<text x="110" y="44.0" font-size="12" fill="#1d2433" text-anchor="end">button</text>
+<path d="M118.0,48.0 L157.8,48.0 L157.8,32.0 L176.7,32.0 L176.7,48.0 L195.8,48.0 L195.8,32.0 L214.8,32.0 L214.8,48.0 L233.9,48.0 L233.9,32.0 L252.9,32.0 L252.9,48.0 L313.4,48.0 L313.4,32.0 L332.3,32.0 L332.3,48.0 L351.3,48.0 L351.3,32.0 L370.3,32.0 L370.3,48.0 L389.4,48.0 L389.4,32.0 L408.4,32.0 L408.4,48.0 L427.5,48.0 L427.5,32.0 L446.5,32.0 L446.5,48.0 L465.6,48.0 L465.6,32.0 L484.6,32.0 L484.6,48.0 L503.7,48.0 L503.7,32.0 L522.7,32.0 L522.7,48.0 L541.7,48.0 L541.7,32.0 L560.8,32.0 L560.8,48.0 L630.8,48.0 L630.8,32.0 L649.7,32.0 L649.7,48.0 L726.0,48.0" fill="none" stroke="#0b5fc0" stroke-width="1.6"/>
+<text x="110" y="74.0" font-size="12" fill="#1d2433" text-anchor="end">press</text>
+<path d="M118.0,78.0 L170.4,78.0 L170.4,62.0 L173.5,62.0 L173.5,78.0 L205.3,78.0 L205.3,62.0 L208.5,62.0 L208.5,78.0 L243.4,78.0 L243.4,62.0 L246.6,62.0 L246.6,78.0 L325.9,78.0 L325.9,62.0 L329.1,62.0 L329.1,78.0 L360.8,78.0 L360.8,62.0 L364.0,62.0 L364.0,78.0 L398.9,78.0 L398.9,62.0 L402.1,62.0 L402.1,78.0 L437.0,78.0 L437.0,62.0 L440.2,62.0 L440.2,78.0 L475.1,78.0 L475.1,62.0 L478.3,62.0 L478.3,78.0 L513.2,78.0 L513.2,62.0 L516.4,62.0 L516.4,78.0 L551.3,78.0 L551.3,62.0 L554.4,62.0 L554.4,78.0 L643.3,78.0 L643.3,62.0 L646.5,62.0 L646.5,78.0 L726.0,78.0" fill="none" stroke="#0b5fc0" stroke-width="1.6"/>
+<text x="110" y="104.0" font-size="12" fill="#1d2433" text-anchor="end">level</text>
+<path d="M118.0,100.0 L121.0,92 L170.5,92 L173.5,100.0 L170.5,108 L121.0,108 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="145.8" y="104.0" font-size="11" fill="#1d2433" text-anchor="middle">0</text>
+<path d="M173.5,100.0 L176.5,92 L205.5,92 L208.5,100.0 L205.5,108 L176.5,108 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="191.0" y="104.0" font-size="11" fill="#1d2433" text-anchor="middle">1</text>
+<path d="M208.5,100.0 L211.5,92 L243.6,92 L246.6,100.0 L243.6,108 L211.5,108 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="227.5" y="104.0" font-size="11" fill="#1d2433" text-anchor="middle">2</text>
+<path d="M246.6,100.0 L249.6,92 L326.1,92 L329.1,100.0 L326.1,108 L249.6,108 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="287.8" y="104.0" font-size="11" fill="#1d2433" text-anchor="middle">3</text>
+<path d="M329.1,100.0 L332.1,92 L361.0,92 L364.0,100.0 L361.0,108 L332.1,108 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="346.5" y="104.0" font-size="11" fill="#1d2433" text-anchor="middle">4</text>
+<path d="M364.0,100.0 L367.0,92 L399.1,92 L402.1,100.0 L399.1,108 L367.0,108 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="383.0" y="104.0" font-size="11" fill="#1d2433" text-anchor="middle">5</text>
+<path d="M402.1,100.0 L405.1,92 L437.2,92 L440.2,100.0 L437.2,108 L405.1,108 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="421.1" y="104.0" font-size="11" fill="#1d2433" text-anchor="middle">6</text>
+<path d="M440.2,100.0 L443.2,92 L475.3,92 L478.3,100.0 L475.3,108 L443.2,108 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="459.2" y="104.0" font-size="11" fill="#1d2433" text-anchor="middle">7</text>
+<path d="M478.3,100.0 L481.3,92 L513.4,92 L516.4,100.0 L513.4,108 L481.3,108 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="497.3" y="104.0" font-size="11" fill="#1d2433" text-anchor="middle">8</text>
+<path d="M516.4,100.0 L519.4,92 L551.4,92 L554.4,100.0 L551.4,108 L519.4,108 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="535.4" y="104.0" font-size="11" fill="#1d2433" text-anchor="middle">9</text>
+<path d="M554.4,100.0 L557.4,92 L643.5,92 L646.5,100.0 L643.5,108 L557.4,108 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="600.5" y="104.0" font-size="11" fill="#1d2433" text-anchor="middle">10</text>
+<path d="M646.5,100.0 L649.5,92 L723.0,92 L726.0,100.0 L723.0,108 L649.5,108 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="686.2" y="104.0" font-size="11" fill="#1d2433" text-anchor="middle">0</text>
+<text x="110" y="134.0" font-size="12" fill="#1d2433" text-anchor="end">pwm → led</text>
+<path d="M118.0,138.0 L189.4,138.0 L189.4,122.0 L192.6,122.0 L192.6,138.0 L221.2,138.0 L221.2,122.0 L227.5,122.0 L227.5,138.0 L252.9,138.0 L252.9,122.0 L262.4,122.0 L262.4,138.0 L284.6,138.0 L284.6,122.0 L294.2,122.0 L294.2,138.0 L316.4,138.0 L316.4,122.0 L325.9,122.0 L325.9,138.0 L348.1,138.0 L348.1,122.0 L360.8,122.0 L360.8,138.0 L379.9,138.0 L379.9,122.0 L395.7,122.0 L395.7,138.0 L411.6,138.0 L411.6,122.0 L430.6,122.0 L430.6,138.0 L443.3,138.0 L443.3,122.0 L465.6,122.0 L465.6,138.0 L475.1,138.0 L475.1,122.0 L500.5,122.0 L500.5,138.0 L506.8,138.0 L506.8,122.0 L535.4,122.0 L535.4,138.0 L538.6,138.0 L538.6,122.0 L649.7,122.0 L649.7,138.0 L726.0,138.0" fill="none" stroke="#0b5fc0" stroke-width="1.6"/>
+<text x="110" y="164.0" font-size="12" fill="#1d2433" text-anchor="end">checks</text>
+<path d="M118.0,160.0 L121.0,152 L154.8,152 L157.8,160.0 L154.8,168 L121.0,168 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="137.9" y="164.0" font-size="11" fill="#1d2433" text-anchor="middle">0</text>
+<path d="M157.8,160.0 L160.8,152 L310.4,152 L313.4,160.0 L310.4,168 L160.8,168 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="235.6" y="164.0" font-size="11" fill="#1d2433" text-anchor="middle">1</text>
+<path d="M313.4,160.0 L316.4,152 L627.8,152 L630.8,160.0 L627.8,168 L316.4,168 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="472.1" y="164.0" font-size="11" fill="#1d2433" text-anchor="middle">2</text>
+<path d="M630.8,160.0 L633.8,152 L723.0,152 L726.0,160.0 L723.0,168 L633.8,168 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="678.4" y="164.0" font-size="11" fill="#1d2433" text-anchor="middle">3</text>
+</svg></div><figcaption>버튼을 누를 때마다 <code>press</code>가 한 클록 뜨고 <code>level</code>이 1씩 오른다. 10 다음에는 0으로 돌아가며, level 10에서는 pwm이 계속 High다.</figcaption></figure>
+<h3>⑥ 합성 · 구현 결과 </h3>
+<div class="tblwrap"><table><thead><tr><th>항목</th><th>값</th><th>비고</th></tr></thead><tbody><tr><td>Slice LUTs</td><td>92 / 48,000</td><td>0.19%</td></tr><tr><td>Slice Registers (FF)</td><td>52 / 96,000</td><td>0.05%</td></tr><tr><td>Bonded IOB</td><td>11 / 338</td><td>XDC의 포트 수와 일치</td></tr><tr><td>BUFGCTRL</td><td>1 / 32</td><td>50 MHz 클록 1개</td></tr><tr><td>Setup WNS / Hold WHS</td><td>8.971 ns / 0.160 ns</td><td>둘 다 양수 → 타이밍 충족</td></tr></tbody></table></div>
+<h3>⑦ 보드 검증</h3>
+<p><span class="badge pass">보드 PASS</span> 2026-09-28 실습실에서 Combo II-DLD S75에 프로그램(다이얼 F = 50 MHz)해 확인했다.</p>
+<div class="tblwrap"><table><thead><tr><th>#</th><th>조작</th><th>관찰 결과</th><th>판정</th></tr></thead><tbody><tr><td>1</td><td>비트스트림 다운로드 직후</td><td>LED 8개 모두 꺼짐 (L = 0)</td><td><span class="status-ok">✔</span></td></tr><tr><td>2</td><td>키패드 2를 한 번씩 누름</td><td>누를 때마다 8개가 함께 한 단계씩 밝아짐, 10번째에 가장 밝음</td><td><span class="status-ok">✔</span></td></tr><tr><td>3</td><td>11번째 누름</td><td>다시 꺼짐 (L = 0)</td><td><span class="status-ok">✔</span></td></tr><tr><td>4</td><td>키패드 1</td><td>즉시 꺼짐 (리셋)</td><td><span class="status-ok">✔</span></td></tr></tbody></table></div>
+<figure><video controls preload="metadata" src="https://raw.githubusercontent.com/hyeongjonghee/electronics2-LABs/main/LAB3/evidence/videos/LAB3-01_led_pwm.mp4"></video><figcaption>LAB3-01 LED PWM 보드 동작 (<code>evidence/videos/LAB3-01_led_pwm.mp4</code>)</figcaption><a class="videolink" href="https://github.com/hyeongjonghee/electronics2-LABs/blob/main/LAB3/evidence/videos/LAB3-01_led_pwm.mp4" target="_blank">GitHub에서 영상 열기 ↗</a></figure>
+</section><section class="circuit" id="c02"><h2>2. 실험 2 · RGB LED 색 조합 (3채널 PWM)</h2>
+<h3>① 목적</h3>
+<p>빨강·초록·파랑 세 채널에 각자 PWM을 달아 버튼 3개로 섞는 비율을 바꾼다. 물감 세 통을 조금씩 섞어 원하는 색을 만드는 것과 같다. 실험 1의 <code>pwm_channel</code>과 <code>button_onepulse</code>를 그대로 세 번씩 재사용했다.</p>
+<h3>② 이론 · 설계 계산</h3>
+$$D_R=\frac{L_R}{10},\quad D_G=\frac{L_G}{10},\quad D_B=\frac{L_B}{10}\qquad(\text{각 }L\in\{0,\dots,10\})$$
+<p>조합 가능한 색은 \(11^3=1\,331\)가지다. PWM 주파수는 실험 1과 같은 1 kHz(\(N=50\,000\))라서 깜빡임은 보이지 않는다. 보드의 RGB LED 4개는 같은 색으로 함께 켜진다(<code>led_r = {4{pwm_r}}</code>).</p>
+<h3>③ 포트 · 보드 매핑</h3>
+<div class="tblwrap"><table><thead><tr><th>포트</th><th>핀</th><th>보드 장치</th></tr></thead><tbody><tr><td>clk_50mhz</td><td>B6</td><td>MAIN_CLOCK1</td></tr><tr><td>rst_p</td><td>K4</td><td>키패드 1</td></tr><tr><td>button_r / g / b</td><td>N8 / N4 / N1</td><td>키패드 2 / 3 / 4</td></tr><tr><td>led_r[3:0]</td><td>T2 U1 P2 R3</td><td>RGB LED 4개의 R</td></tr><tr><td>led_g[3:0]</td><td>U5 V1 R7 T6</td><td>RGB LED 4개의 G</td></tr><tr><td>led_b[3:0]</td><td>U3 W2 R5 T3</td><td>RGB LED 4개의 B</td></tr></tbody></table></div>
+<div class="box ok"><span class="t">핀 확인 완료</span> — RGB 12핀이 매뉴얼 p.555(CLED_R1~R4 · G1~G4 · B1~B4)와 일치한다. 표의 CLED_R4 = K4는 같은 표의 rst(K4)와 겹쳐 오타로 판단했고, 우리 값 R3로 4번째 LED까지 빨간색이 켜지는 것을 보드에서 확인했다.</div>
+<h3>④ RTL</h3>
+<pre><code>`timescale 1ns/1ps
+module lab3_rgb_pwm #(
+    parameter integer CLK_HZ = 50_000_000,
+    parameter integer PWM_HZ = 1_000,
+    parameter integer LEVELS = 10,
+    parameter integer DEBOUNCE_CYCLES = 1_000_000
+) (
+    input  wire clk_50mhz,
+    input  wire rst_p,
+    input  wire button_r,
+    input  wire button_g,
+    input  wire button_b,
+    output wire [3:0] led_r,
+    output wire [3:0] led_g,
+    output wire [3:0] led_b
+);
+    wire press_r, press_g, press_b;
+    wire pwm_r, pwm_g, pwm_b;
+
+    button_onepulse #(.STABLE_CYCLES(DEBOUNCE_CYCLES)) u_button_r (
+        .clk(clk_50mhz), .rst_p(rst_p), .button(button_r), .pulse(press_r));
+    button_onepulse #(.STABLE_CYCLES(DEBOUNCE_CYCLES)) u_button_g (
+        .clk(clk_50mhz), .rst_p(rst_p), .button(button_g), .pulse(press_g));
+    button_onepulse #(.STABLE_CYCLES(DEBOUNCE_CYCLES)) u_button_b (
+        .clk(clk_50mhz), .rst_p(rst_p), .button(button_b), .pulse(press_b));
+
+    reg [3:0] level_r, level_g, level_b;
+    always @(posedge clk_50mhz or posedge rst_p) begin
+        if (rst_p) begin
+            level_r &lt;= 0; level_g &lt;= 0; level_b &lt;= 0;
+        end else begin
+            if (press_r) level_r &lt;= (level_r == LEVELS) ? 0 : level_r + 1&#x27;b1;
+            if (press_g) level_g &lt;= (level_g == LEVELS) ? 0 : level_g + 1&#x27;b1;
+            if (press_b) level_b &lt;= (level_b == LEVELS) ? 0 : level_b + 1&#x27;b1;
+        end
+    end
+
+    pwm_channel #(.PERIOD_CYCLES(CLK_HZ / PWM_HZ), .LEVELS(LEVELS)) u_pwm_r (
+        .clk(clk_50mhz), .rst_p(rst_p), .level(level_r), .pwm(pwm_r));
+    pwm_channel #(.PERIOD_CYCLES(CLK_HZ / PWM_HZ), .LEVELS(LEVELS)) u_pwm_g (
+        .clk(clk_50mhz), .rst_p(rst_p), .level(level_g), .pwm(pwm_g));
+    pwm_channel #(.PERIOD_CYCLES(CLK_HZ / PWM_HZ), .LEVELS(LEVELS)) u_pwm_b (
+        .clk(clk_50mhz), .rst_p(rst_p), .level(level_b), .pwm(pwm_b));
+
+    assign led_r = {4{pwm_r}};
+    assign led_g = {4{pwm_g}};
+    assign led_b = {4{pwm_b}};
+endmodule</code></pre>
+<p class="src"><code>pwm_channel.v</code>, <code>button_onepulse.v</code>는 실험 1과 같은 파일이다.</p>
+<h3>⑤ 시뮬레이션</h3>
+<p><span class="badge pass">PASS</span> Vivado XSim과 Icarus Verilog 12.0에서 같은 결과를 확인했다: <code>LAB3_RGB_PWM_PASS checks=2</code></p><p>검사 2개: 리셋 직후 (0,0,0), R 2회·G 5회·B 8회 누른 뒤 한 주기(10클록) 안의 High 개수가 정확히 (2,5,8).</p>
+<figure><div class="svgwrap"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 322" width="100%" role="img" aria-label="XSim · tb_rgb_pwm — R 2회 · G 5회 · B 8회 누른 뒤 밝기 2 : 5 : 8" style="background:#fff;font-family:Consolas,monospace">
+<text x="118" y="16" font-size="12" fill="#5b6478">XSim · tb_rgb_pwm — R 2회 · G 5회 · B 8회 누른 뒤 밝기 2 : 5 : 8</text>
+<line x1="118.0" y1="22" x2="118.0" y2="300" stroke="#eef1f7"/>
+<text x="118.0" y="314" font-size="10" fill="#5b6478" text-anchor="middle">0 ns</text>
+<line x1="178.8" y1="22" x2="178.8" y2="300" stroke="#eef1f7"/>
+<text x="178.8" y="314" font-size="10" fill="#5b6478" text-anchor="middle">405 ns</text>
+<line x1="239.6" y1="22" x2="239.6" y2="300" stroke="#eef1f7"/>
+<text x="239.6" y="314" font-size="10" fill="#5b6478" text-anchor="middle">810 ns</text>
+<line x1="300.4" y1="22" x2="300.4" y2="300" stroke="#eef1f7"/>
+<text x="300.4" y="314" font-size="10" fill="#5b6478" text-anchor="middle">1,215 ns</text>
+<line x1="361.2" y1="22" x2="361.2" y2="300" stroke="#eef1f7"/>
+<text x="361.2" y="314" font-size="10" fill="#5b6478" text-anchor="middle">1,620 ns</text>
+<line x1="422.0" y1="22" x2="422.0" y2="300" stroke="#eef1f7"/>
+<text x="422.0" y="314" font-size="10" fill="#5b6478" text-anchor="middle">2,026 ns</text>
+<line x1="482.8" y1="22" x2="482.8" y2="300" stroke="#eef1f7"/>
+<text x="482.8" y="314" font-size="10" fill="#5b6478" text-anchor="middle">2,431 ns</text>
+<line x1="543.6" y1="22" x2="543.6" y2="300" stroke="#eef1f7"/>
+<text x="543.6" y="314" font-size="10" fill="#5b6478" text-anchor="middle">2,836 ns</text>
+<line x1="604.4" y1="22" x2="604.4" y2="300" stroke="#eef1f7"/>
+<text x="604.4" y="314" font-size="10" fill="#5b6478" text-anchor="middle">3,241 ns</text>
+<line x1="665.2" y1="22" x2="665.2" y2="300" stroke="#eef1f7"/>
+<text x="665.2" y="314" font-size="10" fill="#5b6478" text-anchor="middle">3,646 ns</text>
+<line x1="726.0" y1="22" x2="726.0" y2="300" stroke="#eef1f7"/>
+<text x="726.0" y="314" font-size="10" fill="#5b6478" text-anchor="middle">4,051 ns</text>
+<text x="110" y="44.0" font-size="12" fill="#1d2433" text-anchor="end">press_r</text>
+<path d="M118.0,48.0 L167.5,48.0 L167.5,32.0 L170.5,32.0 L170.5,48.0 L200.5,48.0 L200.5,32.0 L203.5,32.0 L203.5,48.0 L726.0,48.0" fill="none" stroke="#0b5fc0" stroke-width="1.6"/>
+<text x="110" y="74.0" font-size="12" fill="#1d2433" text-anchor="end">press_g</text>
+<path d="M118.0,78.0 L236.6,78.0 L236.6,62.0 L239.6,62.0 L239.6,78.0 L272.6,78.0 L272.6,62.0 L275.6,62.0 L275.6,78.0 L308.6,78.0 L308.6,62.0 L311.6,62.0 L311.6,78.0 L344.6,78.0 L344.6,62.0 L347.6,62.0 L347.6,78.0 L380.7,78.0 L380.7,62.0 L383.7,62.0 L383.7,78.0 L726.0,78.0" fill="none" stroke="#0b5fc0" stroke-width="1.6"/>
+<text x="110" y="104.0" font-size="12" fill="#1d2433" text-anchor="end">press_b</text>
+<path d="M118.0,108.0 L416.7,108.0 L416.7,92.0 L419.7,92.0 L419.7,108.0 L452.7,108.0 L452.7,92.0 L455.7,92.0 L455.7,108.0 L488.7,108.0 L488.7,92.0 L491.7,92.0 L491.7,108.0 L524.7,108.0 L524.7,92.0 L527.7,92.0 L527.7,108.0 L560.8,108.0 L560.8,92.0 L563.8,92.0 L563.8,108.0 L596.8,108.0 L596.8,92.0 L599.8,92.0 L599.8,108.0 L632.8,108.0 L632.8,92.0 L635.8,92.0 L635.8,108.0 L668.8,108.0 L668.8,92.0 L671.8,92.0 L671.8,108.0 L726.0,108.0" fill="none" stroke="#0b5fc0" stroke-width="1.6"/>
+<text x="110" y="134.0" font-size="12" fill="#1d2433" text-anchor="end">level_r</text>
+<path d="M118.0,130.0 L121.0,122 L167.5,122 L170.5,130.0 L167.5,138 L121.0,138 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="144.3" y="134.0" font-size="11" fill="#1d2433" text-anchor="middle">0</text>
+<path d="M170.5,130.0 L173.5,122 L200.5,122 L203.5,130.0 L200.5,138 L173.5,138 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="187.0" y="134.0" font-size="11" fill="#1d2433" text-anchor="middle">1</text>
+<path d="M203.5,130.0 L206.5,122 L723.0,122 L726.0,130.0 L723.0,138 L206.5,138 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="464.8" y="134.0" font-size="11" fill="#1d2433" text-anchor="middle">2</text>
+<text x="110" y="164.0" font-size="12" fill="#1d2433" text-anchor="end">level_g</text>
+<path d="M118.0,160.0 L121.0,152 L236.6,152 L239.6,160.0 L236.6,168 L121.0,168 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="178.8" y="164.0" font-size="11" fill="#1d2433" text-anchor="middle">0</text>
+<path d="M239.6,160.0 L242.6,152 L272.6,152 L275.6,160.0 L272.6,168 L242.6,168 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="257.6" y="164.0" font-size="11" fill="#1d2433" text-anchor="middle">1</text>
+<path d="M275.6,160.0 L278.6,152 L308.6,152 L311.6,160.0 L308.6,168 L278.6,168 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="293.6" y="164.0" font-size="11" fill="#1d2433" text-anchor="middle">2</text>
+<path d="M311.6,160.0 L314.6,152 L344.6,152 L347.6,160.0 L344.6,168 L314.6,168 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="329.6" y="164.0" font-size="11" fill="#1d2433" text-anchor="middle">3</text>
+<path d="M347.6,160.0 L350.6,152 L380.7,152 L383.7,160.0 L380.7,168 L350.6,168 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="365.6" y="164.0" font-size="11" fill="#1d2433" text-anchor="middle">4</text>
+<path d="M383.7,160.0 L386.7,152 L723.0,152 L726.0,160.0 L723.0,168 L386.7,168 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="554.8" y="164.0" font-size="11" fill="#1d2433" text-anchor="middle">5</text>
+<text x="110" y="194.0" font-size="12" fill="#1d2433" text-anchor="end">level_b</text>
+<path d="M118.0,190.0 L121.0,182 L416.7,182 L419.7,190.0 L416.7,198 L121.0,198 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="268.8" y="194.0" font-size="11" fill="#1d2433" text-anchor="middle">0</text>
+<path d="M419.7,190.0 L422.7,182 L452.7,182 L455.7,190.0 L452.7,198 L422.7,198 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="437.7" y="194.0" font-size="11" fill="#1d2433" text-anchor="middle">1</text>
+<path d="M455.7,190.0 L458.7,182 L488.7,182 L491.7,190.0 L488.7,198 L458.7,198 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="473.7" y="194.0" font-size="11" fill="#1d2433" text-anchor="middle">2</text>
+<path d="M491.7,190.0 L494.7,182 L524.7,182 L527.7,190.0 L524.7,198 L494.7,198 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="509.7" y="194.0" font-size="11" fill="#1d2433" text-anchor="middle">3</text>
+<path d="M527.7,190.0 L530.7,182 L560.8,182 L563.8,190.0 L560.8,198 L530.7,198 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="545.7" y="194.0" font-size="11" fill="#1d2433" text-anchor="middle">4</text>
+<path d="M563.8,190.0 L566.8,182 L596.8,182 L599.8,190.0 L596.8,198 L566.8,198 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="581.8" y="194.0" font-size="11" fill="#1d2433" text-anchor="middle">5</text>
+<path d="M599.8,190.0 L602.8,182 L632.8,182 L635.8,190.0 L632.8,198 L602.8,198 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="617.8" y="194.0" font-size="11" fill="#1d2433" text-anchor="middle">6</text>
+<path d="M635.8,190.0 L638.8,182 L668.8,182 L671.8,190.0 L668.8,198 L638.8,198 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="653.8" y="194.0" font-size="11" fill="#1d2433" text-anchor="middle">7</text>
+<path d="M671.8,190.0 L674.8,182 L723.0,182 L726.0,190.0 L723.0,198 L674.8,198 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="698.9" y="194.0" font-size="11" fill="#1d2433" text-anchor="middle">8</text>
+<text x="110" y="224.0" font-size="12" fill="#1d2433" text-anchor="end">pwm_r</text>
+<path d="M118.0,228.0 L185.5,228.0 L185.5,212.0 L188.5,212.0 L188.5,228.0 L215.6,228.0 L215.6,212.0 L221.6,212.0 L221.6,228.0 L245.6,228.0 L245.6,212.0 L251.6,212.0 L251.6,228.0 L275.6,228.0 L275.6,212.0 L281.6,212.0 L281.6,228.0 L305.6,228.0 L305.6,212.0 L311.6,212.0 L311.6,228.0 L335.6,228.0 L335.6,212.0 L341.6,212.0 L341.6,228.0 L365.6,228.0 L365.6,212.0 L371.6,212.0 L371.6,228.0 L395.7,228.0 L395.7,212.0 L401.7,212.0 L401.7,228.0 L425.7,228.0 L425.7,212.0 L431.7,212.0 L431.7,228.0 L455.7,228.0 L455.7,212.0 L461.7,212.0 L461.7,228.0 L485.7,228.0 L485.7,212.0 L491.7,212.0 L491.7,228.0 L515.7,228.0 L515.7,212.0 L521.7,212.0 L521.7,228.0 L545.7,228.0 L545.7,212.0 L551.7,212.0 L551.7,228.0 L575.8,228.0 L575.8,212.0 L581.8,212.0 L581.8,228.0 L605.8,228.0 L605.8,212.0 L611.8,212.0 L611.8,228.0 L635.8,228.0 L635.8,212.0 L641.8,212.0 L641.8,228.0 L665.8,228.0 L665.8,212.0 L671.8,212.0 L671.8,228.0 L695.8,228.0 L695.8,212.0 L701.8,212.0 L701.8,228.0 L725.8,228.0 L725.8,212.0 L726.0,212.0" fill="none" stroke="#0b5fc0" stroke-width="1.6"/>
+<text x="110" y="254.0" font-size="12" fill="#1d2433" text-anchor="end">pwm_g</text>
+<path d="M118.0,258.0 L245.6,258.0 L245.6,242.0 L248.6,242.0 L248.6,258.0 L275.6,258.0 L275.6,242.0 L281.6,242.0 L281.6,258.0 L305.6,258.0 L305.6,242.0 L311.6,242.0 L311.6,258.0 L335.6,258.0 L335.6,242.0 L344.6,242.0 L344.6,258.0 L365.6,258.0 L365.6,242.0 L377.6,242.0 L377.6,258.0 L395.7,258.0 L395.7,242.0 L410.7,242.0 L410.7,258.0 L425.7,258.0 L425.7,242.0 L440.7,242.0 L440.7,258.0 L455.7,258.0 L455.7,242.0 L470.7,242.0 L470.7,258.0 L485.7,258.0 L485.7,242.0 L500.7,242.0 L500.7,258.0 L515.7,258.0 L515.7,242.0 L530.7,242.0 L530.7,258.0 L545.7,258.0 L545.7,242.0 L560.8,242.0 L560.8,258.0 L575.8,258.0 L575.8,242.0 L590.8,242.0 L590.8,258.0 L605.8,258.0 L605.8,242.0 L620.8,242.0 L620.8,258.0 L635.8,258.0 L635.8,242.0 L650.8,242.0 L650.8,258.0 L665.8,258.0 L665.8,242.0 L680.8,242.0 L680.8,258.0 L695.8,258.0 L695.8,242.0 L710.8,242.0 L710.8,258.0 L725.8,258.0 L725.8,242.0 L726.0,242.0" fill="none" stroke="#0b5fc0" stroke-width="1.6"/>
+<text x="110" y="284.0" font-size="12" fill="#1d2433" text-anchor="end">pwm_b</text>
+<path d="M118.0,288.0 L425.7,288.0 L425.7,272.0 L428.7,272.0 L428.7,288.0 L455.7,288.0 L455.7,272.0 L461.7,272.0 L461.7,288.0 L485.7,288.0 L485.7,272.0 L491.7,272.0 L491.7,288.0 L515.7,288.0 L515.7,272.0 L524.7,272.0 L524.7,288.0 L545.7,288.0 L545.7,272.0 L557.8,272.0 L557.8,288.0 L575.8,288.0 L575.8,272.0 L590.8,272.0 L590.8,288.0 L605.8,288.0 L605.8,272.0 L623.8,272.0 L623.8,288.0 L635.8,288.0 L635.8,272.0 L656.8,272.0 L656.8,288.0 L665.8,288.0 L665.8,272.0 L689.8,272.0 L689.8,288.0 L695.8,288.0 L695.8,272.0 L719.8,272.0 L719.8,288.0 L725.8,288.0 L725.8,272.0 L726.0,272.0" fill="none" stroke="#0b5fc0" stroke-width="1.6"/>
+</svg></div><figcaption>세 버튼이 서로 섞이지 않고 각자 자기 채널의 단계만 올린다. 아래 세 줄에서 High 폭이 2 : 5 : 8로 넓어지는 것이 보인다.</figcaption></figure>
+<h3>⑥ 합성 · 구현 결과 </h3>
+<div class="tblwrap"><table><thead><tr><th>항목</th><th>값</th><th>비고</th></tr></thead><tbody><tr><td>Slice LUTs</td><td>276 / 48,000</td><td>0.57%</td></tr><tr><td>Slice Registers (FF)</td><td>144 / 96,000</td><td>0.15%</td></tr><tr><td>Bonded IOB</td><td>17 / 338</td><td>XDC의 포트 수와 일치</td></tr><tr><td>BUFGCTRL</td><td>1 / 32</td><td>50 MHz 클록 1개</td></tr><tr><td>Setup WNS / Hold WHS</td><td>8.629 ns / 0.122 ns</td><td>둘 다 양수 → 타이밍 충족</td></tr></tbody></table></div>
+<h3>⑦ 보드 검증</h3>
+<p><span class="badge pass">보드 PASS</span> 2026-09-28 실습실에서 Combo II-DLD S75에 프로그램(다이얼 F = 50 MHz)해 확인했다.</p>
+<div class="tblwrap"><table><thead><tr><th>#</th><th>조작</th><th>관찰 결과</th><th>판정</th></tr></thead><tbody><tr><td>1</td><td>키패드 2를 10번</td><td>RGB LED 4개가 모두 빨간색 (CLED_R4 = R3 확인)</td><td><span class="status-ok">✔</span></td></tr><tr><td>2</td><td>키패드 1 → 키패드 3을 10번</td><td>4개 모두 초록색</td><td><span class="status-ok">✔</span></td></tr><tr><td>3</td><td>키패드 1 → 키패드 4를 10번</td><td>4개 모두 파란색</td><td><span class="status-ok">✔</span></td></tr><tr><td>4</td><td>R · G · B 단계 조합</td><td>섞은 비율에 따라 색이 바뀜</td><td><span class="status-ok">✔</span></td></tr></tbody></table></div>
+<figure><video controls preload="metadata" src="https://raw.githubusercontent.com/hyeongjonghee/electronics2-LABs/main/LAB3/evidence/videos/LAB3-02_rgb_pwm.mp4"></video><figcaption>LAB3-02 RGB PWM 보드 동작 (<code>evidence/videos/LAB3-02_rgb_pwm.mp4</code>)</figcaption><a class="videolink" href="https://github.com/hyeongjonghee/electronics2-LABs/blob/main/LAB3/evidence/videos/LAB3-02_rgb_pwm.mp4" target="_blank">GitHub에서 영상 열기 ↗</a></figure>
+</section><section class="circuit" id="c03"><h2>3. 실험 3 · 피에조 부저 (주파수 분주로 음 만들기)</h2>
+<h3>① 목적</h3>
+<p>50 MHz 클록을 나눠 294 Hz 사각파를 만들고 피에조 부저로 "레(D4)" 음을 낸다. 줄넘기를 일정한 박자로 넘으면 줄이 같은 소리를 반복하듯, 1초에 294번 떨리는 신호가 그 높이의 소리가 된다.</p>
+<h3>② 이론 · 설계 계산</h3>
+<p>출력을 반주기마다 뒤집으므로 반주기 클록 수는 다음과 같다(정수 나눗셈).</p>
+$$H=\left\lfloor\frac{f_{clk}}{2f_{tone}}\right\rfloor=\left\lfloor\frac{50\,000\,000}{588}\right\rfloor=85\,034$$
+$$f_{out}=\frac{f_{clk}}{2H}=\frac{50\,000\,000}{170\,068}\approx 294.0000\ \text{Hz}$$
+<p>평균율의 D4는 \(440\times2^{-7/12}\approx293.66\) Hz이므로 차이는 약 0.12%(2 cent)로 귀로는 구별되지 않는다.</p>
+<h3>③ 포트 · 보드 매핑</h3>
+<div class="tblwrap"><table><thead><tr><th>포트</th><th>핀</th><th>보드 장치</th></tr></thead><tbody><tr><td>clk_50mhz</td><td>B6</td><td>MAIN_CLOCK1</td></tr><tr><td>rst_p</td><td>K4</td><td>키패드 1 (누르고 있는 동안 소리 멈춤)</td></tr><tr><td>piezo</td><td>Y21</td><td>피에조 부저</td></tr></tbody></table></div>
+<div class="box ok"><span class="t">핀 확인 완료</span> — 피에조 출력 Y21이 매뉴얼 핀표와 일치한다.</div>
+<h3>④ RTL</h3>
+<pre><code>`timescale 1ns/1ps
+module lab3_piezo #(
+    parameter integer CLK_HZ = 50_000_000,
+    parameter integer TONE_HZ = 294
+) (
+    input  wire clk_50mhz,
+    input  wire rst_p,
+    output reg  piezo
+);
+    localparam integer HALF_PERIOD = CLK_HZ / (2 * TONE_HZ);
+    localparam integer COUNT_WIDTH = (HALF_PERIOD &lt; 2) ? 1 : $clog2(HALF_PERIOD);
+    reg [COUNT_WIDTH-1:0] count;
+
+    always @(posedge clk_50mhz or posedge rst_p) begin
+        if (rst_p) begin
+            count &lt;= 0;
+            piezo &lt;= 0;
+        end else if (count == HALF_PERIOD - 1) begin
+            count &lt;= 0;
+            piezo &lt;= ~piezo;
+        end else begin
+            count &lt;= count + 1&#x27;b1;
+        end
+    end
+endmodule</code></pre>
+<h3>⑤ 시뮬레이션</h3>
+<p><span class="badge pass">PASS</span> Vivado XSim과 Icarus Verilog 12.0에서 같은 결과를 확인했다: <code>LAB3_PIEZO_PASS edges=5</code></p><p>TONE_HZ=100, CLK_HZ=1000으로 줄이면 <i>H</i> = 5. 25클록 동안 <code>count</code>가 0이 되는 간격이 매번 정확히 5클록인지 확인했다.</p>
+<figure><div class="svgwrap"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 202" width="100%" role="img" aria-label="XSim · tb_piezo (CLK_HZ=1000, TONE_HZ=100 → 반주기 5클록)" style="background:#fff;font-family:Consolas,monospace">
+<text x="118" y="16" font-size="12" fill="#5b6478">XSim · tb_piezo (CLK_HZ=1000, TONE_HZ=100 → 반주기 5클록)</text>
+<line x1="118.0" y1="22" x2="118.0" y2="180" stroke="#eef1f7"/>
+<text x="118.0" y="194" font-size="10" fill="#5b6478" text-anchor="middle">0 ns</text>
+<line x1="178.8" y1="22" x2="178.8" y2="180" stroke="#eef1f7"/>
+<text x="178.8" y="194" font-size="10" fill="#5b6478" text-anchor="middle">55 ns</text>
+<line x1="239.6" y1="22" x2="239.6" y2="180" stroke="#eef1f7"/>
+<text x="239.6" y="194" font-size="10" fill="#5b6478" text-anchor="middle">110 ns</text>
+<line x1="300.4" y1="22" x2="300.4" y2="180" stroke="#eef1f7"/>
+<text x="300.4" y="194" font-size="10" fill="#5b6478" text-anchor="middle">165 ns</text>
+<line x1="361.2" y1="22" x2="361.2" y2="180" stroke="#eef1f7"/>
+<text x="361.2" y="194" font-size="10" fill="#5b6478" text-anchor="middle">220 ns</text>
+<line x1="422.0" y1="22" x2="422.0" y2="180" stroke="#eef1f7"/>
+<text x="422.0" y="194" font-size="10" fill="#5b6478" text-anchor="middle">276 ns</text>
+<line x1="482.8" y1="22" x2="482.8" y2="180" stroke="#eef1f7"/>
+<text x="482.8" y="194" font-size="10" fill="#5b6478" text-anchor="middle">331 ns</text>
+<line x1="543.6" y1="22" x2="543.6" y2="180" stroke="#eef1f7"/>
+<text x="543.6" y="194" font-size="10" fill="#5b6478" text-anchor="middle">386 ns</text>
+<line x1="604.4" y1="22" x2="604.4" y2="180" stroke="#eef1f7"/>
+<text x="604.4" y="194" font-size="10" fill="#5b6478" text-anchor="middle">441 ns</text>
+<line x1="665.2" y1="22" x2="665.2" y2="180" stroke="#eef1f7"/>
+<text x="665.2" y="194" font-size="10" fill="#5b6478" text-anchor="middle">496 ns</text>
+<line x1="726.0" y1="22" x2="726.0" y2="180" stroke="#eef1f7"/>
+<text x="726.0" y="194" font-size="10" fill="#5b6478" text-anchor="middle">551 ns</text>
+<text x="110" y="44.0" font-size="12" fill="#1d2433" text-anchor="end">clk</text>
+<path d="M118.0,48.0 L129.0,48.0 L129.0,32.0 L140.1,32.0 L140.1,48.0 L151.1,48.0 L151.1,32.0 L162.1,32.0 L162.1,48.0 L173.2,48.0 L173.2,32.0 L184.2,32.0 L184.2,48.0 L195.2,48.0 L195.2,32.0 L206.3,32.0 L206.3,48.0 L217.3,48.0 L217.3,32.0 L228.3,32.0 L228.3,48.0 L239.4,48.0 L239.4,32.0 L250.4,32.0 L250.4,48.0 L261.4,48.0 L261.4,32.0 L272.5,32.0 L272.5,48.0 L283.5,48.0 L283.5,32.0 L294.6,32.0 L294.6,48.0 L305.6,48.0 L305.6,32.0 L316.6,32.0 L316.6,48.0 L327.7,48.0 L327.7,32.0 L338.7,32.0 L338.7,48.0 L349.7,48.0 L349.7,32.0 L360.8,32.0 L360.8,48.0 L371.8,48.0 L371.8,32.0 L382.8,32.0 L382.8,48.0 L393.9,48.0 L393.9,32.0 L404.9,32.0 L404.9,48.0 L415.9,48.0 L415.9,32.0 L427.0,32.0 L427.0,48.0 L438.0,48.0 L438.0,32.0 L449.0,32.0 L449.0,48.0 L460.1,48.0 L460.1,32.0 L471.1,32.0 L471.1,48.0 L482.1,48.0 L482.1,32.0 L493.2,32.0 L493.2,48.0 L504.2,48.0 L504.2,32.0 L515.2,32.0 L515.2,48.0 L526.3,48.0 L526.3,32.0 L537.3,32.0 L537.3,48.0 L548.3,48.0 L548.3,32.0 L559.4,32.0 L559.4,48.0 L570.4,48.0 L570.4,32.0 L581.4,32.0 L581.4,48.0 L592.5,48.0 L592.5,32.0 L603.5,32.0 L603.5,48.0 L614.6,48.0 L614.6,32.0 L625.6,32.0 L625.6,48.0 L636.6,48.0 L636.6,32.0 L647.7,32.0 L647.7,48.0 L658.7,48.0 L658.7,32.0 L669.7,32.0 L669.7,48.0 L680.8,48.0 L680.8,32.0 L691.8,32.0 L691.8,48.0 L702.8,48.0 L702.8,32.0 L713.9,32.0 L713.9,48.0 L724.9,48.0 L724.9,32.0 L726.0,32.0" fill="none" stroke="#0b5fc0" stroke-width="1.6"/>
+<text x="110" y="74.0" font-size="12" fill="#1d2433" text-anchor="end">rst_p</text>
+<path d="M118.0,62.0 L173.2,62.0 L173.2,78.0 L726.0,78.0" fill="none" stroke="#0b5fc0" stroke-width="1.6"/>
+<text x="110" y="104.0" font-size="12" fill="#1d2433" text-anchor="end">count</text>
+<path d="M118.0,100.0 L121.0,92 L170.2,92 L173.2,100.0 L170.2,108 L121.0,108 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="145.6" y="104.0" font-size="11" fill="#1d2433" text-anchor="middle">0</text>
+<path d="M173.2,100.0 L176.2,92 L192.2,92 L195.2,100.0 L192.2,108 L176.2,108 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="184.2" y="104.0" font-size="11" fill="#1d2433" text-anchor="middle">1</text>
+<path d="M195.2,100.0 L198.2,92 L214.3,92 L217.3,100.0 L214.3,108 L198.2,108 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="206.3" y="104.0" font-size="11" fill="#1d2433" text-anchor="middle">2</text>
+<path d="M217.3,100.0 L220.3,92 L236.4,92 L239.4,100.0 L236.4,108 L220.3,108 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="228.3" y="104.0" font-size="11" fill="#1d2433" text-anchor="middle">3</text>
+<path d="M239.4,100.0 L242.4,92 L258.4,92 L261.4,100.0 L258.4,108 L242.4,108 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="250.4" y="104.0" font-size="11" fill="#1d2433" text-anchor="middle">4</text>
+<path d="M261.4,100.0 L264.4,92 L280.5,92 L283.5,100.0 L280.5,108 L264.4,108 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="272.5" y="104.0" font-size="11" fill="#1d2433" text-anchor="middle">0</text>
+<path d="M283.5,100.0 L286.5,92 L302.6,92 L305.6,100.0 L302.6,108 L286.5,108 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="294.6" y="104.0" font-size="11" fill="#1d2433" text-anchor="middle">1</text>
+<path d="M305.6,100.0 L308.6,92 L324.7,92 L327.7,100.0 L324.7,108 L308.6,108 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="316.6" y="104.0" font-size="11" fill="#1d2433" text-anchor="middle">2</text>
+<path d="M327.7,100.0 L330.7,92 L346.7,92 L349.7,100.0 L346.7,108 L330.7,108 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="338.7" y="104.0" font-size="11" fill="#1d2433" text-anchor="middle">3</text>
+<path d="M349.7,100.0 L352.7,92 L368.8,92 L371.8,100.0 L368.8,108 L352.7,108 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="360.8" y="104.0" font-size="11" fill="#1d2433" text-anchor="middle">4</text>
+<path d="M371.8,100.0 L374.8,92 L390.9,92 L393.9,100.0 L390.9,108 L374.8,108 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="382.8" y="104.0" font-size="11" fill="#1d2433" text-anchor="middle">0</text>
+<path d="M393.9,100.0 L396.9,92 L412.9,92 L415.9,100.0 L412.9,108 L396.9,108 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="404.9" y="104.0" font-size="11" fill="#1d2433" text-anchor="middle">1</text>
+<path d="M415.9,100.0 L418.9,92 L435.0,92 L438.0,100.0 L435.0,108 L418.9,108 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="427.0" y="104.0" font-size="11" fill="#1d2433" text-anchor="middle">2</text>
+<path d="M438.0,100.0 L441.0,92 L457.1,92 L460.1,100.0 L457.1,108 L441.0,108 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="449.0" y="104.0" font-size="11" fill="#1d2433" text-anchor="middle">3</text>
+<path d="M460.1,100.0 L463.1,92 L479.1,92 L482.1,100.0 L479.1,108 L463.1,108 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="471.1" y="104.0" font-size="11" fill="#1d2433" text-anchor="middle">4</text>
+<path d="M482.1,100.0 L485.1,92 L501.2,92 L504.2,100.0 L501.2,108 L485.1,108 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="493.2" y="104.0" font-size="11" fill="#1d2433" text-anchor="middle">0</text>
+<path d="M504.2,100.0 L507.2,92 L523.3,92 L526.3,100.0 L523.3,108 L507.2,108 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="515.2" y="104.0" font-size="11" fill="#1d2433" text-anchor="middle">1</text>
+<path d="M526.3,100.0 L529.3,92 L545.3,92 L548.3,100.0 L545.3,108 L529.3,108 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="537.3" y="104.0" font-size="11" fill="#1d2433" text-anchor="middle">2</text>
+<path d="M548.3,100.0 L551.3,92 L567.4,92 L570.4,100.0 L567.4,108 L551.3,108 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="559.4" y="104.0" font-size="11" fill="#1d2433" text-anchor="middle">3</text>
+<path d="M570.4,100.0 L573.4,92 L589.5,92 L592.5,100.0 L589.5,108 L573.4,108 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="581.4" y="104.0" font-size="11" fill="#1d2433" text-anchor="middle">4</text>
+<path d="M592.5,100.0 L595.5,92 L611.6,92 L614.6,100.0 L611.6,108 L595.5,108 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="603.5" y="104.0" font-size="11" fill="#1d2433" text-anchor="middle">0</text>
+<path d="M614.6,100.0 L617.6,92 L633.6,92 L636.6,100.0 L633.6,108 L617.6,108 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="625.6" y="104.0" font-size="11" fill="#1d2433" text-anchor="middle">1</text>
+<path d="M636.6,100.0 L639.6,92 L655.7,92 L658.7,100.0 L655.7,108 L639.6,108 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="647.7" y="104.0" font-size="11" fill="#1d2433" text-anchor="middle">2</text>
+<path d="M658.7,100.0 L661.7,92 L677.8,92 L680.8,100.0 L677.8,108 L661.7,108 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="669.7" y="104.0" font-size="11" fill="#1d2433" text-anchor="middle">3</text>
+<path d="M680.8,100.0 L683.8,92 L699.8,92 L702.8,100.0 L699.8,108 L683.8,108 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="691.8" y="104.0" font-size="11" fill="#1d2433" text-anchor="middle">4</text>
+<path d="M702.8,100.0 L705.8,92 L721.9,92 L724.9,100.0 L721.9,108 L705.8,108 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="713.9" y="104.0" font-size="11" fill="#1d2433" text-anchor="middle">0</text>
+<path d="M724.9,100.0 L724.9,92 L726.0,92 L726.0,100.0 L726.0,108 L724.9,108 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="110" y="134.0" font-size="12" fill="#1d2433" text-anchor="end">piezo</text>
+<path d="M118.0,138.0 L261.4,138.0 L261.4,122.0 L371.8,122.0 L371.8,138.0 L482.1,138.0 L482.1,122.0 L592.5,122.0 L592.5,138.0 L702.8,138.0 L702.8,122.0 L726.0,122.0" fill="none" stroke="#0b5fc0" stroke-width="1.6"/>
+<text x="110" y="164.0" font-size="12" fill="#1d2433" text-anchor="end">edges</text>
+<path d="M118.0,160.0 L121.0,152 L259.6,152 L262.6,160.0 L259.6,168 L121.0,168 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="190.3" y="164.0" font-size="11" fill="#1d2433" text-anchor="middle">0</text>
+<path d="M262.6,160.0 L265.6,152 L369.9,152 L372.9,160.0 L369.9,168 L265.6,168 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="317.7" y="164.0" font-size="11" fill="#1d2433" text-anchor="middle">1</text>
+<path d="M372.9,160.0 L375.9,152 L480.2,152 L483.2,160.0 L480.2,168 L375.9,168 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="428.1" y="164.0" font-size="11" fill="#1d2433" text-anchor="middle">2</text>
+<path d="M483.2,160.0 L486.2,152 L590.6,152 L593.6,160.0 L590.6,168 L486.2,168 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="538.4" y="164.0" font-size="11" fill="#1d2433" text-anchor="middle">3</text>
+<path d="M593.6,160.0 L596.6,152 L700.9,152 L703.9,160.0 L700.9,168 L596.6,168 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="648.8" y="164.0" font-size="11" fill="#1d2433" text-anchor="middle">4</text>
+<path d="M703.9,160.0 L706.9,152 L723.0,152 L726.0,160.0 L723.0,168 L706.9,168 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="715.0" y="164.0" font-size="11" fill="#1d2433" text-anchor="middle">5</text>
+</svg></div><figcaption>count가 0→4를 돌 때마다 piezo가 뒤집힌다. 한 주기 = 10클록 = 200 ns.</figcaption></figure>
+<h3>⑥ 합성 · 구현 결과 </h3>
+<div class="tblwrap"><table><thead><tr><th>항목</th><th>값</th><th>비고</th></tr></thead><tbody><tr><td>Slice LUTs</td><td>21 / 48,000</td><td>0.04%</td></tr><tr><td>Slice Registers (FF)</td><td>18 / 96,000</td><td>0.02%</td></tr><tr><td>Bonded IOB</td><td>3 / 338</td><td>XDC의 포트 수와 일치</td></tr><tr><td>BUFGCTRL</td><td>1 / 32</td><td>50 MHz 클록 1개</td></tr><tr><td>Setup WNS / Hold WHS</td><td>16.761 ns / 0.246 ns</td><td>둘 다 양수 → 타이밍 충족</td></tr></tbody></table></div>
+<h3>⑦ 보드 검증</h3>
+<p><span class="badge pass">보드 PASS</span> 2026-09-28 실습실에서 Combo II-DLD S75에 프로그램(다이얼 F = 50 MHz)해 확인했다.</p>
+<div class="tblwrap"><table><thead><tr><th>#</th><th>조작</th><th>관찰 결과</th><th>판정</th></tr></thead><tbody><tr><td>1</td><td>PIEZO ENABLE ON, 다운로드</td><td>일정한 "레" 음이 끊김 없이 남</td><td><span class="status-ok">✔</span></td></tr><tr><td>2</td><td>키패드 1을 누르고 있음</td><td>소리가 멈추고, 떼면 다시 남</td><td><span class="status-ok">✔</span></td></tr></tbody></table></div>
+<figure><video controls preload="metadata" src="https://raw.githubusercontent.com/hyeongjonghee/electronics2-LABs/main/LAB3/evidence/videos/LAB3-03_piezo.mp4"></video><figcaption>LAB3-03 피에조 부저 동작(소리 포함) (<code>evidence/videos/LAB3-03_piezo.mp4</code>)</figcaption><a class="videolink" href="https://github.com/hyeongjonghee/electronics2-LABs/blob/main/LAB3/evidence/videos/LAB3-03_piezo.mp4" target="_blank">GitHub에서 영상 열기 ↗</a></figure>
+</section><section class="circuit" id="c04"><h2>4. 실험 4 · 스텝 모터 (2상 여자 순서 만들기)</h2>
+<h3>① 목적</h3>
+<p>스텝 모터의 네 입력(A, B, /A, /B)에 정해진 순서로 전류를 넣어 한 칸씩 돌린다. 계단을 한 칸씩 오르듯 순서를 앞으로 돌리면 정방향, 뒤로 돌리면 역방향이 된다.</p>
+<h3>② 이론 · 설계 계산</h3>
+<p>항상 두 상을 함께 켜는 2상 여자(full step) 순서를 쓴다. 매뉴얼 p.555에서 <code>stepmotor[3:0]</code>은 STEP_A, STEP_B, STEP_/A, STEP_/B다. 한 스텝마다 한 상만 바뀌고, A와 /A(B와 /B)가 동시에 켜지는 일은 없다.</p>
+<div class="tblwrap"><table><thead><tr><th>state</th><th>stepmotor[3:0]</th><th>켜진 상 (bit3~0 = A, B, /A, /B)</th></tr></thead><tbody><tr><td>0</td><td>0011</td><td>/A · /B</td></tr><tr><td>1</td><td>0110</td><td>B · /A</td></tr><tr><td>2</td><td>1100</td><td>A · B</td></tr><tr><td>3</td><td>1001</td><td>A · /B</td></tr></tbody></table></div>
+$$T_{step}=\frac{f_{clk}}{f_{step}}=\frac{50\,000\,000}{100}=500\,000\ \text{클록}=10\ \text{ms}$$
+<p>1초에 100스텝이다. 스텝각이 1.8°인 모터라면 \(1.8^\circ\times100=180^\circ/\text{s}=30\) rpm이다(보드 모터의 스텝각은 확인하지 못했다).</p>
+<h3>③ 포트 · 보드 매핑</h3>
+<div class="tblwrap"><table><thead><tr><th>포트</th><th>핀</th><th>보드 장치</th></tr></thead><tbody><tr><td>clk_50mhz</td><td>B6</td><td>MAIN_CLOCK1</td></tr><tr><td>rst_p</td><td>K4</td><td>키패드 1</td></tr><tr><td>enable</td><td>N8 / Y1</td><td>키패드 2 (누르는 동안) / DIP 버전: DIP SW1</td></tr><tr><td>direction</td><td>N4 / W3</td><td>키패드 3 / DIP 버전: DIP SW2</td></tr><tr><td>stepmotor[3:0]</td><td>Y20 Y22 AA20 AA21</td><td>STEP_A · STEP_B · STEP_/A · STEP_/B</td></tr></tbody></table></div>
+<div class="box ok"><span class="t">핀 확인 완료</span> — STEP_A = Y20, STEP_B = Y22, STEP_/A = AA20, STEP_/B = AA21로 매뉴얼 p.555와 일치한다. 같은 표의 motor_sense(Y19)는 이번 설계에서 쓰지 않았다.</div>
+<div class="box info"><span class="t">두 가지 조작 버전</span> — 키패드는 누르는 동안만 High라서 기본 버전은 키패드 2를 누르고 있는 동안만 돈다. 계속 돌리며 관찰하도록 RTL은 그대로 두고 XDC만 바꾼 DIP 버전(enable = DIP SW1(Y1), direction = DIP SW2(W3))을 따로 빌드했다(WNS 16.255 ns, WHS 0.160 ns). DIP SW1 = Y1은 매뉴얼 p.423 핀표로 확인했다.</div>
+<h3>④ RTL</h3>
+<pre><code>`timescale 1ns/1ps
+module lab3_stepper #(
+    parameter integer CLK_HZ = 50_000_000,
+    parameter integer STEP_HZ = 100
+) (
+    input wire clk_50mhz,
+    input wire rst_p,
+    input wire enable,
+    input wire direction,
+    output reg [3:0] stepmotor
+);
+    localparam integer STEP_CYCLES = CLK_HZ / STEP_HZ;
+    localparam integer COUNT_WIDTH = (STEP_CYCLES &lt; 2) ? 1 : $clog2(STEP_CYCLES);
+    reg [COUNT_WIDTH-1:0] count;
+    reg [1:0] state;
+    (* ASYNC_REG = &quot;TRUE&quot; *) reg enable_meta, enable_sync;
+    (* ASYNC_REG = &quot;TRUE&quot; *) reg direction_meta, direction_sync;
+
+    always @(posedge clk_50mhz or posedge rst_p) begin
+        if (rst_p) begin
+            enable_meta &lt;= 0; enable_sync &lt;= 0;
+            direction_meta &lt;= 0; direction_sync &lt;= 0;
+        end else begin
+            enable_meta &lt;= enable; enable_sync &lt;= enable_meta;
+            direction_meta &lt;= direction; direction_sync &lt;= direction_meta;
+        end
+    end
+
+    always @(posedge clk_50mhz or posedge rst_p) begin
+        if (rst_p) begin
+            count &lt;= 0;
+            state &lt;= 0;
+        end else if (!enable_sync) begin
+            count &lt;= 0;
+        end else if (count == STEP_CYCLES - 1) begin
+            count &lt;= 0;
+            state &lt;= direction_sync ? state - 1&#x27;b1 : state + 1&#x27;b1;
+        end else begin
+            count &lt;= count + 1&#x27;b1;
+        end
+    end
+
+   always @* begin
+       case (state)
+           2&#x27;d0: stepmotor = 4&#x27;b0011;
+           2&#x27;d1: stepmotor = 4&#x27;b0110;
+           2&#x27;d2: stepmotor = 4&#x27;b1100;
+           default: stepmotor = 4&#x27;b1001;
+       endcase
+   end
+endmodule</code></pre>
+<h3>⑤ 시뮬레이션</h3>
+<p><span class="badge pass">PASS</span> Vivado XSim과 Icarus Verilog 12.0에서 같은 결과를 확인했다: <code>LAB3_STEPPER_PASS checks=8</code></p><p>검사 8개: 리셋값 0011 → 정방향 0110·1100·1001·0011 → 역방향 1001·1100 → enable을 내린 뒤 12클록 동안 1100 유지.</p>
+<figure><div class="svgwrap"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 232" width="100%" role="img" aria-label="XSim · tb_stepper (CLK_HZ=8, STEP_HZ=2 → 4클록마다 한 스텝)" style="background:#fff;font-family:Consolas,monospace">
+<text x="118" y="16" font-size="12" fill="#5b6478">XSim · tb_stepper (CLK_HZ=8, STEP_HZ=2 → 4클록마다 한 스텝)</text>
+<line x1="118.0" y1="22" x2="118.0" y2="210" stroke="#eef1f7"/>
+<text x="118.0" y="224" font-size="10" fill="#5b6478" text-anchor="middle">0 ns</text>
+<line x1="178.8" y1="22" x2="178.8" y2="210" stroke="#eef1f7"/>
+<text x="178.8" y="224" font-size="10" fill="#5b6478" text-anchor="middle">83 ns</text>
+<line x1="239.6" y1="22" x2="239.6" y2="210" stroke="#eef1f7"/>
+<text x="239.6" y="224" font-size="10" fill="#5b6478" text-anchor="middle">166 ns</text>
+<line x1="300.4" y1="22" x2="300.4" y2="210" stroke="#eef1f7"/>
+<text x="300.4" y="224" font-size="10" fill="#5b6478" text-anchor="middle">249 ns</text>
+<line x1="361.2" y1="22" x2="361.2" y2="210" stroke="#eef1f7"/>
+<text x="361.2" y="224" font-size="10" fill="#5b6478" text-anchor="middle">332 ns</text>
+<line x1="422.0" y1="22" x2="422.0" y2="210" stroke="#eef1f7"/>
+<text x="422.0" y="224" font-size="10" fill="#5b6478" text-anchor="middle">416 ns</text>
+<line x1="482.8" y1="22" x2="482.8" y2="210" stroke="#eef1f7"/>
+<text x="482.8" y="224" font-size="10" fill="#5b6478" text-anchor="middle">499 ns</text>
+<line x1="543.6" y1="22" x2="543.6" y2="210" stroke="#eef1f7"/>
+<text x="543.6" y="224" font-size="10" fill="#5b6478" text-anchor="middle">582 ns</text>
+<line x1="604.4" y1="22" x2="604.4" y2="210" stroke="#eef1f7"/>
+<text x="604.4" y="224" font-size="10" fill="#5b6478" text-anchor="middle">665 ns</text>
+<line x1="665.2" y1="22" x2="665.2" y2="210" stroke="#eef1f7"/>
+<text x="665.2" y="224" font-size="10" fill="#5b6478" text-anchor="middle">748 ns</text>
+<line x1="726.0" y1="22" x2="726.0" y2="210" stroke="#eef1f7"/>
+<text x="726.0" y="224" font-size="10" fill="#5b6478" text-anchor="middle">831 ns</text>
+<text x="110" y="44.0" font-size="12" fill="#1d2433" text-anchor="end">clk</text>
+<path d="M118.0,48.0 L125.3,48.0 L125.3,32.0 L132.6,32.0 L132.6,48.0 L139.9,48.0 L139.9,32.0 L147.3,32.0 L147.3,48.0 L154.6,48.0 L154.6,32.0 L161.9,32.0 L161.9,48.0 L169.2,48.0 L169.2,32.0 L176.5,32.0 L176.5,48.0 L183.8,48.0 L183.8,32.0 L191.2,32.0 L191.2,48.0 L198.5,48.0 L198.5,32.0 L205.8,32.0 L205.8,48.0 L213.1,48.0 L213.1,32.0 L220.4,32.0 L220.4,48.0 L227.7,48.0 L227.7,32.0 L235.1,32.0 L235.1,48.0 L242.4,48.0 L242.4,32.0 L249.7,32.0 L249.7,48.0 L257.0,48.0 L257.0,32.0 L264.3,32.0 L264.3,48.0 L271.6,48.0 L271.6,32.0 L279.0,32.0 L279.0,48.0 L286.3,48.0 L286.3,32.0 L293.6,32.0 L293.6,48.0 L300.9,48.0 L300.9,32.0 L308.2,32.0 L308.2,48.0 L315.5,48.0 L315.5,32.0 L322.9,32.0 L322.9,48.0 L330.2,48.0 L330.2,32.0 L337.5,32.0 L337.5,48.0 L344.8,48.0 L344.8,32.0 L352.1,32.0 L352.1,48.0 L359.4,48.0 L359.4,32.0 L366.8,32.0 L366.8,48.0 L374.1,48.0 L374.1,32.0 L381.4,32.0 L381.4,48.0 L388.7,48.0 L388.7,32.0 L396.0,32.0 L396.0,48.0 L403.3,48.0 L403.3,32.0 L410.7,32.0 L410.7,48.0 L418.0,48.0 L418.0,32.0 L425.3,32.0 L425.3,48.0 L432.6,48.0 L432.6,32.0 L439.9,32.0 L439.9,48.0 L447.2,48.0 L447.2,32.0 L454.6,32.0 L454.6,48.0 L461.9,48.0 L461.9,32.0 L469.2,32.0 L469.2,48.0 L476.5,48.0 L476.5,32.0 L483.8,32.0 L483.8,48.0 L491.1,48.0 L491.1,32.0 L498.5,32.0 L498.5,48.0 L505.8,48.0 L505.8,32.0 L513.1,32.0 L513.1,48.0 L520.4,48.0 L520.4,32.0 L527.7,32.0 L527.7,48.0 L535.0,48.0 L535.0,32.0 L542.4,32.0 L542.4,48.0 L549.7,48.0 L549.7,32.0 L557.0,32.0 L557.0,48.0 L564.3,48.0 L564.3,32.0 L571.6,32.0 L571.6,48.0 L578.9,48.0 L578.9,32.0 L586.3,32.0 L586.3,48.0 L593.6,48.0 L593.6,32.0 L600.9,32.0 L600.9,48.0 L608.2,48.0 L608.2,32.0 L615.5,32.0 L615.5,48.0 L622.8,48.0 L622.8,32.0 L630.2,32.0 L630.2,48.0 L637.5,48.0 L637.5,32.0 L644.8,32.0 L644.8,48.0 L652.1,48.0 L652.1,32.0 L659.4,32.0 L659.4,48.0 L666.7,48.0 L666.7,32.0 L674.1,32.0 L674.1,48.0 L681.4,48.0 L681.4,32.0 L688.7,32.0 L688.7,48.0 L696.0,48.0 L696.0,32.0 L703.3,32.0 L703.3,48.0 L710.6,48.0 L710.6,32.0 L718.0,32.0 L718.0,48.0 L725.3,48.0 L725.3,32.0 L726.0,32.0" fill="none" stroke="#0b5fc0" stroke-width="1.6"/>
+<text x="110" y="74.0" font-size="12" fill="#1d2433" text-anchor="end">enable</text>
+<path d="M118.0,78.0 L140.7,78.0 L140.7,62.0 L521.1,62.0 L521.1,78.0 L726.0,78.0" fill="none" stroke="#0b5fc0" stroke-width="1.6"/>
+<text x="110" y="104.0" font-size="12" fill="#1d2433" text-anchor="end">direction</text>
+<path d="M118.0,108.0 L404.1,108.0 L404.1,92.0 L726.0,92.0" fill="none" stroke="#0b5fc0" stroke-width="1.6"/>
+<text x="110" y="134.0" font-size="12" fill="#1d2433" text-anchor="end">state</text>
+<path d="M118.0,130.0 L121.0,122 L224.7,122 L227.7,130.0 L224.7,138 L121.0,138 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="172.9" y="134.0" font-size="11" fill="#1d2433" text-anchor="middle">0</text>
+<path d="M227.7,130.0 L230.7,122 L283.3,122 L286.3,130.0 L283.3,138 L230.7,138 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="257.0" y="134.0" font-size="11" fill="#1d2433" text-anchor="middle">1</text>
+<path d="M286.3,130.0 L289.3,122 L341.8,122 L344.8,130.0 L341.8,138 L289.3,138 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="315.5" y="134.0" font-size="11" fill="#1d2433" text-anchor="middle">2</text>
+<path d="M344.8,130.0 L347.8,122 L400.3,122 L403.3,130.0 L400.3,138 L347.8,138 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="374.1" y="134.0" font-size="11" fill="#1d2433" text-anchor="middle">3</text>
+<path d="M403.3,130.0 L406.3,122 L458.9,122 L461.9,130.0 L458.9,138 L406.3,138 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="432.6" y="134.0" font-size="11" fill="#1d2433" text-anchor="middle">0</text>
+<path d="M461.9,130.0 L464.9,122 L517.4,122 L520.4,130.0 L517.4,138 L464.9,138 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="491.1" y="134.0" font-size="11" fill="#1d2433" text-anchor="middle">3</text>
+<path d="M520.4,130.0 L523.4,122 L723.0,122 L726.0,130.0 L723.0,138 L523.4,138 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="623.2" y="134.0" font-size="11" fill="#1d2433" text-anchor="middle">2</text>
+<text x="110" y="164.0" font-size="12" fill="#1d2433" text-anchor="end">stepmotor</text>
+<path d="M118.0,160.0 L121.0,152 L224.7,152 L227.7,160.0 L224.7,168 L121.0,168 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="172.9" y="164.0" font-size="11" fill="#1d2433" text-anchor="middle">0011</text>
+<path d="M227.7,160.0 L230.7,152 L283.3,152 L286.3,160.0 L283.3,168 L230.7,168 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="257.0" y="164.0" font-size="11" fill="#1d2433" text-anchor="middle">0110</text>
+<path d="M286.3,160.0 L289.3,152 L341.8,152 L344.8,160.0 L341.8,168 L289.3,168 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="315.5" y="164.0" font-size="11" fill="#1d2433" text-anchor="middle">1100</text>
+<path d="M344.8,160.0 L347.8,152 L400.3,152 L403.3,160.0 L400.3,168 L347.8,168 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="374.1" y="164.0" font-size="11" fill="#1d2433" text-anchor="middle">1001</text>
+<path d="M403.3,160.0 L406.3,152 L458.9,152 L461.9,160.0 L458.9,168 L406.3,168 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="432.6" y="164.0" font-size="11" fill="#1d2433" text-anchor="middle">0011</text>
+<path d="M461.9,160.0 L464.9,152 L517.4,152 L520.4,160.0 L517.4,168 L464.9,168 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="491.1" y="164.0" font-size="11" fill="#1d2433" text-anchor="middle">1001</text>
+<path d="M520.4,160.0 L523.4,152 L723.0,152 L726.0,160.0 L723.0,168 L523.4,168 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="623.2" y="164.0" font-size="11" fill="#1d2433" text-anchor="middle">1100</text>
+<text x="110" y="194.0" font-size="12" fill="#1d2433" text-anchor="end">checks</text>
+<path d="M118.0,190.0 L121.0,182 L137.7,182 L140.7,190.0 L137.7,198 L121.0,198 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="129.3" y="194.0" font-size="11" fill="#1d2433" text-anchor="middle">0</text>
+<path d="M140.7,190.0 L143.7,182 L225.5,182 L228.5,190.0 L225.5,198 L143.7,198 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="184.6" y="194.0" font-size="11" fill="#1d2433" text-anchor="middle">1</text>
+<path d="M228.5,190.0 L231.5,182 L284.0,182 L287.0,190.0 L284.0,198 L231.5,198 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="257.7" y="194.0" font-size="11" fill="#1d2433" text-anchor="middle">2</text>
+<path d="M287.0,190.0 L290.0,182 L342.5,182 L345.5,190.0 L342.5,198 L290.0,198 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="316.3" y="194.0" font-size="11" fill="#1d2433" text-anchor="middle">3</text>
+<path d="M345.5,190.0 L348.5,182 L401.1,182 L404.1,190.0 L401.1,198 L348.5,198 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="374.8" y="194.0" font-size="11" fill="#1d2433" text-anchor="middle">4</text>
+<path d="M404.1,190.0 L407.1,182 L459.6,182 L462.6,190.0 L459.6,198 L407.1,198 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="433.3" y="194.0" font-size="11" fill="#1d2433" text-anchor="middle">5</text>
+<path d="M462.6,190.0 L465.6,182 L518.1,182 L521.1,190.0 L518.1,198 L465.6,198 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="491.9" y="194.0" font-size="11" fill="#1d2433" text-anchor="middle">6</text>
+<path d="M521.1,190.0 L524.1,182 L723.0,182 L726.0,190.0 L723.0,198 L524.1,198 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="623.6" y="194.0" font-size="11" fill="#1d2433" text-anchor="middle">7</text>
+</svg></div><figcaption>direction이 1이 되면 state가 0→3→2로 거꾸로 간다. enable이 0이면 state가 멈춘다.</figcaption></figure>
+<h3>⑥ 합성 · 구현 결과 </h3>
+<div class="tblwrap"><table><thead><tr><th>항목</th><th>값</th><th>비고</th></tr></thead><tbody><tr><td>Slice LUTs</td><td>20 / 48,000</td><td>0.04%</td></tr><tr><td>Slice Registers (FF)</td><td>25 / 96,000</td><td>0.03%</td></tr><tr><td>Bonded IOB</td><td>8 / 338</td><td>XDC의 포트 수와 일치</td></tr><tr><td>BUFGCTRL</td><td>1 / 32</td><td>50 MHz 클록 1개</td></tr><tr><td>Setup WNS / Hold WHS</td><td>16.252 ns / 0.160 ns</td><td>둘 다 양수 → 타이밍 충족</td></tr></tbody></table></div>
+<h3>⑦ 보드 검증</h3>
+<p><span class="badge pass">보드 PASS</span> 2026-09-28 실습실에서 Combo II-DLD S75에 프로그램(다이얼 F = 50 MHz)해 확인했다.</p>
+<div class="tblwrap"><table><thead><tr><th>#</th><th>조작</th><th>관찰 결과</th><th>판정</th></tr></thead><tbody><tr><td>1</td><td>DIP 버전: SW1 ON</td><td>일정 속도로 한 방향 회전</td><td><span class="status-ok">✔</span></td></tr><tr><td>2</td><td>DIP 버전: SW2 ON</td><td>반대 방향 회전</td><td><span class="status-ok">✔</span></td></tr><tr><td>3</td><td>DIP 버전: SW1 OFF</td><td>그 자리에서 정지</td><td><span class="status-ok">✔</span></td></tr><tr><td>4</td><td>키패드 버전: 키패드 2 누름 / 2+3 누름</td><td>누르는 동안 회전 / 반대 방향 회전</td><td><span class="status-ok">✔</span></td></tr></tbody></table></div>
+<figure><video controls preload="metadata" src="https://raw.githubusercontent.com/hyeongjonghee/electronics2-LABs/main/LAB3/evidence/videos/LAB3-04_stepper.mp4"></video><figcaption>LAB3-04 스텝 모터 — DIP 스위치 버전 (<code>evidence/videos/LAB3-04_stepper.mp4</code>)</figcaption><a class="videolink" href="https://github.com/hyeongjonghee/electronics2-LABs/blob/main/LAB3/evidence/videos/LAB3-04_stepper.mp4" target="_blank">GitHub에서 영상 열기 ↗</a></figure>
+<figure><video controls preload="metadata" src="https://raw.githubusercontent.com/hyeongjonghee/electronics2-LABs/main/LAB3/evidence/videos/LAB3-04b_stepper_keypad.mp4"></video><figcaption>LAB3-04b 스텝 모터 — 키패드 버전 (<code>evidence/videos/LAB3-04b_stepper_keypad.mp4</code>)</figcaption><a class="videolink" href="https://github.com/hyeongjonghee/electronics2-LABs/blob/main/LAB3/evidence/videos/LAB3-04b_stepper_keypad.mp4" target="_blank">GitHub에서 영상 열기 ↗</a></figure>
+</section><section class="circuit" id="c05"><h2>5. 실험 5 · MM:SS 디지털 시계 (7세그먼트 4자리)</h2>
+<h3>① 목적</h3>
+<p>1초마다 올라가는 분·초 시계를 만들고 7세그먼트 4자리에 <b>MM.SS</b>로 표시한다(분 1의 자리의 점을 구분자로 사용). 네 자리를 번갈아 아주 빨리 켜서, 손전등 네 개를 돌려 비추는데도 모두 켜져 보이는 것처럼 표시한다.</p>
+<h3>② 이론 · 설계 계산</h3>
+$$1\ \text{s}=f_{clk}\ \text{클록}=50\,000\,000\ \text{클록}$$
+$$T_{digit}=\frac{f_{clk}}{f_{scan}}=\frac{50\,000\,000}{4\,000}=12\,500\ \text{클록}=250\ \mu\text{s},\qquad T_{frame}=4T_{digit}=1\ \text{ms}$$
+<p>한 자리가 1 ms마다 다시 켜지므로(자리당 1 kHz) 깜빡임은 보이지 않는다. 카운터는 초 1의 자리 9 → 0일 때 초 10의 자리로, 59초 → 00초일 때 분으로 올림하며 59:59 다음은 00:00이다(주기 3,600 s).</p>
+<p>세그먼트 비트 순서는 LAB2-08(보드 검증 완료)과 같은 <code>seg_data[7:0] = {a,b,c,d,e,f,g,dp}</code>, High = 켜짐이다. 자리 선택 <code>seg_com</code>은 Low = 선택이며 COM[3]~COM[0]을 쓴다. 매뉴얼 p.555에서 COM[7] = AR_SEG_S0(맨 왼쪽) … COM[0] = AR_SEG_S7(맨 오른쪽), seg_data[7] = AR_SEG_A … seg_data[0] = AR_SEG_DP임을 확인했다.</p>
+<h3>③ 포트 · 보드 매핑</h3>
+<div class="tblwrap"><table><thead><tr><th>포트</th><th>핀</th><th>보드 장치</th></tr></thead><tbody><tr><td>clk_50mhz</td><td>B6</td><td>MAIN_CLOCK1</td></tr><tr><td>rst_p</td><td>K4</td><td>키패드 1 (00.00으로)</td></tr><tr><td>seg_data[0..7]</td><td>H2 J7 J3 J1 E4 E2 F5 F1</td><td>세그먼트 dp g f e d c b a (Active-High)</td></tr><tr><td>seg_com[0..3]</td><td>K5 K3 K1 L6</td><td>COM0~COM3 (Active-Low)</td></tr><tr><td>seg_com[4..7]</td><td>G3 G1 H6 H4</td><td>사용 안 함 (항상 High = 꺼짐)</td></tr></tbody></table></div>
+<h3>④ RTL</h3>
+<pre><code>`timescale 1ns/1ps
+module lab3_mmss_clock #(
+    parameter integer CLK_HZ = 50_000_000,
+    parameter integer SCAN_HZ = 4_000
+) (
+    input wire clk_50mhz,
+    input wire rst_p,
+    output reg [7:0] seg_data,
+    output reg [7:0] seg_com
+);
+    wire [3:0] mt, mo, st, so;
+    wire [7:0] seg_mt, seg_mo, seg_st, seg_so;
+    localparam integer SCAN_CYCLES = CLK_HZ / SCAN_HZ;
+    localparam integer SCAN_WIDTH = (SCAN_CYCLES &lt; 2) ? 1 : $clog2(SCAN_CYCLES);
+    reg [SCAN_WIDTH-1:0] scan_count;
+    reg [1:0] scan_select;
+
+     mmss_counter #(.CLK_HZ(CLK_HZ)) u_counter (
+         .clk(clk_50mhz), .rst_p(rst_p), .minute_tens(mt), .minute_ones(mo),
+         .second_tens(st), .second_ones(so));
+     sevenseg_decode u_mt(.digit(mt), .segments(seg_mt));
+     sevenseg_decode u_mo(.digit(mo), .segments(seg_mo));
+     sevenseg_decode u_st(.digit(st), .segments(seg_st));
+     sevenseg_decode u_so(.digit(so), .segments(seg_so));
+
+     always @(posedge clk_50mhz or posedge rst_p) begin
+         if (rst_p) begin
+             scan_count &lt;= 0;
+             scan_select &lt;= 0;
+         end else if (scan_count == SCAN_CYCLES - 1) begin
+             scan_count &lt;= 0;
+             scan_select &lt;= scan_select + 1&#x27;b1;
+         end else begin
+             scan_count &lt;= scan_count + 1&#x27;b1;
+         end
+     end
+
+    always @* begin
+        seg_com = 8&#x27;b1111_1111;
+        seg_data = 8&#x27;b0000_0000;
+        case (scan_select)
+            2&#x27;d0: begin seg_com = 8&#x27;b1111_0111; seg_data = seg_mt; end
+            2&#x27;d1: begin seg_com = 8&#x27;b1111_1011; seg_data = seg_mo | 8&#x27;b0000_0001; end
+            2&#x27;d2: begin seg_com = 8&#x27;b1111_1101; seg_data = seg_st; end
+            default: begin seg_com = 8&#x27;b1111_1110; seg_data = seg_so; end
+        endcase
+    end
+endmodule</code></pre>
+<pre><code>`timescale 1ns/1ps
+module mmss_counter #(
+    parameter integer CLK_HZ = 50_000_000
+) (
+    input wire clk,
+    input wire rst_p,
+    output reg [3:0] minute_tens,
+    output reg [3:0] minute_ones,
+    output reg [3:0] second_tens,
+    output reg [3:0] second_ones
+);
+    localparam integer COUNT_WIDTH = (CLK_HZ &lt; 2) ? 1 : $clog2(CLK_HZ);
+    reg [COUNT_WIDTH-1:0] subsecond;
+
+    always @(posedge clk or posedge rst_p) begin
+        if (rst_p) begin
+            subsecond &lt;= 0;
+            minute_tens &lt;= 0; minute_ones &lt;= 0;
+            second_tens &lt;= 0; second_ones &lt;= 0;
+        end else if (subsecond == CLK_HZ - 1) begin
+            subsecond &lt;= 0;
+            if (second_ones != 9)
+                second_ones &lt;= second_ones + 1&#x27;b1;
+            else begin
+                second_ones &lt;= 0;
+                if (second_tens != 5)
+                    second_tens &lt;= second_tens + 1&#x27;b1;
+                else begin
+                    second_tens &lt;= 0;
+                    if (minute_ones != 9)
+                        minute_ones &lt;= minute_ones + 1&#x27;b1;
+                    else begin
+                        minute_ones &lt;= 0;
+                        if (minute_tens != 5)
+                            minute_tens &lt;= minute_tens + 1&#x27;b1;
+                        else
+                            minute_tens &lt;= 0;
+                    end
+                end
+            end
+        end else begin
+            subsecond &lt;= subsecond + 1&#x27;b1;
+        end
+    end
+endmodule</code></pre>
+<pre><code>`timescale 1ns/1ps
+module sevenseg_decode(
+    input wire [3:0] digit,
+    output reg [7:0] segments
+);
+    always @* begin
+        case (digit)
+            4&#x27;d0: segments = 8&#x27;b1111_1100;
+            4&#x27;d1: segments = 8&#x27;b0110_0000;
+            4&#x27;d2: segments = 8&#x27;b1101_1010;
+            4&#x27;d3: segments = 8&#x27;b1111_0010;
+            4&#x27;d4: segments = 8&#x27;b0110_0110;
+            4&#x27;d5: segments = 8&#x27;b1011_0110;
+            4&#x27;d6: segments = 8&#x27;b1011_1110;
+            4&#x27;d7: segments = 8&#x27;b1110_0000;
+            4&#x27;d8: segments = 8&#x27;b1111_1110;
+            4&#x27;d9: segments = 8&#x27;b1111_0110;
+            default: segments = 8&#x27;b0000_0000;
+        endcase
+    end
+endmodule</code></pre>
+<h3>⑤ 시뮬레이션</h3>
+<p><span class="badge pass">PASS</span> Vivado XSim과 Icarus Verilog 12.0에서 같은 결과를 확인했다: <code>LAB3_MMSS_PASS checks=7</code></p><p>CLK_HZ=2로 줄여 2클록(40 ns)을 1초로 만들었다. 검사 7개: 디코더 0·9, 리셋 00:00, 10초 뒤 00:10, 60초 뒤 01:00, 3,599초 뒤 59:59, 1초 더 뒤 00:00.</p>
+<figure><div class="svgwrap"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 172" width="100%" role="img" aria-label="XSim · tb_mmss_counter (CLK_HZ=2 → 40 ns = 1초) — 00:00 → 00:11" style="background:#fff;font-family:Consolas,monospace">
+<text x="118" y="16" font-size="12" fill="#5b6478">XSim · tb_mmss_counter (CLK_HZ=2 → 40 ns = 1초) — 00:00 → 00:11</text>
+<line x1="118.0" y1="22" x2="118.0" y2="150" stroke="#eef1f7"/>
+<text x="118.0" y="164" font-size="10" fill="#5b6478" text-anchor="middle">0 ns</text>
+<line x1="178.8" y1="22" x2="178.8" y2="150" stroke="#eef1f7"/>
+<text x="178.8" y="164" font-size="10" fill="#5b6478" text-anchor="middle">48 ns</text>
+<line x1="239.6" y1="22" x2="239.6" y2="150" stroke="#eef1f7"/>
+<text x="239.6" y="164" font-size="10" fill="#5b6478" text-anchor="middle">96 ns</text>
+<line x1="300.4" y1="22" x2="300.4" y2="150" stroke="#eef1f7"/>
+<text x="300.4" y="164" font-size="10" fill="#5b6478" text-anchor="middle">144 ns</text>
+<line x1="361.2" y1="22" x2="361.2" y2="150" stroke="#eef1f7"/>
+<text x="361.2" y="164" font-size="10" fill="#5b6478" text-anchor="middle">192 ns</text>
+<line x1="422.0" y1="22" x2="422.0" y2="150" stroke="#eef1f7"/>
+<text x="422.0" y="164" font-size="10" fill="#5b6478" text-anchor="middle">240 ns</text>
+<line x1="482.8" y1="22" x2="482.8" y2="150" stroke="#eef1f7"/>
+<text x="482.8" y="164" font-size="10" fill="#5b6478" text-anchor="middle">288 ns</text>
+<line x1="543.6" y1="22" x2="543.6" y2="150" stroke="#eef1f7"/>
+<text x="543.6" y="164" font-size="10" fill="#5b6478" text-anchor="middle">336 ns</text>
+<line x1="604.4" y1="22" x2="604.4" y2="150" stroke="#eef1f7"/>
+<text x="604.4" y="164" font-size="10" fill="#5b6478" text-anchor="middle">384 ns</text>
+<line x1="665.2" y1="22" x2="665.2" y2="150" stroke="#eef1f7"/>
+<text x="665.2" y="164" font-size="10" fill="#5b6478" text-anchor="middle">432 ns</text>
+<line x1="726.0" y1="22" x2="726.0" y2="150" stroke="#eef1f7"/>
+<text x="726.0" y="164" font-size="10" fill="#5b6478" text-anchor="middle">480 ns</text>
+<text x="110" y="44.0" font-size="12" fill="#1d2433" text-anchor="end">분 10의 자리</text>
+<path d="M118.0,40.0 L121.0,32 L723.0,32 L726.0,40.0 L723.0,48 L121.0,48 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="422.0" y="44.0" font-size="11" fill="#1d2433" text-anchor="middle">0</text>
+<text x="110" y="74.0" font-size="12" fill="#1d2433" text-anchor="end">분 1의 자리</text>
+<path d="M118.0,70.0 L121.0,62 L723.0,62 L726.0,70.0 L723.0,78 L121.0,78 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="422.0" y="74.0" font-size="11" fill="#1d2433" text-anchor="middle">0</text>
+<text x="110" y="104.0" font-size="12" fill="#1d2433" text-anchor="end">초 10의 자리</text>
+<path d="M118.0,100.0 L121.0,92 L634.3,92 L637.3,100.0 L634.3,108 L121.0,108 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="377.7" y="104.0" font-size="11" fill="#1d2433" text-anchor="middle">0</text>
+<path d="M637.3,100.0 L640.3,92 L723.0,92 L726.0,100.0 L723.0,108 L640.3,108 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="681.7" y="104.0" font-size="11" fill="#1d2433" text-anchor="middle">1</text>
+<text x="110" y="134.0" font-size="12" fill="#1d2433" text-anchor="end">초 1의 자리</text>
+<path d="M118.0,130.0 L121.0,122 L178.3,122 L181.3,130.0 L178.3,138 L121.0,138 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="149.7" y="134.0" font-size="11" fill="#1d2433" text-anchor="middle">0</text>
+<path d="M181.3,130.0 L184.3,122 L229.0,122 L232.0,130.0 L229.0,138 L184.3,138 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="206.7" y="134.0" font-size="11" fill="#1d2433" text-anchor="middle">1</text>
+<path d="M232.0,130.0 L235.0,122 L279.7,122 L282.7,130.0 L279.7,138 L235.0,138 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="257.3" y="134.0" font-size="11" fill="#1d2433" text-anchor="middle">2</text>
+<path d="M282.7,130.0 L285.7,122 L330.3,122 L333.3,130.0 L330.3,138 L285.7,138 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="308.0" y="134.0" font-size="11" fill="#1d2433" text-anchor="middle">3</text>
+<path d="M333.3,130.0 L336.3,122 L381.0,122 L384.0,130.0 L381.0,138 L336.3,138 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="358.7" y="134.0" font-size="11" fill="#1d2433" text-anchor="middle">4</text>
+<path d="M384.0,130.0 L387.0,122 L431.7,122 L434.7,130.0 L431.7,138 L387.0,138 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="409.3" y="134.0" font-size="11" fill="#1d2433" text-anchor="middle">5</text>
+<path d="M434.7,130.0 L437.7,122 L482.3,122 L485.3,130.0 L482.3,138 L437.7,138 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="460.0" y="134.0" font-size="11" fill="#1d2433" text-anchor="middle">6</text>
+<path d="M485.3,130.0 L488.3,122 L533.0,122 L536.0,130.0 L533.0,138 L488.3,138 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="510.7" y="134.0" font-size="11" fill="#1d2433" text-anchor="middle">7</text>
+<path d="M536.0,130.0 L539.0,122 L583.7,122 L586.7,130.0 L583.7,138 L539.0,138 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="561.3" y="134.0" font-size="11" fill="#1d2433" text-anchor="middle">8</text>
+<path d="M586.7,130.0 L589.7,122 L634.3,122 L637.3,130.0 L634.3,138 L589.7,138 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="612.0" y="134.0" font-size="11" fill="#1d2433" text-anchor="middle">9</text>
+<path d="M637.3,130.0 L640.3,122 L685.0,122 L688.0,130.0 L685.0,138 L640.3,138 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="662.7" y="134.0" font-size="11" fill="#1d2433" text-anchor="middle">0</text>
+<path d="M688.0,130.0 L691.0,122 L723.0,122 L726.0,130.0 L723.0,138 L691.0,138 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="707.0" y="134.0" font-size="11" fill="#1d2433" text-anchor="middle">1</text>
+</svg></div><figcaption>초 1의 자리가 9 다음 0이 되면서 초 10의 자리가 1 오른다.</figcaption></figure>
+<figure><div class="svgwrap"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 172" width="100%" role="img" aria-label="같은 파형 — 00:57 → 01:03 (분 자리 올림)" style="background:#fff;font-family:Consolas,monospace">
+<text x="118" y="16" font-size="12" fill="#5b6478">같은 파형 — 00:57 → 01:03 (분 자리 올림)</text>
+<line x1="118.0" y1="22" x2="118.0" y2="150" stroke="#eef1f7"/>
+<text x="118.0" y="164" font-size="10" fill="#5b6478" text-anchor="middle">2,290 ns</text>
+<line x1="178.8" y1="22" x2="178.8" y2="150" stroke="#eef1f7"/>
+<text x="178.8" y="164" font-size="10" fill="#5b6478" text-anchor="middle">2,314 ns</text>
+<line x1="239.6" y1="22" x2="239.6" y2="150" stroke="#eef1f7"/>
+<text x="239.6" y="164" font-size="10" fill="#5b6478" text-anchor="middle">2,338 ns</text>
+<line x1="300.4" y1="22" x2="300.4" y2="150" stroke="#eef1f7"/>
+<text x="300.4" y="164" font-size="10" fill="#5b6478" text-anchor="middle">2,362 ns</text>
+<line x1="361.2" y1="22" x2="361.2" y2="150" stroke="#eef1f7"/>
+<text x="361.2" y="164" font-size="10" fill="#5b6478" text-anchor="middle">2,386 ns</text>
+<line x1="422.0" y1="22" x2="422.0" y2="150" stroke="#eef1f7"/>
+<text x="422.0" y="164" font-size="10" fill="#5b6478" text-anchor="middle">2,410 ns</text>
+<line x1="482.8" y1="22" x2="482.8" y2="150" stroke="#eef1f7"/>
+<text x="482.8" y="164" font-size="10" fill="#5b6478" text-anchor="middle">2,434 ns</text>
+<line x1="543.6" y1="22" x2="543.6" y2="150" stroke="#eef1f7"/>
+<text x="543.6" y="164" font-size="10" fill="#5b6478" text-anchor="middle">2,458 ns</text>
+<line x1="604.4" y1="22" x2="604.4" y2="150" stroke="#eef1f7"/>
+<text x="604.4" y="164" font-size="10" fill="#5b6478" text-anchor="middle">2,482 ns</text>
+<line x1="665.2" y1="22" x2="665.2" y2="150" stroke="#eef1f7"/>
+<text x="665.2" y="164" font-size="10" fill="#5b6478" text-anchor="middle">2,506 ns</text>
+<line x1="726.0" y1="22" x2="726.0" y2="150" stroke="#eef1f7"/>
+<text x="726.0" y="164" font-size="10" fill="#5b6478" text-anchor="middle">2,530 ns</text>
+<text x="110" y="44.0" font-size="12" fill="#1d2433" text-anchor="end">분 10의 자리</text>
+<path d="M118.0,40.0 L121.0,32 L723.0,32 L726.0,40.0 L723.0,48 L121.0,48 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="422.0" y="44.0" font-size="11" fill="#1d2433" text-anchor="middle">0</text>
+<text x="110" y="74.0" font-size="12" fill="#1d2433" text-anchor="end">분 1의 자리</text>
+<path d="M118.0,70.0 L121.0,62 L419.0,62 L422.0,70.0 L419.0,78 L121.0,78 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="270.0" y="74.0" font-size="11" fill="#1d2433" text-anchor="middle">0</text>
+<path d="M422.0,70.0 L425.0,62 L723.0,62 L726.0,70.0 L723.0,78 L425.0,78 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="574.0" y="74.0" font-size="11" fill="#1d2433" text-anchor="middle">1</text>
+<text x="110" y="104.0" font-size="12" fill="#1d2433" text-anchor="end">초 10의 자리</text>
+<path d="M118.0,100.0 L121.0,92 L419.0,92 L422.0,100.0 L419.0,108 L121.0,108 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="270.0" y="104.0" font-size="11" fill="#1d2433" text-anchor="middle">5</text>
+<path d="M422.0,100.0 L425.0,92 L723.0,92 L726.0,100.0 L723.0,108 L425.0,108 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="574.0" y="104.0" font-size="11" fill="#1d2433" text-anchor="middle">0</text>
+<text x="110" y="134.0" font-size="12" fill="#1d2433" text-anchor="end">초 1의 자리</text>
+<path d="M118.0,130.0 L121.0,122 L216.3,122 L219.3,130.0 L216.3,138 L121.0,138 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="168.7" y="134.0" font-size="11" fill="#1d2433" text-anchor="middle">7</text>
+<path d="M219.3,130.0 L222.3,122 L317.7,122 L320.7,130.0 L317.7,138 L222.3,138 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="270.0" y="134.0" font-size="11" fill="#1d2433" text-anchor="middle">8</text>
+<path d="M320.7,130.0 L323.7,122 L419.0,122 L422.0,130.0 L419.0,138 L323.7,138 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="371.3" y="134.0" font-size="11" fill="#1d2433" text-anchor="middle">9</text>
+<path d="M422.0,130.0 L425.0,122 L520.3,122 L523.3,130.0 L520.3,138 L425.0,138 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="472.7" y="134.0" font-size="11" fill="#1d2433" text-anchor="middle">0</text>
+<path d="M523.3,130.0 L526.3,122 L621.7,122 L624.7,130.0 L621.7,138 L526.3,138 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="574.0" y="134.0" font-size="11" fill="#1d2433" text-anchor="middle">1</text>
+<path d="M624.7,130.0 L627.7,122 L723.0,122 L726.0,130.0 L723.0,138 L627.7,138 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="675.3" y="134.0" font-size="11" fill="#1d2433" text-anchor="middle">2</text>
+</svg></div><figcaption>00:59 → 01:00에서 초 두 자리가 0이 되고 분 1의 자리가 오른다.</figcaption></figure>
+<figure><div class="svgwrap"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 172" width="100%" role="img" aria-label="같은 파형의 끝부분 — 59:59 → 00:00 넘어감" style="background:#fff;font-family:Consolas,monospace">
+<text x="118" y="16" font-size="12" fill="#5b6478">같은 파형의 끝부분 — 59:59 → 00:00 넘어감</text>
+<line x1="118.0" y1="22" x2="118.0" y2="150" stroke="#eef1f7"/>
+<text x="118.0" y="164" font-size="10" fill="#5b6478" text-anchor="middle">143,890 ns</text>
+<line x1="178.8" y1="22" x2="178.8" y2="150" stroke="#eef1f7"/>
+<line x1="239.6" y1="22" x2="239.6" y2="150" stroke="#eef1f7"/>
+<text x="239.6" y="164" font-size="10" fill="#5b6478" text-anchor="middle">143,918 ns</text>
+<line x1="300.4" y1="22" x2="300.4" y2="150" stroke="#eef1f7"/>
+<line x1="361.2" y1="22" x2="361.2" y2="150" stroke="#eef1f7"/>
+<text x="361.2" y="164" font-size="10" fill="#5b6478" text-anchor="middle">143,946 ns</text>
+<line x1="422.0" y1="22" x2="422.0" y2="150" stroke="#eef1f7"/>
+<line x1="482.8" y1="22" x2="482.8" y2="150" stroke="#eef1f7"/>
+<text x="482.8" y="164" font-size="10" fill="#5b6478" text-anchor="middle">143,975 ns</text>
+<line x1="543.6" y1="22" x2="543.6" y2="150" stroke="#eef1f7"/>
+<line x1="604.4" y1="22" x2="604.4" y2="150" stroke="#eef1f7"/>
+<text x="604.4" y="164" font-size="10" fill="#5b6478" text-anchor="middle">144,003 ns</text>
+<line x1="665.2" y1="22" x2="665.2" y2="150" stroke="#eef1f7"/>
+<line x1="726.0" y1="22" x2="726.0" y2="150" stroke="#eef1f7"/>
+<text x="726.0" y="164" font-size="10" fill="#5b6478" text-anchor="middle">144,031 ns</text>
+<line x1="635.4" y1="22" x2="635.4" y2="150" stroke="#b3261e" stroke-dasharray="4 3"/>
+<text x="638.4" y="30" font-size="10" fill="#b3261e">3600초</text>
+<text x="110" y="44.0" font-size="12" fill="#1d2433" text-anchor="end">분 10의 자리</text>
+<path d="M118.0,40.0 L121.0,32 L632.4,32 L635.4,40.0 L632.4,48 L121.0,48 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="376.7" y="44.0" font-size="11" fill="#1d2433" text-anchor="middle">5</text>
+<path d="M635.4,40.0 L638.4,32 L723.0,32 L726.0,40.0 L723.0,48 L638.4,48 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="680.7" y="44.0" font-size="11" fill="#1d2433" text-anchor="middle">0</text>
+<text x="110" y="74.0" font-size="12" fill="#1d2433" text-anchor="end">분 1의 자리</text>
+<path d="M118.0,70.0 L121.0,62 L632.4,62 L635.4,70.0 L632.4,78 L121.0,78 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="376.7" y="74.0" font-size="11" fill="#1d2433" text-anchor="middle">9</text>
+<path d="M635.4,70.0 L638.4,62 L723.0,62 L726.0,70.0 L723.0,78 L638.4,78 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="680.7" y="74.0" font-size="11" fill="#1d2433" text-anchor="middle">0</text>
+<text x="110" y="104.0" font-size="12" fill="#1d2433" text-anchor="end">초 10의 자리</text>
+<path d="M118.0,100.0 L121.0,92 L632.4,92 L635.4,100.0 L632.4,108 L121.0,108 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="376.7" y="104.0" font-size="11" fill="#1d2433" text-anchor="middle">5</text>
+<path d="M635.4,100.0 L638.4,92 L723.0,92 L726.0,100.0 L723.0,108 L638.4,108 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="680.7" y="104.0" font-size="11" fill="#1d2433" text-anchor="middle">0</text>
+<text x="110" y="134.0" font-size="12" fill="#1d2433" text-anchor="end">초 1의 자리</text>
+<path d="M118.0,130.0 L121.0,122 L287.5,122 L290.5,130.0 L287.5,138 L121.0,138 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="204.2" y="134.0" font-size="11" fill="#1d2433" text-anchor="middle">7</text>
+<path d="M290.5,130.0 L293.5,122 L460.0,122 L463.0,130.0 L460.0,138 L293.5,138 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="376.7" y="134.0" font-size="11" fill="#1d2433" text-anchor="middle">8</text>
+<path d="M463.0,130.0 L466.0,122 L632.4,122 L635.4,130.0 L632.4,138 L466.0,138 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="549.2" y="134.0" font-size="11" fill="#1d2433" text-anchor="middle">9</text>
+<path d="M635.4,130.0 L638.4,122 L723.0,122 L726.0,130.0 L723.0,138 L638.4,138 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="680.7" y="134.0" font-size="11" fill="#1d2433" text-anchor="middle">0</text>
+</svg></div><figcaption>3,600초째에 네 자리가 동시에 0으로 넘어간다.</figcaption></figure>
+<h3>⑥ 합성 · 구현 결과 </h3>
+<div class="tblwrap"><table><thead><tr><th>항목</th><th>값</th><th>비고</th></tr></thead><tbody><tr><td>Slice LUTs</td><td>83 / 48,000</td><td>0.17%</td></tr><tr><td>Slice Registers (FF)</td><td>58 / 96,000</td><td>0.06%</td></tr><tr><td>Bonded IOB</td><td>18 / 338</td><td>XDC의 포트 수와 일치</td></tr><tr><td>BUFGCTRL</td><td>1 / 32</td><td>50 MHz 클록 1개</td></tr><tr><td>Setup WNS / Hold WHS</td><td>15.118 ns / 0.210 ns</td><td>둘 다 양수 → 타이밍 충족</td></tr></tbody></table></div>
+<h3>⑦ 보드 검증</h3>
+<p><span class="badge pass">보드 PASS</span> 2026-09-28 실습실에서 Combo II-DLD S75에 프로그램(다이얼 F = 50 MHz)해 확인했다.</p>
+<div class="tblwrap"><table><thead><tr><th>#</th><th>조작</th><th>관찰 결과</th><th>판정</th></tr></thead><tbody><tr><td>1</td><td>다운로드</td><td>오른쪽 4자리에 00.00부터 1초마다 증가</td><td><span class="status-ok">✔</span></td></tr><tr><td>2</td><td>자리 순서</td><td>왼쪽부터 분 10 · 분 1 · 초 10 · 초 1, 분 1의 자리 점이 구분자</td><td><span class="status-ok">✔</span></td></tr><tr><td>3</td><td>1분 이상 관찰</td><td>00.59 → 01.00으로 올림</td><td><span class="status-ok">✔</span></td></tr><tr><td>4</td><td>키패드 1</td><td>00.00으로 되돌아감</td><td><span class="status-ok">✔</span></td></tr></tbody></table></div>
+<figure><video controls preload="metadata" src="https://raw.githubusercontent.com/hyeongjonghee/electronics2-LABs/main/LAB3/evidence/videos/LAB3-05_mmss_clock.mp4"></video><figcaption>LAB3-05 MM:SS 시계 동작 (<code>evidence/videos/LAB3-05_mmss_clock.mp4</code>)</figcaption><a class="videolink" href="https://github.com/hyeongjonghee/electronics2-LABs/blob/main/LAB3/evidence/videos/LAB3-05_mmss_clock.mp4" target="_blank">GitHub에서 영상 열기 ↗</a></figure>
+</section><section class="circuit" id="c06"><h2>6. 실험 6 · Character LCD (HD44780 호환 16×2)</h2>
+<h3>① 목적</h3>
+<p>16×2 문자 LCD를 초기화하고 첫 줄에 <code>FPGA LAB3</code>, 둘째 줄에 <code>LCD CONTROLLER</code>를 쓴다. LCD는 명령을 받은 뒤 처리할 시간이 필요하므로, 정해진 순서와 기다리는 시간을 지키는 "순서표 실행기"(상태 머신)로 만들었다. 요리 레시피처럼 순서와 기다리는 시간이 정해져 있다.</p>
+<h3>② 이론 · 설계 계산</h3>
+<p>10 µs짜리 tick(500클록)을 기본 단위로 쓴다.</p>
+<div class="tblwrap"><table><thead><tr><th>구간</th><th>tick</th><th>실제 시간</th><th>HD44780 요구</th></tr></thead><tbody><tr><td>전원 안정 대기</td><td>2,000</td><td>20 ms</td><td>≥ 15 ms</td></tr><tr><td>E High 폭</td><td>1</td><td>10 µs</td><td>≥ 0.23 µs</td></tr><tr><td>일반 명령·문자 후 대기</td><td>4</td><td>40 µs</td><td>≥ 37 µs</td></tr><tr><td>Clear(0x01) 후 대기</td><td>200</td><td>2 ms</td><td>≥ 1.52 ms</td></tr></tbody></table></div>
+<p>한 바이트는 준비(1) → E High(1) → E Low(1) → 대기(4) → 다음으로(1) = 8 tick = 80 µs다. 초기화가 끝난 뒤 index 6~39(34바이트)를 계속 다시 쓰므로 화면 전체가 약 \(34\times80\,\mu\text{s}=2.72\ \text{ms}\)마다 새로 쓰인다.</p>
+<div class="tblwrap"><table><thead><tr><th>index</th><th>RS</th><th>DATA</th><th>의미</th></tr></thead><tbody><tr><td>0~2</td><td>0</td><td>0x38</td><td>8비트 버스 · 2줄 · 5×8 글꼴 (3회)</td></tr><tr><td>3</td><td>0</td><td>0x0C</td><td>화면 ON, 커서 OFF</td></tr><tr><td>4</td><td>0</td><td>0x06</td><td>쓰고 나면 커서 오른쪽 이동</td></tr><tr><td>5</td><td>0</td><td>0x01</td><td>화면 지우기(2 ms 대기)</td></tr><tr><td>6</td><td>0</td><td>0x80</td><td>첫 줄 첫 칸으로</td></tr><tr><td>7~22</td><td>1</td><td>"FPGA LAB3" + 공백</td><td>첫 줄 16칸</td></tr><tr><td>23</td><td>0</td><td>0xC0</td><td>둘째 줄 첫 칸으로</td></tr><tr><td>24~39</td><td>1</td><td>"LCD CONTROLLER" + 공백</td><td>둘째 줄 16칸</td></tr></tbody></table></div>
+<h3>③ 포트 · 보드 매핑</h3>
+<div class="tblwrap"><table><thead><tr><th>포트</th><th>핀</th><th>보드 장치</th></tr></thead><tbody><tr><td>clk_50mhz</td><td>B6</td><td>MAIN_CLOCK1</td></tr><tr><td>rst_p</td><td>K4</td><td>키패드 1</td></tr><tr><td>lcd_e / lcd_rs / lcd_rw</td><td>A6 / G6 / D6</td><td>LCD E · RS · RW (RW는 항상 0 = 쓰기)</td></tr><tr><td>lcd_data[0..7]</td><td>A4 B2 C3 D4 A2 C5 C1 D1</td><td>LCD D0~D7</td></tr></tbody></table></div>
+<div class="box ok"><span class="t">핀 확인 완료</span> — LCD 11핀이 매뉴얼 p.568 핀 구성표, p.578 예제 핀표와 일치한다.</div>
+<h3>④ RTL</h3>
+<pre><code>`timescale 1ns/1ps
+module lab3_character_lcd #(
+    parameter integer TICK_CYCLES = 500,
+    parameter integer POWER_TICKS = 2_000,
+    parameter integer NORMAL_WAIT_TICKS = 4,
+    parameter integer CLEAR_WAIT_TICKS = 200
+) (
+    input wire clk_50mhz,
+    input wire rst_p,
+    output reg lcd_e,
+    output reg lcd_rs,
+    output wire lcd_rw,
+    output reg [7:0] lcd_data
+);
+    localparam integer TICK_WIDTH = (TICK_CYCLES &lt; 2) ? 1 : $clog2(TICK_CYCLES);
+    reg [TICK_WIDTH-1:0] tick_count;
+    reg tick;
+    reg [1:0] phase;
+    reg [5:0] index;
+    integer wait_count;
+    integer power_count;
+    reg byte_rs;
+    reg [7:0] byte_data;
+    assign lcd_rw = 1&#x27;b0;
+
+    always @(posedge clk_50mhz or posedge rst_p) begin
+        if (rst_p) begin
+            tick_count &lt;= 0;
+            tick &lt;= 0;
+        end else if (tick_count == TICK_CYCLES - 1) begin
+            tick_count &lt;= 0;
+            tick &lt;= 1;
+        end else begin
+            tick_count &lt;= tick_count + 1&#x27;b1;
+            tick &lt;= 0;
+        end
+    end
+
+    always @* begin
+        byte_rs = 1&#x27;b0;
+        byte_data = 8&#x27;h00;
+        case (index)
+            0, 1, 2: byte_data = 8&#x27;h38;
+            3: byte_data = 8&#x27;h0c;
+            4: byte_data = 8&#x27;h06;
+            5: byte_data = 8&#x27;h01;
+            6: byte_data = 8&#x27;h80;
+            7: begin byte_rs=1; byte_data=&quot;F&quot;; end
+            8: begin byte_rs=1; byte_data=&quot;P&quot;; end
+            9: begin byte_rs=1; byte_data=&quot;G&quot;; end
+            10: begin byte_rs=1; byte_data=&quot;A&quot;; end
+            11: begin byte_rs=1; byte_data=&quot; &quot;; end
+            12: begin byte_rs=1; byte_data=&quot;L&quot;; end
+            13: begin byte_rs=1; byte_data=&quot;A&quot;; end
+            14: begin byte_rs=1; byte_data=&quot;B&quot;; end
+            15: begin byte_rs=1; byte_data=&quot;3&quot;; end
+            16,17,18,19,20,21,22: begin byte_rs=1; byte_data=&quot; &quot;; end
+            23: byte_data = 8&#x27;hc0;
+            24: begin byte_rs=1; byte_data=&quot;L&quot;; end
+            25: begin byte_rs=1; byte_data=&quot;C&quot;; end
+            26: begin byte_rs=1; byte_data=&quot;D&quot;; end
+            27: begin byte_rs=1; byte_data=&quot; &quot;; end
+            28: begin byte_rs=1; byte_data=&quot;C&quot;; end
+            29: begin byte_rs=1; byte_data=&quot;O&quot;; end
+            30: begin byte_rs=1; byte_data=&quot;N&quot;; end
+            31: begin byte_rs=1; byte_data=&quot;T&quot;; end
+            32: begin byte_rs=1; byte_data=&quot;R&quot;; end
+            33: begin byte_rs=1; byte_data=&quot;O&quot;; end
+            34: begin byte_rs=1; byte_data=&quot;L&quot;; end
+            35: begin byte_rs=1; byte_data=&quot;L&quot;; end
+            36: begin byte_rs=1; byte_data=&quot;E&quot;; end
+            37: begin byte_rs=1; byte_data=&quot;R&quot;; end
+            38,39: begin byte_rs=1; byte_data=&quot; &quot;; end
+            default: byte_data = 8&#x27;h00;
+        endcase
+    end
+
+    always @(posedge clk_50mhz or posedge rst_p) begin
+        if (rst_p) begin
+            lcd_e &lt;= 0; lcd_rs &lt;= 0; lcd_data &lt;= 0;
+            phase &lt;= 0; index &lt;= 0; wait_count &lt;= 0; power_count &lt;= 0;
+        end else if (tick) begin
+            if (power_count &lt; POWER_TICKS) begin
+                power_count &lt;= power_count + 1;
+                lcd_e &lt;= 0;
+            end else begin
+                case (phase)
+                    0: begin
+                         lcd_e &lt;= 0; lcd_rs &lt;= byte_rs; lcd_data &lt;= byte_data;
+                         phase &lt;= 1;
+                    end
+                    1: begin lcd_e &lt;= 1; phase &lt;= 2; end
+                    2: begin
+                        lcd_e &lt;= 0;
+                        wait_count &lt;= (index == 5) ? CLEAR_WAIT_TICKS : NORMAL_WAIT_TICKS;
+                        phase &lt;= 3;
+                    end
+                    default: begin
+                        if (wait_count &gt; 0)
+                             wait_count &lt;= wait_count - 1;
+                        else begin
+                             index &lt;= (index == 39) ? 6 : index + 1&#x27;b1;
+                             phase &lt;= 0;
+                        end
+                    end
+                endcase
+          end
+    end
+  end
+endmodule</code></pre>
+<h3>⑤ 시뮬레이션</h3>
+<p><span class="badge pass">PASS</span> Vivado XSim과 Icarus Verilog 12.0에서 같은 결과를 확인했다: <code>LAB3_LCD_PASS bytes=40</code></p><p>tick을 2클록으로 줄이고, E의 하강 에지마다 RS·DATA·RW를 기대값 표와 비교했다. 40바이트(초기화 7 + 문자·주소 33) 모두 일치.</p>
+<figure><div class="svgwrap"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 172" width="100%" role="img" aria-label="XSim · tb_character_lcd — 초기화 명령 38·38·38·0C·06·01·80 (RS=0)" style="background:#fff;font-family:Consolas,monospace">
+<text x="118" y="16" font-size="12" fill="#5b6478">XSim · tb_character_lcd — 초기화 명령 38·38·38·0C·06·01·80 (RS=0)</text>
+<line x1="118.0" y1="22" x2="118.0" y2="150" stroke="#eef1f7"/>
+<text x="118.0" y="164" font-size="10" fill="#5b6478" text-anchor="middle">0 ns</text>
+<line x1="178.8" y1="22" x2="178.8" y2="150" stroke="#eef1f7"/>
+<text x="178.8" y="164" font-size="10" fill="#5b6478" text-anchor="middle">170 ns</text>
+<line x1="239.6" y1="22" x2="239.6" y2="150" stroke="#eef1f7"/>
+<text x="239.6" y="164" font-size="10" fill="#5b6478" text-anchor="middle">340 ns</text>
+<line x1="300.4" y1="22" x2="300.4" y2="150" stroke="#eef1f7"/>
+<text x="300.4" y="164" font-size="10" fill="#5b6478" text-anchor="middle">510 ns</text>
+<line x1="361.2" y1="22" x2="361.2" y2="150" stroke="#eef1f7"/>
+<text x="361.2" y="164" font-size="10" fill="#5b6478" text-anchor="middle">680 ns</text>
+<line x1="422.0" y1="22" x2="422.0" y2="150" stroke="#eef1f7"/>
+<text x="422.0" y="164" font-size="10" fill="#5b6478" text-anchor="middle">850 ns</text>
+<line x1="482.8" y1="22" x2="482.8" y2="150" stroke="#eef1f7"/>
+<text x="482.8" y="164" font-size="10" fill="#5b6478" text-anchor="middle">1,020 ns</text>
+<line x1="543.6" y1="22" x2="543.6" y2="150" stroke="#eef1f7"/>
+<text x="543.6" y="164" font-size="10" fill="#5b6478" text-anchor="middle">1,190 ns</text>
+<line x1="604.4" y1="22" x2="604.4" y2="150" stroke="#eef1f7"/>
+<text x="604.4" y="164" font-size="10" fill="#5b6478" text-anchor="middle">1,360 ns</text>
+<line x1="665.2" y1="22" x2="665.2" y2="150" stroke="#eef1f7"/>
+<text x="665.2" y="164" font-size="10" fill="#5b6478" text-anchor="middle">1,530 ns</text>
+<line x1="726.0" y1="22" x2="726.0" y2="150" stroke="#eef1f7"/>
+<text x="726.0" y="164" font-size="10" fill="#5b6478" text-anchor="middle">1,700 ns</text>
+<text x="110" y="44.0" font-size="12" fill="#1d2433" text-anchor="end">E</text>
+<path d="M118.0,48.0 L207.4,48.0 L207.4,32.0 L221.7,32.0 L221.7,48.0 L278.9,48.0 L278.9,32.0 L293.2,32.0 L293.2,48.0 L350.5,48.0 L350.5,32.0 L364.8,32.0 L364.8,48.0 L422.0,48.0 L422.0,32.0 L436.3,32.0 L436.3,48.0 L493.5,48.0 L493.5,32.0 L507.8,32.0 L507.8,48.0 L565.1,48.0 L565.1,32.0 L579.4,32.0 L579.4,48.0 L650.9,48.0 L650.9,32.0 L665.2,32.0 L665.2,48.0 L722.4,48.0 L722.4,32.0 L726.0,32.0" fill="none" stroke="#0b5fc0" stroke-width="1.6"/>
+<text x="110" y="74.0" font-size="12" fill="#1d2433" text-anchor="end">RS</text>
+<path d="M118.0,78.0 L708.1,78.0 L708.1,62.0 L726.0,62.0" fill="none" stroke="#0b5fc0" stroke-width="1.6"/>
+<text x="110" y="104.0" font-size="12" fill="#1d2433" text-anchor="end">DATA</text>
+<path d="M118.0,100.0 L121.0,92 L190.1,92 L193.1,100.0 L190.1,108 L121.0,108 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="155.6" y="104.0" font-size="11" fill="#1d2433" text-anchor="middle">00</text>
+<path d="M193.1,100.0 L196.1,92 L404.7,92 L407.7,100.0 L404.7,108 L196.1,108 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="300.4" y="104.0" font-size="11" fill="#1d2433" text-anchor="middle">38</text>
+<path d="M407.7,100.0 L410.7,92 L476.2,92 L479.2,100.0 L476.2,108 L410.7,108 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="443.5" y="104.0" font-size="11" fill="#1d2433" text-anchor="middle">0C</text>
+<path d="M479.2,100.0 L482.2,92 L547.8,92 L550.8,100.0 L547.8,108 L482.2,108 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="515.0" y="104.0" font-size="11" fill="#1d2433" text-anchor="middle">06</text>
+<path d="M550.8,100.0 L553.8,92 L633.6,92 L636.6,100.0 L633.6,108 L553.8,108 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="593.7" y="104.0" font-size="11" fill="#1d2433" text-anchor="middle">01</text>
+<path d="M636.6,100.0 L639.6,92 L705.1,92 L708.1,100.0 L705.1,108 L639.6,108 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="672.4" y="104.0" font-size="11" fill="#1d2433" text-anchor="middle">80</text>
+<path d="M708.1,100.0 L711.1,92 L723.0,92 L726.0,100.0 L723.0,108 L711.1,108 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="110" y="134.0" font-size="12" fill="#1d2433" text-anchor="end">index</text>
+<path d="M118.0,130.0 L121.0,122 L247.3,122 L250.3,130.0 L247.3,138 L121.0,138 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="184.2" y="134.0" font-size="11" fill="#1d2433" text-anchor="middle">0</text>
+<path d="M250.3,130.0 L253.3,122 L318.9,122 L321.9,130.0 L318.9,138 L253.3,138 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="286.1" y="134.0" font-size="11" fill="#1d2433" text-anchor="middle">1</text>
+<path d="M321.9,130.0 L324.9,122 L390.4,122 L393.4,130.0 L390.4,138 L324.9,138 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="357.6" y="134.0" font-size="11" fill="#1d2433" text-anchor="middle">2</text>
+<path d="M393.4,130.0 L396.4,122 L461.9,122 L464.9,130.0 L461.9,138 L396.4,138 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="429.2" y="134.0" font-size="11" fill="#1d2433" text-anchor="middle">3</text>
+<path d="M464.9,130.0 L467.9,122 L533.4,122 L536.4,130.0 L533.4,138 L467.9,138 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="500.7" y="134.0" font-size="11" fill="#1d2433" text-anchor="middle">4</text>
+<path d="M536.4,130.0 L539.4,122 L619.3,122 L622.3,130.0 L619.3,138 L539.4,138 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="579.4" y="134.0" font-size="11" fill="#1d2433" text-anchor="middle">5</text>
+<path d="M622.3,130.0 L625.3,122 L690.8,122 L693.8,130.0 L690.8,138 L625.3,138 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="658.0" y="134.0" font-size="11" fill="#1d2433" text-anchor="middle">6</text>
+<path d="M693.8,130.0 L696.8,122 L723.0,122 L726.0,130.0 L723.0,138 L696.8,138 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="709.9" y="134.0" font-size="11" fill="#1d2433" text-anchor="middle">7</text>
+</svg></div><figcaption>초기화 구간. RS=0에서 38·38·38·0C·06·01·80이 차례로 나가며, 01(Clear) 뒤에는 대기가 길다.</figcaption></figure>
+<figure><div class="svgwrap"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 172" width="100%" role="img" aria-label="같은 파형 — 첫 줄 문자 &quot;FPGA LAB3&quot; 전송 (RS=1)" style="background:#fff;font-family:Consolas,monospace">
+<text x="118" y="16" font-size="12" fill="#5b6478">같은 파형 — 첫 줄 문자 &quot;FPGA LAB3&quot; 전송 (RS=1)</text>
+<line x1="118.0" y1="22" x2="118.0" y2="150" stroke="#eef1f7"/>
+<text x="118.0" y="164" font-size="10" fill="#5b6478" text-anchor="middle">1,350 ns</text>
+<line x1="178.8" y1="22" x2="178.8" y2="150" stroke="#eef1f7"/>
+<text x="178.8" y="164" font-size="10" fill="#5b6478" text-anchor="middle">1,555 ns</text>
+<line x1="239.6" y1="22" x2="239.6" y2="150" stroke="#eef1f7"/>
+<text x="239.6" y="164" font-size="10" fill="#5b6478" text-anchor="middle">1,760 ns</text>
+<line x1="300.4" y1="22" x2="300.4" y2="150" stroke="#eef1f7"/>
+<text x="300.4" y="164" font-size="10" fill="#5b6478" text-anchor="middle">1,965 ns</text>
+<line x1="361.2" y1="22" x2="361.2" y2="150" stroke="#eef1f7"/>
+<text x="361.2" y="164" font-size="10" fill="#5b6478" text-anchor="middle">2,170 ns</text>
+<line x1="422.0" y1="22" x2="422.0" y2="150" stroke="#eef1f7"/>
+<text x="422.0" y="164" font-size="10" fill="#5b6478" text-anchor="middle">2,375 ns</text>
+<line x1="482.8" y1="22" x2="482.8" y2="150" stroke="#eef1f7"/>
+<text x="482.8" y="164" font-size="10" fill="#5b6478" text-anchor="middle">2,580 ns</text>
+<line x1="543.6" y1="22" x2="543.6" y2="150" stroke="#eef1f7"/>
+<text x="543.6" y="164" font-size="10" fill="#5b6478" text-anchor="middle">2,785 ns</text>
+<line x1="604.4" y1="22" x2="604.4" y2="150" stroke="#eef1f7"/>
+<text x="604.4" y="164" font-size="10" fill="#5b6478" text-anchor="middle">2,990 ns</text>
+<line x1="665.2" y1="22" x2="665.2" y2="150" stroke="#eef1f7"/>
+<text x="665.2" y="164" font-size="10" fill="#5b6478" text-anchor="middle">3,195 ns</text>
+<line x1="726.0" y1="22" x2="726.0" y2="150" stroke="#eef1f7"/>
+<text x="726.0" y="164" font-size="10" fill="#5b6478" text-anchor="middle">3,400 ns</text>
+<text x="110" y="44.0" font-size="12" fill="#1d2433" text-anchor="end">E</text>
+<path d="M118.0,48.0 L159.5,48.0 L159.5,32.0 L171.4,32.0 L171.4,48.0 L218.8,48.0 L218.8,32.0 L230.7,32.0 L230.7,48.0 L278.2,48.0 L278.2,32.0 L290.0,32.0 L290.0,48.0 L337.5,48.0 L337.5,32.0 L349.3,32.0 L349.3,48.0 L396.8,48.0 L396.8,32.0 L408.7,32.0 L408.7,48.0 L456.1,48.0 L456.1,32.0 L468.0,32.0 L468.0,48.0 L515.4,48.0 L515.4,32.0 L527.3,32.0 L527.3,48.0 L574.7,48.0 L574.7,32.0 L586.6,32.0 L586.6,48.0 L634.1,48.0 L634.1,32.0 L645.9,32.0 L645.9,48.0 L693.4,48.0 L693.4,32.0 L705.2,32.0 L705.2,48.0 L726.0,48.0" fill="none" stroke="#0b5fc0" stroke-width="1.6"/>
+<text x="110" y="74.0" font-size="12" fill="#1d2433" text-anchor="end">RS</text>
+<path d="M118.0,78.0 L207.0,78.0 L207.0,62.0 L726.0,62.0" fill="none" stroke="#0b5fc0" stroke-width="1.6"/>
+<text x="110" y="104.0" font-size="12" fill="#1d2433" text-anchor="end">DATA</text>
+<path d="M118.0,100.0 L121.0,92 L144.7,92 L147.7,100.0 L144.7,108 L121.0,108 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="132.8" y="104.0" font-size="11" fill="#1d2433" text-anchor="middle">01</text>
+<path d="M147.7,100.0 L150.7,92 L204.0,92 L207.0,100.0 L204.0,108 L150.7,108 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="177.3" y="104.0" font-size="11" fill="#1d2433" text-anchor="middle">80</text>
+<path d="M207.0,100.0 L210.0,92 L263.3,92 L266.3,100.0 L263.3,108 L210.0,108 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="236.6" y="104.0" font-size="11" fill="#1d2433" text-anchor="middle">F</text>
+<path d="M266.3,100.0 L269.3,92 L322.6,92 L325.6,100.0 L322.6,108 L269.3,108 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="296.0" y="104.0" font-size="11" fill="#1d2433" text-anchor="middle">P</text>
+<path d="M325.6,100.0 L328.6,92 L381.9,92 L384.9,100.0 L381.9,108 L328.6,108 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="355.3" y="104.0" font-size="11" fill="#1d2433" text-anchor="middle">G</text>
+<path d="M384.9,100.0 L387.9,92 L441.2,92 L444.2,100.0 L441.2,108 L387.9,108 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="414.6" y="104.0" font-size="11" fill="#1d2433" text-anchor="middle">A</text>
+<path d="M444.2,100.0 L447.2,92 L500.6,92 L503.6,100.0 L500.6,108 L447.2,108 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="473.9" y="104.0" font-size="11" fill="#1d2433" text-anchor="middle">␣</text>
+<path d="M503.6,100.0 L506.6,92 L559.9,92 L562.9,100.0 L559.9,108 L506.6,108 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="533.2" y="104.0" font-size="11" fill="#1d2433" text-anchor="middle">L</text>
+<path d="M562.9,100.0 L565.9,92 L619.2,92 L622.2,100.0 L619.2,108 L565.9,108 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="592.5" y="104.0" font-size="11" fill="#1d2433" text-anchor="middle">A</text>
+<path d="M622.2,100.0 L625.2,92 L678.5,92 L681.5,100.0 L678.5,108 L625.2,108 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="651.9" y="104.0" font-size="11" fill="#1d2433" text-anchor="middle">B</text>
+<path d="M681.5,100.0 L684.5,92 L723.0,92 L726.0,100.0 L723.0,108 L684.5,108 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="703.8" y="104.0" font-size="11" fill="#1d2433" text-anchor="middle">3</text>
+<text x="110" y="134.0" font-size="12" fill="#1d2433" text-anchor="end">index</text>
+<path d="M118.0,130.0 L121.0,122 L132.8,122 L135.8,130.0 L132.8,138 L121.0,138 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="126.9" y="134.0" font-size="11" fill="#1d2433" text-anchor="middle">5</text>
+<path d="M135.8,130.0 L138.8,122 L192.1,122 L195.1,130.0 L192.1,138 L138.8,138 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="165.5" y="134.0" font-size="11" fill="#1d2433" text-anchor="middle">6</text>
+<path d="M195.1,130.0 L198.1,122 L251.4,122 L254.4,130.0 L251.4,138 L198.1,138 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="224.8" y="134.0" font-size="11" fill="#1d2433" text-anchor="middle">7</text>
+<path d="M254.4,130.0 L257.4,122 L310.7,122 L313.7,130.0 L310.7,138 L257.4,138 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="284.1" y="134.0" font-size="11" fill="#1d2433" text-anchor="middle">8</text>
+<path d="M313.7,130.0 L316.7,122 L370.1,122 L373.1,130.0 L370.1,138 L316.7,138 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="343.4" y="134.0" font-size="11" fill="#1d2433" text-anchor="middle">9</text>
+<path d="M373.1,130.0 L376.1,122 L429.4,122 L432.4,130.0 L429.4,138 L376.1,138 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="402.7" y="134.0" font-size="11" fill="#1d2433" text-anchor="middle">10</text>
+<path d="M432.4,130.0 L435.4,122 L488.7,122 L491.7,130.0 L488.7,138 L435.4,138 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="462.0" y="134.0" font-size="11" fill="#1d2433" text-anchor="middle">11</text>
+<path d="M491.7,130.0 L494.7,122 L548.0,122 L551.0,130.0 L548.0,138 L494.7,138 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="521.4" y="134.0" font-size="11" fill="#1d2433" text-anchor="middle">12</text>
+<path d="M551.0,130.0 L554.0,122 L607.3,122 L610.3,130.0 L607.3,138 L554.0,138 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="580.7" y="134.0" font-size="11" fill="#1d2433" text-anchor="middle">13</text>
+<path d="M610.3,130.0 L613.3,122 L666.6,122 L669.6,130.0 L666.6,138 L613.3,138 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="640.0" y="134.0" font-size="11" fill="#1d2433" text-anchor="middle">14</text>
+<path d="M669.6,130.0 L672.6,122 L723.0,122 L726.0,130.0 L723.0,138 L672.6,138 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="697.8" y="134.0" font-size="11" fill="#1d2433" text-anchor="middle">15</text>
+</svg></div><figcaption>RS=1로 바뀐 뒤 F·P·G·A·␣·L·A·B·3이 E 펄스마다 한 글자씩 나간다.</figcaption></figure>
+<h3>⑥ 합성 · 구현 결과 </h3>
+<div class="tblwrap"><table><thead><tr><th>항목</th><th>값</th><th>비고</th></tr></thead><tbody><tr><td>Slice LUTs</td><td>111 / 48,000</td><td>0.23%</td></tr><tr><td>Slice Registers (FF)</td><td>93 / 96,000</td><td>0.10%</td></tr><tr><td>Bonded IOB</td><td>13 / 338</td><td>XDC의 포트 수와 일치</td></tr><tr><td>BUFGCTRL</td><td>1 / 32</td><td>50 MHz 클록 1개</td></tr><tr><td>Setup WNS / Hold WHS</td><td>14.220 ns / 0.167 ns</td><td>둘 다 양수 → 타이밍 충족</td></tr></tbody></table></div>
+<h3>⑦ 보드 검증</h3>
+<p><span class="badge pass">보드 PASS</span> 2026-09-28 실습실에서 Combo II-DLD S75에 프로그램(다이얼 F = 50 MHz)해 확인했다.</p>
+<div class="tblwrap"><table><thead><tr><th>#</th><th>조작</th><th>관찰 결과</th><th>판정</th></tr></thead><tbody><tr><td>1</td><td>다운로드</td><td>첫 줄 FPGA LAB3, 둘째 줄 LCD CONTROLLER 표시</td><td><span class="status-ok">✔</span></td></tr><tr><td>2</td><td>키패드 1을 눌렀다 뗌</td><td>초기화 후 같은 글자가 다시 표시</td><td><span class="status-ok">✔</span></td></tr></tbody></table></div>
+<figure><video controls preload="metadata" src="https://raw.githubusercontent.com/hyeongjonghee/electronics2-LABs/main/LAB3/evidence/videos/LAB3-06_character_lcd.mp4"></video><figcaption>LAB3-06 Character LCD 표시 (<code>evidence/videos/LAB3-06_character_lcd.mp4</code>)</figcaption><a class="videolink" href="https://github.com/hyeongjonghee/electronics2-LABs/blob/main/LAB3/evidence/videos/LAB3-06_character_lcd.mp4" target="_blank">GitHub에서 영상 열기 ↗</a></figure>
+</section><section class="circuit" id="c07"><h2>7. 실험 7 · UART 에코 (9600 bps, 8N1)</h2>
+<h3>① 목적</h3>
+<p>PC 터미널에서 보낸 글자를 받아 그대로 돌려보내고(에코), 받은 글자의 ASCII 값을 LED 8개에 2진수로 보여준다. UART는 약속한 빠르기(보레이트)로 한 비트씩 차례로 보내는 방식이라, 보내는 쪽과 받는 쪽이 같은 박자로 손뼉을 치는 것과 같다.</p>
+<h3>② 이론 · 설계 계산</h3>
+<p>한 비트에 해당하는 클록 수를 반올림으로 구한다.</p>
+$$\text{DIV}=\left\lfloor\frac{f_{clk}+\text{BAUD}/2}{\text{BAUD}}\right\rfloor=\left\lfloor\frac{50\,004\,800}{9\,600}\right\rfloor=5\,208$$
+$$\text{실제 보레이트}=\frac{50\,000\,000}{5\,208}\approx9\,600.61\ \text{bps},\qquad\text{오차}\approx+0.0064\%$$
+<p>UART는 한 글자(10비트) 동안 오차가 쌓여도 반 비트(5%) 안이면 되므로 충분히 작다. 한 글자 프레임은 시작(0) + 데이터 8비트(LSB 먼저) + 정지(1) = 10비트 = 약 1.04 ms다. 수신기는 시작 비트의 하강 에지를 본 뒤 DIV/2만큼 기다려 비트 한가운데에서 표본을 잡는다.</p>
+<h3>③ 포트 · 보드 매핑</h3>
+<div class="tblwrap"><table><thead><tr><th>포트</th><th>핀</th><th>보드 장치</th></tr></thead><tbody><tr><td>clk_50mhz</td><td>B6</td><td>MAIN_CLOCK1</td></tr><tr><td>rst_p</td><td>K4</td><td>키패드 1</td></tr><tr><td>uart_rxd</td><td>C6</td><td>USB_RXD (FT232R TXD → FPGA)</td></tr><tr><td>uart_txd</td><td>F6</td><td>USB_TXD (FPGA → FT232R RXD)</td></tr><tr><td>led[7:0]</td><td>L4 M4 M2 N7 M7 M3 M1 N5</td><td>마지막 수신 바이트 (LED1 = MSB)</td></tr></tbody></table></div>
+<div class="box ok"><span class="t">핀 확인 완료</span> — USB_RXD = C6, USB_TXD = F6로 매뉴얼 p.586 USB to Serial(FT232R, J10 USB Type-B)과 일치한다. 회로도에서 FT232R의 TXD가 USB_RXD로 들어가므로 FPGA 입력은 C6이다. 같은 쪽의 RS-232 경로(UART_RXD = A5, UART_TXD = A3, ADM3202 · DB9)는 쓰지 않았다.</div>
+<h3>④ RTL</h3>
+<pre><code>`timescale 1ns/1ps
+module lab3_uart_echo #(
+    parameter integer CLK_HZ = 50_000_000,
+    parameter integer BAUD = 9_600
+) (
+    input wire clk_50mhz,
+    input wire rst_p,
+    input wire uart_rxd,
+    output wire uart_txd,
+    output wire [7:0] led
+);
+    localparam integer DIV = (CLK_HZ + BAUD/2) / BAUD;
+    wire [7:0] rx_data;
+    wire rx_valid;
+    wire rx_framing_error;
+    wire tx_ready;
+    reg tx_valid;
+    reg [7:0] tx_data;
+    reg [7:0] last_data;
+
+    uart_rx #(.DIV(DIV)) u_rx(
+        .clk(clk_50mhz), .rst_p(rst_p), .rx(uart_rxd), .data(rx_data),
+        .valid(rx_valid), .framing_error(rx_framing_error));
+    uart_tx #(.DIV(DIV)) u_tx(
+        .clk(clk_50mhz), .rst_p(rst_p), .valid(tx_valid), .data(tx_data),
+        .ready(tx_ready), .tx(uart_txd));
+
+    always @(posedge clk_50mhz or posedge rst_p) begin
+        if (rst_p) begin
+            tx_valid &lt;= 0; tx_data &lt;= 0; last_data &lt;= 0;
+        end else begin
+            tx_valid &lt;= 0;
+            if (rx_valid) begin
+                last_data &lt;= rx_data;
+                if (tx_ready) begin
+                    tx_data &lt;= rx_data;
+                    tx_valid &lt;= 1;
+                end
+            end
+        end
+    end
+    assign led = last_data;
+endmodule</code></pre>
+<pre><code>`timescale 1ns/1ps
+module uart_rx #(parameter integer DIV = 5208)(
+    input wire clk, rst_p, rx,
+    output reg [7:0] data,
+    output reg valid,
+    output reg framing_error
+);
+    (* ASYNC_REG=&quot;TRUE&quot; *) reg [1:0] sync;
+    reg [1:0] state;
+    integer timer;
+    reg [2:0] bitno;
+    reg [7:0] shift;
+    always @(posedge clk) begin
+        if (rst_p) begin
+            sync&lt;=3; state&lt;=0; timer&lt;=0; bitno&lt;=0; shift&lt;=0;
+            data&lt;=0; valid&lt;=0; framing_error&lt;=0;
+        end else begin
+            sync&lt;={sync[0],rx}; valid&lt;=0; framing_error&lt;=0;
+            case(state)
+                0: if(!sync[1]) begin timer&lt;=DIV/2-1; state&lt;=1; end
+                1: if(timer!=0) timer&lt;=timer-1;
+                    else if(sync[1]) state&lt;=0;
+                    else begin timer&lt;=DIV-1; bitno&lt;=0; state&lt;=2; end
+                2: if(timer!=0) timer&lt;=timer-1;
+                    else begin
+                        shift[bitno]&lt;=sync[1]; timer&lt;=DIV-1;
+                        if(bitno==7) state&lt;=3; else bitno&lt;=bitno+1&#x27;b1;
+                    end
+                3: if(timer!=0) timer&lt;=timer-1;
+                    else begin
+                        if(sync[1]) begin data&lt;=shift; valid&lt;=1; end
+                        else framing_error&lt;=1;
+                        state&lt;=0;
+                    end
+            endcase
+      end
+    end
+endmodule
+
+module uart_tx #(parameter integer DIV = 5208)(
+    input wire clk, rst_p, valid,
+    input wire [7:0] data,
+    output wire ready,
+    output wire tx
+);
+    reg [9:0] shift;
+    reg [3:0] remaining;
+    integer timer;
+    assign ready = (remaining == 0);
+    assign tx = ready ? 1&#x27;b1 : shift[0];
+    always @(posedge clk) begin
+        if(rst_p) begin shift&lt;=10&#x27;h3ff; remaining&lt;=0; timer&lt;=0; end
+        else if(ready) begin
+            if(valid) begin shift&lt;={1&#x27;b1,data,1&#x27;b0}; remaining&lt;=10; timer&lt;=DIV-1; end
+        end else if(timer!=0) timer&lt;=timer-1;
+        else begin timer&lt;=DIV-1; shift&lt;={1&#x27;b1,shift[9:1]}; remaining&lt;=remaining-1&#x27;b1; end
+    end
+endmodule</code></pre>
+<h3>⑤ 시뮬레이션</h3>
+<p><span class="badge pass">PASS</span> Vivado XSim과 Icarus Verilog 12.0에서 같은 결과를 확인했다: <code>LAB3_UART_ECHO_PASS checks=3</code></p><p>DIV=8로 줄여 0x41(A), 0x5A(Z), 0x0A(줄바꿈)를 보내고, 되돌아온 직렬 비트와 LED 값이 같은지 확인했다. 프레이밍 오류 0회.</p>
+<figure><div class="svgwrap"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 232" width="100%" role="img" aria-label="XSim · tb_uart_echo (DIV=8 클록/비트) — 0x41(&#x27;A&#x27;) 수신 → 그대로 송신" style="background:#fff;font-family:Consolas,monospace">
+<text x="118" y="16" font-size="12" fill="#5b6478">XSim · tb_uart_echo (DIV=8 클록/비트) — 0x41(&#x27;A&#x27;) 수신 → 그대로 송신</text>
+<line x1="118.0" y1="22" x2="118.0" y2="210" stroke="#eef1f7"/>
+<text x="118.0" y="224" font-size="10" fill="#5b6478" text-anchor="middle">0 ns</text>
+<line x1="178.8" y1="22" x2="178.8" y2="210" stroke="#eef1f7"/>
+<text x="178.8" y="224" font-size="10" fill="#5b6478" text-anchor="middle">330 ns</text>
+<line x1="239.6" y1="22" x2="239.6" y2="210" stroke="#eef1f7"/>
+<text x="239.6" y="224" font-size="10" fill="#5b6478" text-anchor="middle">660 ns</text>
+<line x1="300.4" y1="22" x2="300.4" y2="210" stroke="#eef1f7"/>
+<text x="300.4" y="224" font-size="10" fill="#5b6478" text-anchor="middle">990 ns</text>
+<line x1="361.2" y1="22" x2="361.2" y2="210" stroke="#eef1f7"/>
+<text x="361.2" y="224" font-size="10" fill="#5b6478" text-anchor="middle">1,320 ns</text>
+<line x1="422.0" y1="22" x2="422.0" y2="210" stroke="#eef1f7"/>
+<text x="422.0" y="224" font-size="10" fill="#5b6478" text-anchor="middle">1,650 ns</text>
+<line x1="482.8" y1="22" x2="482.8" y2="210" stroke="#eef1f7"/>
+<text x="482.8" y="224" font-size="10" fill="#5b6478" text-anchor="middle">1,980 ns</text>
+<line x1="543.6" y1="22" x2="543.6" y2="210" stroke="#eef1f7"/>
+<text x="543.6" y="224" font-size="10" fill="#5b6478" text-anchor="middle">2,310 ns</text>
+<line x1="604.4" y1="22" x2="604.4" y2="210" stroke="#eef1f7"/>
+<text x="604.4" y="224" font-size="10" fill="#5b6478" text-anchor="middle">2,640 ns</text>
+<line x1="665.2" y1="22" x2="665.2" y2="210" stroke="#eef1f7"/>
+<text x="665.2" y="224" font-size="10" fill="#5b6478" text-anchor="middle">2,970 ns</text>
+<line x1="726.0" y1="22" x2="726.0" y2="210" stroke="#eef1f7"/>
+<text x="726.0" y="224" font-size="10" fill="#5b6478" text-anchor="middle">3,300 ns</text>
+<text x="110" y="44.0" font-size="12" fill="#1d2433" text-anchor="end">uart_rxd</text>
+<path d="M118.0,32.0 L130.9,32.0 L130.9,48.0 L160.4,48.0 L160.4,32.0 L189.9,32.0 L189.9,48.0 L337.2,48.0 L337.2,32.0 L366.7,32.0 L366.7,48.0 L396.2,48.0 L396.2,32.0 L726.0,32.0" fill="none" stroke="#0b5fc0" stroke-width="1.6"/>
+<text x="110" y="74.0" font-size="12" fill="#1d2433" text-anchor="end">rx_valid</text>
+<path d="M118.0,70.0 L119.8,70.0 L119.8,78.0 L418.3,78.0 L418.3,62.0 L422.0,62.0 L422.0,78.0 L726.0,78.0" fill="none" stroke="#0b5fc0" stroke-width="1.6"/>
+<text x="110" y="104.0" font-size="12" fill="#1d2433" text-anchor="end">rx_data</text>
+<path d="M118.0,100.0 L118.0,92 L119.8,92 L119.8,100.0 L119.8,108 L118.0,108 Z" fill="#e6f5ec" stroke="#b3261e" stroke-width="1.1"/>
+<path d="M119.8,100.0 L122.8,92 L415.3,92 L418.3,100.0 L415.3,108 L122.8,108 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="269.1" y="104.0" font-size="11" fill="#1d2433" text-anchor="middle">00</text>
+<path d="M418.3,100.0 L421.3,92 L723.0,92 L726.0,100.0 L723.0,108 L421.3,108 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="572.2" y="104.0" font-size="11" fill="#1d2433" text-anchor="middle">41</text>
+<text x="110" y="134.0" font-size="12" fill="#1d2433" text-anchor="end">uart_txd</text>
+<path d="M118.0,130.0 L119.8,130.0 L119.8,122.0 L425.7,122.0 L425.7,138.0 L455.2,138.0 L455.2,122.0 L484.6,122.0 L484.6,138.0 L632.0,138.0 L632.0,122.0 L661.5,122.0 L661.5,138.0 L691.0,138.0 L691.0,122.0 L726.0,122.0" fill="none" stroke="#0b5fc0" stroke-width="1.6"/>
+<text x="110" y="164.0" font-size="12" fill="#1d2433" text-anchor="end">led</text>
+<path d="M118.0,160.0 L121.0,152 L419.0,152 L422.0,160.0 L419.0,168 L121.0,168 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="270.0" y="164.0" font-size="11" fill="#1d2433" text-anchor="middle">00</text>
+<path d="M422.0,160.0 L425.0,152 L723.0,152 L726.0,160.0 L723.0,168 L425.0,168 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="574.0" y="164.0" font-size="11" fill="#1d2433" text-anchor="middle">41</text>
+<text x="110" y="194.0" font-size="12" fill="#1d2433" text-anchor="end">checks</text>
+<path d="M118.0,190.0 L121.0,182 L702.7,182 L705.7,190.0 L702.7,198 L121.0,198 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="411.9" y="194.0" font-size="11" fill="#1d2433" text-anchor="middle">0</text>
+<path d="M705.7,190.0 L708.7,182 L723.0,182 L726.0,190.0 L723.0,198 L708.7,198 Z" fill="#e6f5ec" stroke="#137a3c" stroke-width="1.1"/>
+<text x="715.9" y="194.0" font-size="11" fill="#1d2433" text-anchor="middle">1</text>
+</svg></div><figcaption>rxd에 A(0x41)가 들어온 뒤 rx_valid가 한 클록 뜨고, 곧바로 txd로 같은 비트열이 나간다. LED는 41로 바뀐다.</figcaption></figure>
+<h3>⑥ 합성 · 구현 결과 </h3>
+<div class="tblwrap"><table><thead><tr><th>항목</th><th>값</th><th>비고</th></tr></thead><tbody><tr><td>Slice LUTs</td><td>134 / 48,000</td><td>0.28%</td></tr><tr><td>Slice Registers (FF)</td><td>118 / 96,000</td><td>0.12%</td></tr><tr><td>Bonded IOB</td><td>12 / 338</td><td>XDC의 포트 수와 일치</td></tr><tr><td>BUFGCTRL</td><td>1 / 32</td><td>50 MHz 클록 1개</td></tr><tr><td>Setup WNS / Hold WHS</td><td>14.617 ns / 0.131 ns</td><td>둘 다 양수 → 타이밍 충족</td></tr></tbody></table></div>
+<h3>⑦ 보드 검증</h3>
+<p><span class="badge pass">보드 PASS</span> 2026-09-28 실습실에서 Combo II-DLD S75에 프로그램(다이얼 F = 50 MHz)해 확인했다.</p>
+<div class="tblwrap"><table><thead><tr><th>#</th><th>조작</th><th>관찰 결과</th><th>판정</th></tr></thead><tbody><tr><td>1</td><td>보드 USB Type-B(J10) ↔ PC, PuTTY Serial 9600 · 8N1 · 흐름 제어 없음</td><td>FT232R이 USB Serial COM 포트로 인식</td><td><span class="status-ok">✔</span></td></tr><tr><td>2</td><td>A 입력</td><td>PuTTY 화면에 A가 되돌아옴, LED = 0100_0001 (LED2 · LED8)</td><td><span class="status-ok">✔</span></td></tr><tr><td>3</td><td>여러 글자 입력</td><td>모두 그대로 에코, 보드의 USB_TXD · USB_RXD LED 깜빡임</td><td><span class="status-ok">✔</span></td></tr></tbody></table></div>
+<figure><video controls preload="metadata" src="https://raw.githubusercontent.com/hyeongjonghee/electronics2-LABs/main/LAB3/evidence/videos/LAB3-07_uart_echo.mp4"></video><figcaption>LAB3-07 UART 에코 — 보드와 PuTTY 화면 (<code>evidence/videos/LAB3-07_uart_echo.mp4</code>)</figcaption><a class="videolink" href="https://github.com/hyeongjonghee/electronics2-LABs/blob/main/LAB3/evidence/videos/LAB3-07_uart_echo.mp4" target="_blank">GitHub에서 영상 열기 ↗</a></figure>
+<figure><video controls preload="metadata" src="https://raw.githubusercontent.com/hyeongjonghee/electronics2-LABs/main/LAB3/evidence/videos/LAB3-07_uart_echo_board.mp4"></video><figcaption>LAB3-07 UART 에코 — 보드만 (<code>evidence/videos/LAB3-07_uart_echo_board.mp4</code>)</figcaption><a class="videolink" href="https://github.com/hyeongjonghee/electronics2-LABs/blob/main/LAB3/evidence/videos/LAB3-07_uart_echo_board.mp4" target="_blank">GitHub에서 영상 열기 ↗</a></figure>
+</section>
+<h2 id="discussion">8. 고찰</h2>
+<ul>
+<li><b>빌드 성공 ≠ 보드 동작.</b> 새 장치 핀 30개는 빌드가 모두 성공한 뒤에도 근거가 없었다. 매뉴얼 각 실험 절의 핀표(p.555 · 568 · 578 · 586)와 한 줄씩 대조하고 나서야 보드에 올렸고, 그 결과 7개 회로가 한 번에 동작했다.</li>
+<li><b>매뉴얼 오타 1건.</b> p.555 핀표의 CLED_R4 = K4는 같은 표의 rst(K4)와 겹친다. FPGA 핀 하나를 두 신호에 동시에 줄 수 없으므로 오타로 판단했고, 우리 값 R3로 4번째 RGB LED가 켜지는 것을 보드로 확인했다.</li>
+<li><b>스텝 모터 입력의 의미.</b> 설계 때는 4비트를 A · B · C · D 네 코일로 가정했지만, 매뉴얼에서는 A · B · /A · /B(두 코일의 양 끝)였다. 순서를 다시 따져 보니 한 스텝마다 한 상만 바뀌고 A와 /A가 동시에 켜지지 않아 올바른 2상 여자 순서였다. 회전 방향만 교과서 순서와 반대다.</li>
+<li><b>푸시 키와 연속 동작.</b> 키패드는 누르는 동안만 High라서, 계속 켜 두어야 하는 입력(스텝 모터 enable)에는 DIP 스위치가 더 알맞았다. RTL은 그대로 두고 XDC만 바꿔 두 버전을 모두 검증했다.</li>
+<li><b>UART는 케이블부터.</b> 처음에는 PC가 FT232R을 전혀 인식하지 못해 COM 포트가 없었다. FPGA 설계가 아니라 PC와 보드 사이 USB 연결 쪽 문제였고, 연결을 다시 확인해 USB Serial COM 포트가 잡히자 설계를 바꾸지 않고도 바로 에코가 동작했다. 보드에는 RS-232(A5/A3)와 USB(C6/F6) 두 경로가 있어 어느 쪽을 쓰는지 핀표로 먼저 확인해야 한다.</li>
+</ul>
+<h2 id="refs">참고</h2>
+<ul>
+<li>실습 매뉴얼 「Verilog HDL을 이용한 디지털 논리 회로 설계」 CH2 — 클록 선택표, 키패드 · LED · BDIO · 확장 헤더 핀 구성표</li>
+<li>HD44780U 데이터시트 — 초기화 순서와 명령 실행 시간</li>
+<li>실습 매뉴얼 p.423(LED PWM 예제 핀표) · p.555(RGB · 스텝 모터 · 7세그 핀표) · p.568 · 578(Text LCD) · p.586(RS-232 · USB to Serial)</li>
+<li>LAB2-08 7세그먼트 자리 스캔 (보드 검증 완료) — 세그먼트 비트 순서와 COM 극성</li>
+</ul>
+</div></body></html>
