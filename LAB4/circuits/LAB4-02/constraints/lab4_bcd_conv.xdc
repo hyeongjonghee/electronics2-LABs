@@ -1,4 +1,4 @@
-# LAB4-02: SW1~4 = ten, SW5~8 = one / LED1 = valid, LED2~8 = bin[6:0]
+# LAB4-02: SW1~4 = ten, SW5~8 = one / LED1~7 = bin[6:0] (교재 p.245), LED8 = valid
 set_property -dict {PACKAGE_PIN U4 IOSTANDARD LVCMOS33} [get_ports {sw[0]}]
 set_property -dict {PACKAGE_PIN V4 IOSTANDARD LVCMOS33} [get_ports {sw[1]}]
 set_property -dict {PACKAGE_PIN W1 IOSTANDARD LVCMOS33} [get_ports {sw[2]}]

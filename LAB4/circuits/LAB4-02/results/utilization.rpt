@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2026 Advanced Micro Devices, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2026.1 (win64) Build 6511674 Tue Jun 16 11:02:23 MDT 2026
-| Date         : Wed Oct  7 16:30:41 2026
+| Date         : Mon Oct 12 14:26:00 2026
 | Host         : DESKTOP-N2ITJDI running 64-bit major release  (build 9200)
 | Command      : report_utilization -file reports/utilization.rpt
 | Design       : lab4_bcd_conv_top
