@@ -1,0 +1,5 @@
+XSIM done t=2186 ns
+SYNTH status=synth_design Complete!
+UTIL Slice LUTs = 33
+UTIL Slice Registers = 32
+UTIL Bonded IOB = 27
