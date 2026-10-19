@@ -1,0 +1,2 @@
+PASS DAC: 260 writes, wraparound, channel, data hold, reset
+$finish called at time : 10436 ns : File "C:/Users/UOS/Documents/lab6/lab6_03_dac/sim/tb.sv" Line 31

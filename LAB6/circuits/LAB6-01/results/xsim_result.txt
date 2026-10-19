@@ -1,0 +1,2 @@
+PASS servo: 20ms frame, 1/1.5/2ms pulse, limits, reset
+$finish called at time : 100036 ns : File "C:/Users/UOS/Documents/lab6/lab6_01_servo/sim/tb.sv" Line 44

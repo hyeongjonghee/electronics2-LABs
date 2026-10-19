@@ -1,0 +1,2 @@
+PASS servo_board_top: bounce -> 1 pulse per press, 1.4/1.7 ms, LED step, x50 width = class formula (11 values)
+sim/tb_board.sv:63: $finish called at 120036000 (1ps)

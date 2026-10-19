@@ -1,0 +1,6 @@
+SYNTH done top=dac_board_top
+IMPL done
+UTIL Slice LUTs = 22
+UTIL Slice Registers = 62
+UTIL Bonded IOB = 23
+RESULT wns=14.854 whs=0.165 bit=1

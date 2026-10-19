@@ -1,0 +1,4 @@
+CLASS dac      : WR=20.0 ns (min 20 -> margin 0.0), setup=20.0 ns (min 15), hold>=140.0 ns, violations=0
+BOARD dac_top  : WR=40.0 ns (min 20 -> margin 20.0), setup=40.0 ns (min 15), hold>=120.0 ns, violations=0
+PASS DAC board: 300 writes, AD7302 timing OK, vout ramp 0..2.4902 V
+sim/tb_board.sv:24: $finish called at 48080000 (1ps)

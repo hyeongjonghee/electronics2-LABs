@@ -1,0 +1,12 @@
+2000.2 us  PC(FPGA COM) <- 0x31   LED1=1  LED2~8=0110001
+3406.5 us  PC(FPGA COM) <- 0x31   LED1=1  LED2~8=0110001
+4812.7 us  PC(FPGA COM) <- 0x31   LED1=1  LED2~8=0110001
+6219.0 us  PC(FPGA COM) <- 0x32   LED1=0  LED2~8=0110010
+7625.2 us  PC(FPGA COM) <- 0x32   LED1=1  LED2~8=0110010
+9031.5 us  PC(FPGA COM) <- 0x32   LED1=0  LED2~8=0110010
+10437.7 us  PC(FPGA COM) <- 0x30   LED1=0  LED2~8=0110000
+11844.0 us  PC(FPGA COM) <- 0x78   LED1=0  LED2~8=1111000
+13250.2 us  PC(FPGA COM) <- 0x30   LED1=0  LED2~8=0110000
+14656.5 us  PC(FPGA COM) <- 0x01   LED1=0  LED2~8=0000001
+PASS uart_cmd_top: 10 bytes echoed, LED1 follows 0/1/2 commands
+$finish called at time : 15333500030 ps : File "C:/Users/UOS/Documents/lab6/lab6_04_uart_cmd/sim/tb.sv" Line 46

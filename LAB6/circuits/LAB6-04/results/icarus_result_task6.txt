@@ -1,0 +1,5 @@
+  2000.2 us  PC(FPGA COM) <- 0x31   LED1=1  LED2~8=0110001
+  3406.5 us  PC(FPGA COM) <- 0x41   LED1=1  LED2~8=1000001
+  4812.7 us  PC(FPGA COM) <- 0x61   LED1=1  LED2~8=1100001
+PASS uart_cmd_top: 3 bytes echoed, LED1 follows 0/1/2 commands
+sim/tb.sv:46: $finish called at 5489750009 (1ps)

@@ -1,0 +1,7 @@
+lab6_01_servo servo_ctrl : LUTs=452 Registers=73 IOB=5
+lab6_01_servo servo_board_top : LUTs=798 Registers=119 IOB=13
+lab6_02_sram sram : LUTs=4 Registers=0 IOB=55
+lab6_02_sram sram_board_top : LUTs=12 Registers=8 IOB=58
+lab6_03_dac dac : LUTs=19 Registers=50 IOB=23
+lab6_03_dac dac_board_top : LUTs=23 Registers=54 IOB=23
+lab6_04_uart_cmd uart_cmd_top : LUTs=144 Registers=127 IOB=12

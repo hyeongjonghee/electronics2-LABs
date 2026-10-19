@@ -1,0 +1,6 @@
+SYNTH done top=uart_cmd_top
+IMPL done
+UTIL Slice LUTs = 142
+UTIL Slice Registers = 127
+UTIL Bonded IOB = 12
+RESULT wns=14.748 whs=0.157 bit=1

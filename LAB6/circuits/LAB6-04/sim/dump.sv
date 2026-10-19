@@ -1,0 +1,9 @@
+// 파형 기록 전용 모듈(수업 TB는 그대로 둔다). XSim은 -d XSIM으로 컴파일해 파일 이름만 바꾼다.
+module dump; initial begin
+`ifdef XSIM
+    $dumpfile("reports/xsim_wave.vcd");
+`else
+    $dumpfile("reports/icarus_wave.vcd");
+`endif
+    $dumpvars(1, tb.rxd, tb.txd, tb.led, tb.ref_lamp, tb.dut.rx_valid, tb.dut.rx_data, tb.dut.tx_valid, tb.dut.tx_data, tb.dut.lamp);
+end endmodule

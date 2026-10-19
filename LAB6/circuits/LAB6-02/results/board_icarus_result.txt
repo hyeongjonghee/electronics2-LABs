@@ -1,0 +1,4 @@
+CLASS sram     : writes=17, tHD=0 races=17, wrong reads=16/16
+BOARD sram_top : writes=17, tHD=0 races=0, violations=0, contention=0
+PASS SRAM board: 17 writes, 17 reads, overlap idle, data held after WE rise, no bus contention
+sim/tb_board.sv:36: $finish called at 120100000 (1ps)
