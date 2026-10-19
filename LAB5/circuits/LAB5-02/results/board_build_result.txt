@@ -1,0 +1,6 @@
+SYNTH status=synth_design Complete!
+IMPL status=write_bitstream Complete!
+UTIL Slice LUTs = 32
+UTIL Slice Registers = 32
+UTIL Bonded IOB = 27
+RESULT wns=14.966936 whs=0.244239 bit=1
