@@ -1,0 +1,1271 @@
+<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>LAB7 실험 전 보고서 — 형종희</title>
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js"></script>
+<style>
+:root{
+  --bg:#ffffff; --fg:#1d2433; --muted:#5b6478; --line:#d9deea; --soft:#f4f6fb;
+  --accent:#0b5fc0; --accent-soft:#e8f0fc; --ok:#137a3c; --ok-soft:#e6f5ec;
+  --warn:#9a5b00; --warn-soft:#fff4de; --bad:#b3261e; --bad-soft:#fdecea;
+  --code-bg:#f6f7fa;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);
+  font-family:'Noto Sans KR','Pretendard','Malgun Gothic','Apple SD Gothic Neo',system-ui,sans-serif;
+  line-height:1.75;font-size:16px}
+.page{max-width:840px;margin:0 auto;padding:28px 22px 90px}
+header.cover{background:linear-gradient(135deg,#0b3d91,#062a6b);color:#fff;border-radius:14px;padding:28px 30px 24px;margin-bottom:22px}
+header.cover .kicker{color:#cfe0ff;font-weight:600;font-size:.95rem}
+header.cover h1{color:#fff;margin:.25em 0 .2em;font-size:2rem;line-height:1.3}
+header.cover .sub{color:#d6e4ff}
+.meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px 14px;margin-top:16px}
+.meta div{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.3);color:#fff;border-radius:10px;padding:8px 12px;font-size:.92rem}
+.meta b{display:block;color:#c5d8ff;font-weight:600;font-size:.78rem}
+.github-box{background:var(--accent-soft);border:1.5px solid var(--accent);border-radius:12px;padding:14px 18px;margin:16px 0}
+.github-box h3{margin:.1em 0 .5em;color:var(--accent)}
+.github-box table{margin:0}
+h2{font-size:1.55rem;margin:2.2em 0 .6em;padding-bottom:.25em;border-bottom:2px solid var(--line);scroll-margin-top:12px}
+h3{font-size:1.2rem;margin:1.6em 0 .5em;color:var(--accent)}
+h4{font-size:1.02rem;margin:1.2em 0 .35em}
+p{margin:.55em 0}
+code,pre,.mono{font-family:'D2Coding','Cascadia Mono','Consolas','Noto Sans Mono CJK KR',monospace;
+  font-variant-ligatures:none;-webkit-font-feature-settings:"liga" 0,"calt" 0;font-feature-settings:"liga" 0,"calt" 0}
+code{background:var(--code-bg);padding:.08em .35em;border-radius:5px;font-size:.9em}
+pre{background:var(--code-bg) !important;color:var(--fg);border:1px solid var(--line);border-radius:10px;padding:12px 14px;overflow-x:auto;
+  font-size:.86rem;line-height:1.55;margin:.6em 0}
+pre code{background:transparent !important;padding:0}
+table{border-collapse:collapse;width:100%;margin:.7em 0;font-size:.94rem}
+th,td{border:1px solid var(--line);padding:7px 10px;text-align:left;vertical-align:top;overflow-wrap:anywhere}
+th{background:var(--soft);font-weight:700}
+td.c,th.c{text-align:center}
+.tblwrap{overflow-x:auto}
+.box{border-radius:12px;padding:12px 16px;margin:1em 0;border:1px solid var(--line);background:var(--soft)}
+.box.ok{background:var(--ok-soft);border-color:var(--ok)}
+.box.ok .t{color:var(--ok);font-weight:700}
+.box.warn{background:var(--warn-soft);border-color:var(--warn)}
+.box.warn .t{color:var(--warn);font-weight:700}
+.box.info{background:var(--accent-soft);border-color:var(--accent)}
+.box.info .t{color:var(--accent);font-weight:700}
+.status-ok{color:var(--ok);font-weight:700}
+.status-warn{color:var(--warn);font-weight:700}
+figure{margin:1em 0}
+figure img{max-width:100%;max-height:195mm;height:auto;display:block;margin:0 auto;border:1px solid var(--line);border-radius:8px}
+figcaption{font-size:.88rem;color:var(--muted);margin-top:5px}
+video{max-width:100%;max-height:195mm;display:block;margin:.4em auto;border:1px solid var(--line);border-radius:8px;background:#000}
+.videolink{display:inline-block;margin-top:6px;font-size:.9rem}
+nav.toc{background:var(--soft);border:1px solid var(--line);border-radius:12px;padding:14px 20px;margin:18px 0}
+nav.toc ol{margin:.3em 0;padding-left:1.3em;columns:2;column-gap:24px}
+nav.toc a{color:var(--accent);text-decoration:none}
+.circuit{border-top:4px solid var(--accent);padding-top:6px;margin-top:3em}
+.badge{display:inline-block;border-radius:999px;padding:2px 11px;font-size:.8rem;font-weight:700;margin-right:6px}
+.badge.pass{background:var(--ok-soft);color:var(--ok);border:1px solid var(--ok)}
+.src{color:var(--muted);font-size:.82rem}
+@media print{
+  @page{size:A4;margin:14mm}
+  body{font-size:11pt}
+  .page{max-width:none;padding:0}
+  header.cover{padding:16px 20px}
+  table,figure,pre,.box{page-break-inside:avoid}
+  video{display:none}
+  .videolink{display:block}
+}
+
+.svgwrap{border:1px solid var(--line);border-radius:8px;padding:6px;background:#fff;overflow-x:auto}
+.svgwrap svg{min-width:560px;display:block}
+mjx-container[display="true"]{overflow-x:auto;overflow-y:hidden;padding:2px 0}
+@media print{h2,h3,h4{break-after:avoid;page-break-after:avoid}pre{break-inside:auto !important;page-break-inside:auto !important}section.circuit{break-before:page;page-break-before:always;margin-top:0}figure{break-inside:avoid}}
+
+.split{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:640px){.split{grid-template-columns:1fr}}
+.led{display:inline-block;width:12px;height:12px;border-radius:50%;border:1px solid #8a93a6;margin:0 1px;vertical-align:-1px;background:#fff}
+.led.on{background:#e53935;border-color:#b71c1c}
+.led.g.on{background:#2e7d32;border-color:#1b5e20}
+.box.bad{background:var(--bad-soft);border-color:var(--bad)}
+.box.bad .t{color:var(--bad);font-weight:700}
+.status-bad{color:var(--bad);font-weight:700}
+td.num{text-align:right;font-variant-numeric:tabular-nums}
+@media print{pre{white-space:pre-wrap;overflow-wrap:anywhere}}
+.split>div{min-width:0}
+</style></head><body><div class="page">
+<header class="cover"><div class="kicker">서울시립대학교 · 전자전기컴퓨터설계실험Ⅱ</div>
+<h1>LAB7 실험 전 보고서</h1>
+<div class="sub">STM32_3 — SPI로 MCU와 FPGA 연결 (과제8 MCU 송신 파형 · 과제9 MCU→MCU · 과제10 MCU→FPGA · 과제11 FPGA→MCU · 과제12 FPGA→FPGA)</div>
+<div class="meta">
+<div><b>이름</b>형종희</div><div><b>학번</b>2023440145</div><div><b>조</b>C조 (과제9·12 짝: D조)</div>
+<div><b>작성일</b>2026-10-27</div><div><b>실험일</b>2026-11-02</div>
+<div><b>FPGA 보드</b>Combo II-DLD S75 · xc7s75fgga484-1</div><div><b>MCU 보드</b>NUCLEO-G474RE</div>
+<div><b>도구</b>Vivado 2026.1 (XSim) · Icarus Verilog 12.0 · STM32Cube (GCC)</div>
+</div></header>
+<div class="github-box"><h3>📦 GitHub 제출 정보</h3>
+<div class="tblwrap"><table class=""><thead><tr><th>항목</th><th>값</th></tr></thead><tbody><tr><td>저장소</td><td><a href="https://github.com/hyeongjonghee/electronics2-LABs" target="_blank">https://github.com/hyeongjonghee/electronics2-LABs</a> (Public)</td></tr><tr><td>LAB7 설계 소스 커밋</td><td><code>68e6369</code> — FPGA SPI 수신·송신 회로와 테스트벤치, Icarus/XSim 결과와 파형(VCD), 보드 빌드 보고서, STM32 송신·수신 코드와 PC 모의 실행 파일</td></tr><tr><td>LAB7 경로</td><td><code>LAB7/circuits/LAB7-01~03/</code>, <code>LAB7/stm32/</code>, <code>LAB7/lab7_tools.ps1</code>, <code>LAB7/LAB7_실험전보고서.html</code> · <code>.pdf</code></td></tr><tr><td>실험 전 보고서 태그</td><td><code>lab7-prelab</code> — 이 보고서(HTML · PDF)가 들어간 커밋. 최종 제출 태그 <code>lab7-submit</code>은 실험 후 보고서 커밋에 따로 건다.</td></tr><tr><td>STM32 기반 프로젝트</td><td><code>Glaysia/ece2_474</code> 태그 <code>v1.1.0</code> = 커밋 <code>dd94f01</code>. 바꾼 파일은 <code>Core/Src/ece2_474_routine.c</code> 하나이며, 과제별 사본을 위 저장소 <code>LAB7/stm32/</code>에 보관.</td></tr></tbody></table></div></div>
+<nav class="toc"><b>목차</b><ol>
+<li><a href="#sum">사전 결과 요약</a></li><li><a href="#e1">과제8 · MCU 송신 파형</a></li><li><a href="#e2">과제9 · MCU → MCU</a></li>
+<li><a href="#e3">과제10 · MCU → FPGA 수신</a></li><li><a href="#e4">과제11 · FPGA → MCU 송신</a></li><li><a href="#e5">과제12 · FPGA → FPGA</a></li>
+<li><a href="#disc">고찰</a></li><li><a href="#refs">참고문헌</a></li></ol></nav>
+<section id="sum"><h2>0. 사전 결과 요약</h2>
+<p>LAB7은 11/2 수업(STM32_3 · SPI로 MCU와 FPGA 연결)의 실습이다. 수업 문서가 정한 <b>과제 5개(과제8~12)</b>를 순서대로 모두 준비했다. MCU 쪽은 매뉴얼이 준 송신(마스터)·수신(슬레이브) 코드를 쓰고, <b>FPGA의 SPI 수신 회로와 송신 회로는 정답 코드 없이 직접 작성</b>했다. I²C는 이번 실습 범위가 아니다.</p>
+<p>SPI 규칙은 수업 통일안을 따른다. <b>모드 0</b>(SCK 대기 LOW, 수신 측은 SCK 상승 에지에서 읽고 송신 측은 하강 에지에서 다음 비트로 바꿈), <b>8비트, 높은 비트(MSB)부터</b>, CS가 LOW인 동안만 통신, MISO는 연결하지 않는다.</p>
+<div class="tblwrap"><table class=""><thead><tr><th>#</th><th>실험 (무엇을 하는가)</th><th>검증</th><th>결과</th><th>자원 / 빌드</th></tr></thead><tbody><tr><td>1</td><td><b>과제8</b> · MCU가 SPI로 1초마다 한 바이트를 보내고, 그 파형(SCK·MOSI·CS)을 오실로스코프로 본다</td><td>빌드 + PC 모의 실행</td><td><span class="badge pass">PASS</span>SPI1 모드 0 · MSB · 781.25 kHz, CS LOW 안에서만 전송, TX=55·A5·00·FF</td><td>BUILD OK (송신판·네 값 순환판)</td></tr><tr><td>2</td><td><b>과제9</b> · MCU 두 대(C조·D조)를 연결해, 한쪽이 보낸 값을 다른 쪽이 받아 PC 화면에 출력</td><td>빌드 + 송신 모의 출력 → 수신 모의 실행</td><td><span class="badge pass">PASS</span>RX=55·A5·00·FF ×2, 송신이 끝나면 RX timeout</td><td>BUILD OK (수신판)</td></tr><tr><td>3</td><td><b>과제10</b> · MCU가 보낸 SPI 바이트를 FPGA가 받아 FPGA UART로 PC에 "RX=55"처럼 출력</td><td>Icarus · XSim 자동 검사 (MCU 파형 모델)</td><td><span class="badge pass">PASS</span>16바이트 · 14줄, 덜 찬 프레임 버림, 4바이트 프레임, CS HIGH 잡음 무시, 1 MHz·100 kHz</td><td>LUT 160 · FF 141 · IOB 14 · <b>WNS +14.907 ns</b></td></tr><tr><td>4</td><td><b>과제11</b> · FPGA가 마스터가 되어 1초마다 DIP 스위치 값을 SPI로 MCU에 보낸다</td><td>Icarus · XSim 자동 검사 + 받은 바이트로 MCU 수신 모의 실행</td><td><span class="badge pass">PASS</span>모드 0 규칙 8가지, SCK 500 kHz, MCU 출력 RX=55·A5·00·FF·3C·81</td><td>LUT 207 · FF 202 · IOB 22 · <b>WNS +14.323 ns</b></td></tr><tr><td>5</td><td><b>과제12</b> · FPGA 두 대(C조·D조)를 연결해 과제11 회로가 보내고 과제10 회로가 받는다</td><td>Icarus · XSim 두 보드 시뮬레이션 (클록 ±100 ppm), 역할 교대</td><td><span class="badge pass">PASS</span>보드 A "TX=xx" = 보드 B "RX=xx" 5개 ×2방향</td><td>과제10·11 비트스트림 그대로</td></tr></tbody></table></div>
+<div class="box info"><span class="t">설계 결정 4가지</span><ol>
+<li><b>받은 값을 사람이 읽는 글자로 출력</b>: FPGA는 받은 바이트를 <code>RX=55\r\n</code>처럼 16진수 글자로 보낸다. MCU 수신 예제의 출력과 모양이 같아서 Serial Monitor 화면 두 개를 나란히 놓고 비교할 수 있다. 0x00 · 0xFF처럼 화면에 안 보이는 값도 그대로 확인된다.</li>
+<li><b>FIFO로 속도 차이 흡수</b>: SPI 한 바이트는 약 10 µs, UART 한 글자는 1.04 ms라 약 100배 느리다. 받은 바이트를 64칸 FIFO에 먼저 쌓고 UART가 빌 때마다 꺼내 보낸다.</li>
+<li><b>보낼 값 = DIP 스위치</b>: 과제11·12에서 0x55 · 0xA5 · 0x00 · 0xFF를 실험 당일 다시 빌드하지 않고 스위치로 바꾼다. MCU 송신도 네 값을 1초마다 차례로 보내는 판을 따로 준비했다.</li>
+<li><b>기말 프로젝트 재사용</b>: 수신기는 CS가 LOW인 채로 여러 바이트를 연속으로 받고(바이트 번호 출력), 송신기는 바이트 수를 매개변수(<code>NBYTES</code>)로 바꿀 수 있다. 프로젝트의 4바이트 레지스터 맵을 그대로 붙일 수 있게 했다.</li></ol></div>
+<div class="box warn"><span class="t">검증 범위</span> FPGA 회로는 Icarus와 Vivado XSim 두 시뮬레이터에서 같은 결과를 냈다. MCU 코드는 실제 STM32 컴파일러로 빌드하고, HAL 함수를 흉내 낸 PC 모의 실행으로 동작 순서(CS LOW → 전송 → CS HIGH, 슬레이브 재설정)를 검사했다. 실제 핀의 전압·잡음·배선 지연은 실험 당일 오실로스코프와 영상으로 확인한다.</div></section>
+<section class="circuit" id="e1"><h2>1. 실험 1 · STM32_3 과제8 — MCU 송신 파형 확인</h2>
+<p class="src">MCU 한 대가 SPI로 1초마다 한 바이트를 보내고, 오실로스코프로 SCK · MOSI · CS를 보며 비트 순서와 클록 주파수를 기록한다. (혼자 진행)</p>
+<h3>① 목적</h3><p>SPI 통신이 실제 전선 위에서 어떻게 보이는지 확인한다. 우체부(마스터)가 박자(SCK)를 치면서 한 글자씩(MOSI) 불러 주고, 누구에게 말하는지는 손짓(CS)으로 알리는 것과 같다. 0x55 · 0xA5 · 0x00 · 0xFF를 보내 비트 순서가 MSB부터인지, SCK 주파수가 계산과 같은지 잰다.</p>
+<h3>② 이론 · 설계 계산</h3><div class="tblwrap"><table class=""><thead><tr><th>규칙</th><th>내용</th><th>이유</th></tr></thead><tbody><tr><td>대기 상태</td><td>CS HIGH, SCK LOW</td><td>모드 0의 CPOL = 0</td></tr><tr><td>데이터 읽기</td><td>수신 측은 SCK <b>상승 에지</b>에서 MOSI를 읽는다</td><td>CPHA = 0 (첫 에지에서 읽음)</td></tr><tr><td>데이터 바꾸기</td><td>송신 측은 첫 비트를 첫 상승 에지 <b>전</b>에 내놓고, 이후 <b>하강 에지</b>에서 다음 비트로 바꾼다</td><td>읽는 순간(상승)과 바뀌는 순간(하강)이 반주기 떨어져 있어 MOSI가 안정된 상태에서 읽힌다</td></tr><tr><td>한 바이트</td><td>상승 에지 8번, MSB(b7)부터</td><td>수업 통일 규칙 · <code>SPI_FIRSTBIT_MSB</code></td></tr><tr><td>프레임</td><td>CS가 LOW인 동안만 유효</td><td>여러 장치가 같은 SCK·MOSI를 공유해도 선택된 하나만 반응</td></tr></tbody></table></div>
+<p>수업 템플릿의 SPI1은 시스템 클록 100 MHz를 128로 나눈다.</p>
+$$f_{SCK} = \frac{100\ \text{MHz}}{128} = 781.25\ \text{kHz},\qquad T_{SCK} = 1.28\ \mu\text{s},\qquad T_{byte} = 8\,T_{SCK} = 10.24\ \mu\text{s}$$
+<p>CS는 SPI 하드웨어가 아니라 GPIO(PB6)로 코드가 직접 내린다. 그래서 CS LOW → 첫 SCK 사이에 <code>HAL_SPI_Transmit</code> 진입·SPI 켜기 시간(약 수 µs)이 들어가고, 마지막 SCK 뒤에도 함수가 끝날 때까지 CS가 LOW로 남는다. TB의 MCU 모델은 이 간격을 2 µs · 1.5 µs로 넣었다.</p>
+<div class="tblwrap"><table class=""><thead><tr><th>보내는 값</th><th>2진수 (b7→b0)</th><th>상승 에지에서 읽히는 MOSI</th><th>특징</th></tr></thead><tbody><tr><td>0x55</td><td>0101 0101</td><td>0 1 0 1 0 1 0 1</td><td>MOSI가 SCK의 절반 속도로 계속 바뀜</td></tr><tr><td>0xA5</td><td>1010 0101</td><td>1 0 1 0 0 1 0 1</td><td>가운데 "0 0"에서 MOSI가 한 주기 동안 LOW 유지</td></tr><tr><td>0x00</td><td>0000 0000</td><td>0 0 0 0 0 0 0 0</td><td>MOSI는 계속 LOW, SCK만 8번</td></tr><tr><td>0xFF</td><td>1111 1111</td><td>1 1 1 1 1 1 1 1</td><td>MOSI는 CS LOW 동안 계속 HIGH</td></tr></tbody></table></div>
+<h3>③ 포트 · 보드 매핑</h3><div class="tblwrap"><table class=""><thead><tr><th>신호</th><th>NUCLEO 핀</th><th>Arduino 이름</th><th>오실로스코프</th></tr></thead><tbody><tr><td>SCK</td><td>PB3 · SPI1_SCK</td><td>D3</td><td>CH1 (트리거 아님)</td></tr><tr><td>MOSI</td><td>PA7 · SPI1_MOSI</td><td>D11</td><td>CH2</td></tr><tr><td>CS</td><td>PB6 · GPIO 출력</td><td>D10</td><td>CH1과 바꿔 보거나 다음 측정 (TBS2000B 2채널)</td></tr><tr><td>GND</td><td>CN6 GND</td><td>—</td><td>프로브 GND 클립</td></tr></tbody></table></div>
+<h3>④ 핵심 코드</h3><p>매뉴얼 송신 예제를 <code>polling_routine()</code>에 그대로 넣었다(<code>LAB7/stm32/task8_tx</code>). 당일 다시 빌드하지 않으려고, 보내는 값만 1초마다 바꾸는 판(<code>task8_cycle</code>)을 하나 더 만들었다.</p>
+<pre><code>void polling_routine(void)
+{
+    /* LAB7 송신(마스터) · 매뉴얼 예제에서 보내는 값만 1초마다 0x55 -&gt; 0xA5 -&gt; 0x00 -&gt; 0xFF로 바꿈.
+     * 과제8(파형)·과제9·과제10에서 다시 빌드하지 않고 네 값을 모두 확인하기 위한 판. */
+    static const uint8_t pattern[4] = {0x55U, 0xA5U, 0x00U, 0xFFU};
+    static uint32_t last_ms = 0;
+    static uint32_t k = 0;
+    uint32_t now_ms = HAL_GetTick();
+    if (now_ms - last_ms &lt; 1000U) return;
+    last_ms = now_ms;
+
+    uint8_t tx = pattern[k];
+    k = (k + 1U) &amp; 3U;
+    HAL_GPIO_WritePin(SPI_CS_ece2_GPIO_Port,
+                      SPI_CS_ece2_Pin, GPIO_PIN_RESET);
+    HAL_StatusTypeDef result =
+        HAL_SPI_Transmit(&amp;hspi1, &amp;tx, 1U, 100U);
+    HAL_GPIO_WritePin(SPI_CS_ece2_GPIO_Port,
+                      SPI_CS_ece2_Pin, GPIO_PIN_SET);
+
+    printf(&quot;TX=%02X, result=%d\r\n&quot;,
+           (unsigned int)tx, (int)result);
+}</code></pre>
+<h3>⑤ 시뮬레이션 (PC 모의 실행)</h3><p>LAB6에서 만든 모의 실행기를 SPI용으로 늘렸다. 가짜 <code>main.h</code>에 <code>SPI_HandleTypeDef</code> · <code>HAL_SPI_Transmit</code> · <code>HAL_GPIO_WritePin</code>을 넣고, 수업 코드 파일을 한 글자도 바꾸지 않고 gcc로 컴파일한다. 모의 HAL은 ① SPI1이 모드 0 · 8비트 · MSB인지 ② <b>CS(PB6)가 LOW일 때만 Transmit이 불렸는지</b>를 검사하고, 나간 바이트를 hex 파일로 남긴다. 이 파일이 과제9 수신 모의 실행과 과제10 FPGA TB의 입력이 된다.</p>
+<div class="split"><div><b>매뉴얼 송신판 (4초)</b><pre><code># SPI1 init: MASTER, NSS=SOFT, CPOL=0 CPHA=0 (mode 0), 8-bit, MSB first, prescaler=128
+# SCK = 100 MHz / 128 = 781.25 kHz
+TX=55, result=0
+TX=55, result=0
+TX=55, result=0
+TX=55, result=0
+# PASS: 0 check failures</code></pre></div><div><b>네 값 순환판 (8초)</b><pre><code># SPI1 init: MASTER, NSS=SOFT, CPOL=0 CPHA=0 (mode 0), 8-bit, MSB first, prescaler=128
+# SCK = 100 MHz / 128 = 781.25 kHz
+TX=55, result=0
+TX=A5, result=0
+TX=00, result=0
+TX=FF, result=0
+TX=55, result=0
+TX=A5, result=0
+TX=00, result=0
+TX=FF, result=0
+# PASS: 0 check failures</code></pre></div></div>
+<figure><div class="svgwrap"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 336" width="100%" font-family="Consolas, D2Coding, monospace" font-size="11">
+<rect x="0" y="0" width="760" height="336" fill="#ffffff"/>
+<text x="120" y="14" fill="#1d2433" font-size="12.5" font-weight="bold">과제10 · MCU(781.25 kHz) → FPGA 슬레이브, 0x55 한 프레임 (XSim)</text>
+<line x1="140.9" y1="36" x2="140.9" y2="314" stroke="#e3e7ef" stroke-width="1"/>
+<text x="140.9" y="327" fill="#5b6478" text-anchor="middle">6</text>
+<line x1="224.7" y1="36" x2="224.7" y2="314" stroke="#e3e7ef" stroke-width="1"/>
+<text x="224.7" y="327" fill="#5b6478" text-anchor="middle">8</text>
+<line x1="308.4" y1="36" x2="308.4" y2="314" stroke="#e3e7ef" stroke-width="1"/>
+<text x="308.4" y="327" fill="#5b6478" text-anchor="middle">10</text>
+<line x1="392.1" y1="36" x2="392.1" y2="314" stroke="#e3e7ef" stroke-width="1"/>
+<text x="392.1" y="327" fill="#5b6478" text-anchor="middle">12</text>
+<line x1="475.9" y1="36" x2="475.9" y2="314" stroke="#e3e7ef" stroke-width="1"/>
+<text x="475.9" y="327" fill="#5b6478" text-anchor="middle">14</text>
+<line x1="559.6" y1="36" x2="559.6" y2="314" stroke="#e3e7ef" stroke-width="1"/>
+<text x="559.6" y="327" fill="#5b6478" text-anchor="middle">16</text>
+<line x1="643.3" y1="36" x2="643.3" y2="314" stroke="#e3e7ef" stroke-width="1"/>
+<text x="643.3" y="327" fill="#5b6478" text-anchor="middle">18</text>
+<text x="756" y="327" fill="#5b6478" text-anchor="end">µs</text>
+<line x1="224.7" y1="36" x2="224.7" y2="314" stroke="#c0392b" stroke-width="1" stroke-dasharray="3,3"/>
+<text x="226.7" y="33" fill="#c0392b" font-size="10">b7=0</text>
+<line x1="278.3" y1="36" x2="278.3" y2="314" stroke="#c0392b" stroke-width="1" stroke-dasharray="3,3"/>
+<text x="280.3" y="33" fill="#c0392b" font-size="10">b6=1</text>
+<line x1="331.8" y1="36" x2="331.8" y2="314" stroke="#c0392b" stroke-width="1" stroke-dasharray="3,3"/>
+<text x="333.8" y="33" fill="#c0392b" font-size="10">b5=0</text>
+<line x1="385.4" y1="36" x2="385.4" y2="314" stroke="#c0392b" stroke-width="1" stroke-dasharray="3,3"/>
+<text x="387.4" y="33" fill="#c0392b" font-size="10">b4=1</text>
+<line x1="439.0" y1="36" x2="439.0" y2="314" stroke="#c0392b" stroke-width="1" stroke-dasharray="3,3"/>
+<text x="441.0" y="33" fill="#c0392b" font-size="10">b3=0</text>
+<line x1="492.6" y1="36" x2="492.6" y2="314" stroke="#c0392b" stroke-width="1" stroke-dasharray="3,3"/>
+<text x="494.6" y="33" fill="#c0392b" font-size="10">b2=1</text>
+<line x1="546.2" y1="36" x2="546.2" y2="314" stroke="#c0392b" stroke-width="1" stroke-dasharray="3,3"/>
+<text x="548.2" y="33" fill="#c0392b" font-size="10">b1=0</text>
+<line x1="599.8" y1="36" x2="599.8" y2="314" stroke="#c0392b" stroke-width="1" stroke-dasharray="3,3"/>
+<text x="601.8" y="33" fill="#c0392b" font-size="10">b0=1</text>
+<text x="112" y="58.0" fill="#1d2433" text-anchor="end">CS (PB6)</text>
+<path d="M120.0,45.0 L140.9,45.0 L140.9,63.0 L689.4,63.0 L689.4,45.0 L748.0,45.0" fill="none" stroke="#0b5fc0" stroke-width="1.6"/>
+<text x="112" y="88.0" fill="#1d2433" text-anchor="end">SCK (PB3)</text>
+<path d="M120.0,93.0 L224.7,93.0 L224.7,75.0 L251.5,75.0 L251.5,93.0 L278.3,93.0 L278.3,75.0 L305.1,75.0 L305.1,93.0 L331.8,93.0 L331.8,75.0 L358.6,75.0 L358.6,93.0 L385.4,93.0 L385.4,75.0 L412.2,75.0 L412.2,93.0 L439.0,93.0 L439.0,75.0 L465.8,75.0 L465.8,93.0 L492.6,93.0 L492.6,75.0 L519.4,75.0 L519.4,93.0 L546.2,93.0 L546.2,75.0 L573.0,75.0 L573.0,93.0 L599.8,93.0 L599.8,75.0 L626.6,75.0 L626.6,93.0 L748.0,93.0" fill="none" stroke="#0b5fc0" stroke-width="1.6"/>
+<text x="112" y="118.0" fill="#1d2433" text-anchor="end">MOSI (PA7)</text>
+<path d="M120.0,123.0 L251.5,123.0 L251.5,105.0 L305.1,105.0 L305.1,123.0 L358.6,123.0 L358.6,105.0 L412.2,105.0 L412.2,123.0 L465.8,123.0 L465.8,105.0 L519.4,105.0 L519.4,123.0 L573.0,123.0 L573.0,105.0 L689.4,105.0 L689.4,123.0 L748.0,123.0" fill="none" stroke="#0b5fc0" stroke-width="1.6"/>
+<text x="112" y="148.0" fill="#1d2433" text-anchor="end">동기화 SCK</text>
+<path d="M120.0,144.0 L123.0,135 L222.2,135 L225.2,144.0 L222.2,153 L123.0,153 Z" fill="#eef3fb" stroke="#7a8599" stroke-width="1"/>
+<text x="172.6" y="148.0" fill="#1d2433" text-anchor="middle">0</text>
+<path d="M225.2,144.0 L225.7,135 L225.7,135 L226.1,144.0 L225.7,153 L225.7,153 Z" fill="#eef3fb" stroke="#7a8599" stroke-width="1"/>
+<path d="M226.1,144.0 L229.1,135 L249.0,135 L252.0,144.0 L249.0,153 L229.1,153 Z" fill="#eef3fb" stroke="#7a8599" stroke-width="1"/>
+<text x="239.1" y="148.0" fill="#1d2433" text-anchor="middle">3</text>
+<path d="M252.0,144.0 L252.5,135 L252.5,135 L252.9,144.0 L252.5,153 L252.5,153 Z" fill="#eef3fb" stroke="#7a8599" stroke-width="1"/>
+<path d="M252.9,144.0 L255.9,135 L275.8,135 L278.8,144.0 L275.8,153 L255.9,153 Z" fill="#eef3fb" stroke="#7a8599" stroke-width="1"/>
+<text x="265.9" y="148.0" fill="#1d2433" text-anchor="middle">0</text>
+<path d="M278.8,144.0 L279.2,135 L279.2,135 L279.7,144.0 L279.2,153 L279.2,153 Z" fill="#eef3fb" stroke="#7a8599" stroke-width="1"/>
+<path d="M279.7,144.0 L282.7,135 L302.6,135 L305.6,144.0 L302.6,153 L282.7,153 Z" fill="#eef3fb" stroke="#7a8599" stroke-width="1"/>
+<text x="292.6" y="148.0" fill="#1d2433" text-anchor="middle">3</text>
+<path d="M305.6,144.0 L306.0,135 L306.0,135 L306.5,144.0 L306.0,153 L306.0,153 Z" fill="#eef3fb" stroke="#7a8599" stroke-width="1"/>
+<path d="M306.5,144.0 L309.5,135 L329.4,135 L332.4,144.0 L329.4,153 L309.5,153 Z" fill="#eef3fb" stroke="#7a8599" stroke-width="1"/>
+<text x="319.4" y="148.0" fill="#1d2433" text-anchor="middle">0</text>
+<path d="M332.4,144.0 L332.8,135 L332.8,135 L333.3,144.0 L332.8,153 L332.8,153 Z" fill="#eef3fb" stroke="#7a8599" stroke-width="1"/>
+<path d="M333.3,144.0 L336.3,135 L356.2,135 L359.2,144.0 L356.2,153 L336.3,153 Z" fill="#eef3fb" stroke="#7a8599" stroke-width="1"/>
+<text x="346.2" y="148.0" fill="#1d2433" text-anchor="middle">3</text>
+<path d="M359.2,144.0 L359.6,135 L359.6,135 L360.1,144.0 L359.6,153 L359.6,153 Z" fill="#eef3fb" stroke="#7a8599" stroke-width="1"/>
+<path d="M360.1,144.0 L363.1,135 L383.0,135 L386.0,144.0 L383.0,153 L363.1,153 Z" fill="#eef3fb" stroke="#7a8599" stroke-width="1"/>
+<text x="373.0" y="148.0" fill="#1d2433" text-anchor="middle">0</text>
+<path d="M386.0,144.0 L386.4,135 L386.4,135 L386.8,144.0 L386.4,153 L386.4,153 Z" fill="#eef3fb" stroke="#7a8599" stroke-width="1"/>
+<path d="M386.8,144.0 L389.8,135 L409.8,135 L412.8,144.0 L409.8,153 L389.8,153 Z" fill="#eef3fb" stroke="#7a8599" stroke-width="1"/>
+<text x="399.8" y="148.0" fill="#1d2433" text-anchor="middle">3</text>
+<path d="M412.8,144.0 L413.2,135 L413.2,135 L413.6,144.0 L413.2,153 L413.2,153 Z" fill="#eef3fb" stroke="#7a8599" stroke-width="1"/>
+<path d="M413.6,144.0 L416.6,135 L436.6,135 L439.6,144.0 L436.6,153 L416.6,153 Z" fill="#eef3fb" stroke="#7a8599" stroke-width="1"/>
+<text x="426.6" y="148.0" fill="#1d2433" text-anchor="middle">0</text>
+<path d="M439.6,144.0 L440.0,135 L440.0,135 L440.4,144.0 L440.0,153 L440.0,153 Z" fill="#eef3fb" stroke="#7a8599" stroke-width="1"/>
+<path d="M440.4,144.0 L443.4,135 L463.4,135 L466.4,144.0 L463.4,153 L443.4,153 Z" fill="#eef3fb" stroke="#7a8599" stroke-width="1"/>
+<text x="453.4" y="148.0" fill="#1d2433" text-anchor="middle">3</text>
+<path d="M466.4,144.0 L466.8,135 L466.8,135 L467.2,144.0 L466.8,153 L466.8,153 Z" fill="#eef3fb" stroke="#7a8599" stroke-width="1"/>
+<path d="M467.2,144.0 L470.2,135 L490.2,135 L493.2,144.0 L490.2,153 L470.2,153 Z" fill="#eef3fb" stroke="#7a8599" stroke-width="1"/>
+<text x="480.2" y="148.0" fill="#1d2433" text-anchor="middle">0</text>
+<path d="M493.2,144.0 L493.6,135 L493.6,135 L494.0,144.0 L493.6,153 L493.6,153 Z" fill="#eef3fb" stroke="#7a8599" stroke-width="1"/>
+<path d="M494.0,144.0 L497.0,135 L517.0,135 L520.0,144.0 L517.0,153 L497.0,153 Z" fill="#eef3fb" stroke="#7a8599" stroke-width="1"/>
+<text x="507.0" y="148.0" fill="#1d2433" text-anchor="middle">3</text>
+<path d="M520.0,144.0 L520.4,135 L520.4,135 L520.8,144.0 L520.4,153 L520.4,153 Z" fill="#eef3fb" stroke="#7a8599" stroke-width="1"/>
+<path d="M520.8,144.0 L523.8,135 L543.8,135 L546.8,144.0 L543.8,153 L523.8,153 Z" fill="#eef3fb" stroke="#7a8599" stroke-width="1"/>
+<text x="533.8" y="148.0" fill="#1d2433" text-anchor="middle">0</text>
+<path d="M546.8,144.0 L547.2,135 L547.2,135 L547.6,144.0 L547.2,153 L547.2,153 Z" fill="#eef3fb" stroke="#7a8599" stroke-width="1"/>
+<path d="M547.6,144.0 L550.6,135 L570.6,135 L573.6,144.0 L570.6,153 L550.6,153 Z" fill="#eef3fb" stroke="#7a8599" stroke-width="1"/>
+<text x="560.6" y="148.0" fill="#1d2433" text-anchor="middle">3</text>
+<path d="M573.6,144.0 L574.0,135 L574.0,135 L574.4,144.0 L574.0,153 L574.0,153 Z" fill="#eef3fb" stroke="#7a8599" stroke-width="1"/>
+<path d="M574.4,144.0 L577.4,135 L597.4,135 L600.4,144.0 L597.4,153 L577.4,153 Z" fill="#eef3fb" stroke="#7a8599" stroke-width="1"/>
+<text x="587.4" y="148.0" fill="#1d2433" text-anchor="middle">0</text>
+<path d="M600.4,144.0 L600.8,135 L600.8,135 L601.2,144.0 L600.8,153 L600.8,153 Z" fill="#eef3fb" stroke="#7a8599" stroke-width="1"/>
+<path d="M601.2,144.0 L604.2,135 L624.2,135 L627.2,144.0 L624.2,153 L604.2,153 Z" fill="#eef3fb" stroke="#7a8599" stroke-width="1"/>
+<text x="614.2" y="148.0" fill="#1d2433" text-anchor="middle">3</text>
+<path d="M627.2,144.0 L627.6,135 L627.6,135 L628.0,144.0 L627.6,153 L627.6,153 Z" fill="#eef3fb" stroke="#7a8599" stroke-width="1"/>
+<path d="M628.0,144.0 L631.0,135 L745.0,135 L748.0,144.0 L745.0,153 L631.0,153 Z" fill="#eef3fb" stroke="#7a8599" stroke-width="1"/>
+<text x="688.0" y="148.0" fill="#1d2433" text-anchor="middle">0</text>
+<text x="112" y="178.0" fill="#1d2433" text-anchor="end">bitcnt</text>
+<path d="M120.0,174.0 L123.0,165 L223.9,165 L226.9,174.0 L223.9,183 L123.0,183 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<text x="173.5" y="178.0" fill="#1d2433" text-anchor="middle">0</text>
+<path d="M226.9,174.0 L229.9,165 L277.5,165 L280.5,174.0 L277.5,183 L229.9,183 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<text x="253.7" y="178.0" fill="#1d2433" text-anchor="middle">1</text>
+<path d="M280.5,174.0 L283.5,165 L331.1,165 L334.1,174.0 L331.1,183 L283.5,183 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<text x="307.3" y="178.0" fill="#1d2433" text-anchor="middle">2</text>
+<path d="M334.1,174.0 L337.1,165 L384.7,165 L387.7,174.0 L384.7,183 L337.1,183 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<text x="360.9" y="178.0" fill="#1d2433" text-anchor="middle">3</text>
+<path d="M387.7,174.0 L390.7,165 L438.3,165 L441.3,174.0 L438.3,183 L390.7,183 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<text x="414.5" y="178.0" fill="#1d2433" text-anchor="middle">4</text>
+<path d="M441.3,174.0 L444.3,165 L491.9,165 L494.9,174.0 L491.9,183 L444.3,183 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<text x="468.1" y="178.0" fill="#1d2433" text-anchor="middle">5</text>
+<path d="M494.9,174.0 L497.9,165 L545.5,165 L548.5,174.0 L545.5,183 L497.9,183 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<text x="521.7" y="178.0" fill="#1d2433" text-anchor="middle">6</text>
+<path d="M548.5,174.0 L551.5,165 L599.0,165 L602.0,174.0 L599.0,183 L551.5,183 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<text x="575.2" y="178.0" fill="#1d2433" text-anchor="middle">7</text>
+<path d="M602.0,174.0 L605.0,165 L745.0,165 L748.0,174.0 L745.0,183 L605.0,183 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<text x="675.0" y="178.0" fill="#1d2433" text-anchor="middle">0</text>
+<text x="112" y="208.0" fill="#1d2433" text-anchor="end">shift</text>
+<path d="M120.0,204.0 L123.0,195 L277.5,195 L280.5,204.0 L277.5,213 L123.0,213 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<text x="200.3" y="208.0" fill="#1d2433" text-anchor="middle">00</text>
+<path d="M280.5,204.0 L283.5,195 L331.1,195 L334.1,204.0 L331.1,213 L283.5,213 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<text x="307.3" y="208.0" fill="#1d2433" text-anchor="middle">01</text>
+<path d="M334.1,204.0 L337.1,195 L384.7,195 L387.7,204.0 L384.7,213 L337.1,213 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<text x="360.9" y="208.0" fill="#1d2433" text-anchor="middle">02</text>
+<path d="M387.7,204.0 L390.7,195 L438.3,195 L441.3,204.0 L438.3,213 L390.7,213 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<text x="414.5" y="208.0" fill="#1d2433" text-anchor="middle">05</text>
+<path d="M441.3,204.0 L444.3,195 L491.9,195 L494.9,204.0 L491.9,213 L444.3,213 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<text x="468.1" y="208.0" fill="#1d2433" text-anchor="middle">0A</text>
+<path d="M494.9,204.0 L497.9,195 L545.5,195 L548.5,204.0 L545.5,213 L497.9,213 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<text x="521.7" y="208.0" fill="#1d2433" text-anchor="middle">15</text>
+<path d="M548.5,204.0 L551.5,195 L745.0,195 L748.0,204.0 L745.0,213 L551.5,213 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<text x="648.2" y="208.0" fill="#1d2433" text-anchor="middle">2A</text>
+<text x="112" y="238.0" fill="#1d2433" text-anchor="end">valid</text>
+<path d="M120.0,243.0 L602.0,243.0 L602.0,225.0 L602.9,225.0 L602.9,243.0 L748.0,243.0" fill="none" stroke="#137a3c" stroke-width="1.6"/>
+<text x="112" y="268.0" fill="#1d2433" text-anchor="end">data</text>
+<path d="M120.0,264.0 L123.0,255 L599.0,255 L602.0,264.0 L599.0,273 L123.0,273 Z" fill="#eef3fb" stroke="#137a3c" stroke-width="1"/>
+<text x="361.0" y="268.0" fill="#1d2433" text-anchor="middle">00</text>
+<path d="M602.0,264.0 L605.0,255 L745.0,255 L748.0,264.0 L745.0,273 L605.0,273 Z" fill="#eef3fb" stroke="#137a3c" stroke-width="1"/>
+<text x="675.0" y="268.0" fill="#1d2433" text-anchor="middle">55</text>
+<text x="112" y="298.0" fill="#1d2433" text-anchor="end">frame_end</text>
+<path d="M120.0,303.0 L691.6,303.0 L691.6,285.0 L692.5,285.0 L692.5,303.0 L748.0,303.0" fill="none" stroke="#9a5b00" stroke-width="1.6"/>
+</svg></div><figcaption>그림 1. MCU 송신 0x55의 예상 파형. 위 세 줄이 오실로스코프에 보일 신호(TB의 MCU 모델: 781.25 kHz, 모드 0, CS는 소프트웨어). 빨간 점선이 SCK 상승 에지 8번이며, 그때의 MOSI가 0 1 0 1 0 1 0 1이다. 아래 줄은 과제10에서 이 신호를 받은 FPGA 내부(XSim).</figcaption></figure>
+<figure><div class="svgwrap"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 336" width="100%" font-family="Consolas, D2Coding, monospace" font-size="11">
+<rect x="0" y="0" width="760" height="336" fill="#ffffff"/>
+<text x="120" y="14" fill="#1d2433" font-size="12.5" font-weight="bold">과제10 · MCU(781.25 kHz) → FPGA 슬레이브, 0xA5 한 프레임 (XSim)</text>
+<line x1="174.4" y1="36" x2="174.4" y2="314" stroke="#e3e7ef" stroke-width="1"/>
+<text x="174.4" y="327" fill="#5b6478" text-anchor="middle">220</text>
+<line x1="258.2" y1="36" x2="258.2" y2="314" stroke="#e3e7ef" stroke-width="1"/>
+<text x="258.2" y="327" fill="#5b6478" text-anchor="middle">222</text>
+<line x1="341.9" y1="36" x2="341.9" y2="314" stroke="#e3e7ef" stroke-width="1"/>
+<text x="341.9" y="327" fill="#5b6478" text-anchor="middle">224</text>
+<line x1="425.6" y1="36" x2="425.6" y2="314" stroke="#e3e7ef" stroke-width="1"/>
+<text x="425.6" y="327" fill="#5b6478" text-anchor="middle">226</text>
+<line x1="509.4" y1="36" x2="509.4" y2="314" stroke="#e3e7ef" stroke-width="1"/>
+<text x="509.4" y="327" fill="#5b6478" text-anchor="middle">228</text>
+<line x1="593.1" y1="36" x2="593.1" y2="314" stroke="#e3e7ef" stroke-width="1"/>
+<text x="593.1" y="327" fill="#5b6478" text-anchor="middle">230</text>
+<line x1="676.8" y1="36" x2="676.8" y2="314" stroke="#e3e7ef" stroke-width="1"/>
+<text x="676.8" y="327" fill="#5b6478" text-anchor="middle">232</text>
+<text x="756" y="327" fill="#5b6478" text-anchor="end">µs</text>
+<line x1="220.5" y1="36" x2="220.5" y2="314" stroke="#c0392b" stroke-width="1" stroke-dasharray="3,3"/>
+<text x="222.5" y="33" fill="#c0392b" font-size="10">b7=1</text>
+<line x1="274.1" y1="36" x2="274.1" y2="314" stroke="#c0392b" stroke-width="1" stroke-dasharray="3,3"/>
+<text x="276.1" y="33" fill="#c0392b" font-size="10">b6=0</text>
+<line x1="327.7" y1="36" x2="327.7" y2="314" stroke="#c0392b" stroke-width="1" stroke-dasharray="3,3"/>
+<text x="329.7" y="33" fill="#c0392b" font-size="10">b5=1</text>
+<line x1="381.2" y1="36" x2="381.2" y2="314" stroke="#c0392b" stroke-width="1" stroke-dasharray="3,3"/>
+<text x="383.2" y="33" fill="#c0392b" font-size="10">b4=0</text>
+<line x1="434.8" y1="36" x2="434.8" y2="314" stroke="#c0392b" stroke-width="1" stroke-dasharray="3,3"/>
+<text x="436.8" y="33" fill="#c0392b" font-size="10">b3=0</text>
+<line x1="488.4" y1="36" x2="488.4" y2="314" stroke="#c0392b" stroke-width="1" stroke-dasharray="3,3"/>
+<text x="490.4" y="33" fill="#c0392b" font-size="10">b2=1</text>
+<line x1="542.0" y1="36" x2="542.0" y2="314" stroke="#c0392b" stroke-width="1" stroke-dasharray="3,3"/>
+<text x="544.0" y="33" fill="#c0392b" font-size="10">b1=0</text>
+<line x1="595.6" y1="36" x2="595.6" y2="314" stroke="#c0392b" stroke-width="1" stroke-dasharray="3,3"/>
+<text x="597.6" y="33" fill="#c0392b" font-size="10">b0=1</text>
+<text x="112" y="58.0" fill="#1d2433" text-anchor="end">CS (PB6)</text>
+<path d="M120.0,45.0 L136.7,45.0 L136.7,63.0 L685.2,63.0 L685.2,45.0 L748.0,45.0" fill="none" stroke="#0b5fc0" stroke-width="1.6"/>
+<text x="112" y="88.0" fill="#1d2433" text-anchor="end">SCK (PB3)</text>
+<path d="M120.0,93.0 L220.5,93.0 L220.5,75.0 L247.3,75.0 L247.3,93.0 L274.1,93.0 L274.1,75.0 L300.9,75.0 L300.9,93.0 L327.7,93.0 L327.7,75.0 L354.5,75.0 L354.5,93.0 L381.2,93.0 L381.2,75.0 L408.0,75.0 L408.0,93.0 L434.8,93.0 L434.8,75.0 L461.6,75.0 L461.6,93.0 L488.4,93.0 L488.4,75.0 L515.2,75.0 L515.2,93.0 L542.0,93.0 L542.0,75.0 L568.8,75.0 L568.8,93.0 L595.6,93.0 L595.6,75.0 L622.4,75.0 L622.4,93.0 L748.0,93.0" fill="none" stroke="#0b5fc0" stroke-width="1.6"/>
+<text x="112" y="118.0" fill="#1d2433" text-anchor="end">MOSI (PA7)</text>
+<path d="M120.0,123.0 L193.7,123.0 L193.7,105.0 L247.3,105.0 L247.3,123.0 L300.9,123.0 L300.9,105.0 L354.5,105.0 L354.5,123.0 L461.6,123.0 L461.6,105.0 L515.2,105.0 L515.2,123.0 L568.8,123.0 L568.8,105.0 L685.2,105.0 L685.2,123.0 L748.0,123.0" fill="none" stroke="#0b5fc0" stroke-width="1.6"/>
+<text x="112" y="148.0" fill="#1d2433" text-anchor="end">동기화 SCK</text>
+<path d="M120.0,144.0 L123.0,135 L218.1,135 L221.1,144.0 L218.1,153 L123.0,153 Z" fill="#eef3fb" stroke="#7a8599" stroke-width="1"/>
+<text x="170.5" y="148.0" fill="#1d2433" text-anchor="middle">0</text>
+<path d="M221.1,144.0 L221.5,135 L221.5,135 L221.9,144.0 L221.5,153 L221.5,153 Z" fill="#eef3fb" stroke="#7a8599" stroke-width="1"/>
+<path d="M221.9,144.0 L224.9,135 L244.8,135 L247.8,144.0 L244.8,153 L224.9,153 Z" fill="#eef3fb" stroke="#7a8599" stroke-width="1"/>
+<text x="234.9" y="148.0" fill="#1d2433" text-anchor="middle">3</text>
+<path d="M247.8,144.0 L248.3,135 L248.3,135 L248.7,144.0 L248.3,153 L248.3,153 Z" fill="#eef3fb" stroke="#7a8599" stroke-width="1"/>
+<path d="M248.7,144.0 L251.7,135 L271.6,135 L274.6,144.0 L271.6,153 L251.7,153 Z" fill="#eef3fb" stroke="#7a8599" stroke-width="1"/>
+<text x="261.7" y="148.0" fill="#1d2433" text-anchor="middle">0</text>
+<path d="M274.6,144.0 L275.1,135 L275.1,135 L275.5,144.0 L275.1,153 L275.1,153 Z" fill="#eef3fb" stroke="#7a8599" stroke-width="1"/>
+<path d="M275.5,144.0 L278.5,135 L298.4,135 L301.4,144.0 L298.4,153 L278.5,153 Z" fill="#eef3fb" stroke="#7a8599" stroke-width="1"/>
+<text x="288.5" y="148.0" fill="#1d2433" text-anchor="middle">3</text>
+<path d="M301.4,144.0 L301.9,135 L301.9,135 L302.3,144.0 L301.9,153 L301.9,153 Z" fill="#eef3fb" stroke="#7a8599" stroke-width="1"/>
+<path d="M302.3,144.0 L305.3,135 L325.2,135 L328.2,144.0 L325.2,153 L305.3,153 Z" fill="#eef3fb" stroke="#7a8599" stroke-width="1"/>
+<text x="315.3" y="148.0" fill="#1d2433" text-anchor="middle">0</text>
+<path d="M328.2,144.0 L328.7,135 L328.7,135 L329.1,144.0 L328.7,153 L328.7,153 Z" fill="#eef3fb" stroke="#7a8599" stroke-width="1"/>
+<path d="M329.1,144.0 L332.1,135 L352.0,135 L355.0,144.0 L352.0,153 L332.1,153 Z" fill="#eef3fb" stroke="#7a8599" stroke-width="1"/>
+<text x="342.0" y="148.0" fill="#1d2433" text-anchor="middle">3</text>
+<path d="M355.0,144.0 L355.4,135 L355.4,135 L355.9,144.0 L355.4,153 L355.4,153 Z" fill="#eef3fb" stroke="#7a8599" stroke-width="1"/>
+<path d="M355.9,144.0 L358.9,135 L378.8,135 L381.8,144.0 L378.8,153 L358.9,153 Z" fill="#eef3fb" stroke="#7a8599" stroke-width="1"/>
+<text x="368.8" y="148.0" fill="#1d2433" text-anchor="middle">0</text>
+<path d="M381.8,144.0 L382.2,135 L382.2,135 L382.7,144.0 L382.2,153 L382.2,153 Z" fill="#eef3fb" stroke="#7a8599" stroke-width="1"/>
+<path d="M382.7,144.0 L385.7,135 L405.6,135 L408.6,144.0 L405.6,153 L385.7,153 Z" fill="#eef3fb" stroke="#7a8599" stroke-width="1"/>
+<text x="395.6" y="148.0" fill="#1d2433" text-anchor="middle">3</text>
+<path d="M408.6,144.0 L409.0,135 L409.0,135 L409.5,144.0 L409.0,153 L409.0,153 Z" fill="#eef3fb" stroke="#7a8599" stroke-width="1"/>
+<path d="M409.5,144.0 L412.5,135 L432.4,135 L435.4,144.0 L432.4,153 L412.5,153 Z" fill="#eef3fb" stroke="#7a8599" stroke-width="1"/>
+<text x="422.4" y="148.0" fill="#1d2433" text-anchor="middle">0</text>
+<path d="M435.4,144.0 L435.8,135 L435.8,135 L436.2,144.0 L435.8,153 L435.8,153 Z" fill="#eef3fb" stroke="#7a8599" stroke-width="1"/>
+<path d="M436.2,144.0 L439.2,135 L459.2,135 L462.2,144.0 L459.2,153 L439.2,153 Z" fill="#eef3fb" stroke="#7a8599" stroke-width="1"/>
+<text x="449.2" y="148.0" fill="#1d2433" text-anchor="middle">3</text>
+<path d="M462.2,144.0 L462.6,135 L462.6,135 L463.0,144.0 L462.6,153 L462.6,153 Z" fill="#eef3fb" stroke="#7a8599" stroke-width="1"/>
+<path d="M463.0,144.0 L466.0,135 L486.0,135 L489.0,144.0 L486.0,153 L466.0,153 Z" fill="#eef3fb" stroke="#7a8599" stroke-width="1"/>
+<text x="476.0" y="148.0" fill="#1d2433" text-anchor="middle">0</text>
+<path d="M489.0,144.0 L489.4,135 L489.4,135 L489.8,144.0 L489.4,153 L489.4,153 Z" fill="#eef3fb" stroke="#7a8599" stroke-width="1"/>
+<path d="M489.8,144.0 L492.8,135 L512.8,135 L515.8,144.0 L512.8,153 L492.8,153 Z" fill="#eef3fb" stroke="#7a8599" stroke-width="1"/>
+<text x="502.8" y="148.0" fill="#1d2433" text-anchor="middle">3</text>
+<path d="M515.8,144.0 L516.2,135 L516.2,135 L516.6,144.0 L516.2,153 L516.2,153 Z" fill="#eef3fb" stroke="#7a8599" stroke-width="1"/>
+<path d="M516.6,144.0 L519.6,135 L539.6,135 L542.6,144.0 L539.6,153 L519.6,153 Z" fill="#eef3fb" stroke="#7a8599" stroke-width="1"/>
+<text x="529.6" y="148.0" fill="#1d2433" text-anchor="middle">0</text>
+<path d="M542.6,144.0 L543.0,135 L543.0,135 L543.4,144.0 L543.0,153 L543.0,153 Z" fill="#eef3fb" stroke="#7a8599" stroke-width="1"/>
+<path d="M543.4,144.0 L546.4,135 L566.4,135 L569.4,144.0 L566.4,153 L546.4,153 Z" fill="#eef3fb" stroke="#7a8599" stroke-width="1"/>
+<text x="556.4" y="148.0" fill="#1d2433" text-anchor="middle">3</text>
+<path d="M569.4,144.0 L569.8,135 L569.8,135 L570.2,144.0 L569.8,153 L569.8,153 Z" fill="#eef3fb" stroke="#7a8599" stroke-width="1"/>
+<path d="M570.2,144.0 L573.2,135 L593.2,135 L596.2,144.0 L593.2,153 L573.2,153 Z" fill="#eef3fb" stroke="#7a8599" stroke-width="1"/>
+<text x="583.2" y="148.0" fill="#1d2433" text-anchor="middle">0</text>
+<path d="M596.2,144.0 L596.6,135 L596.6,135 L597.0,144.0 L596.6,153 L596.6,153 Z" fill="#eef3fb" stroke="#7a8599" stroke-width="1"/>
+<path d="M597.0,144.0 L600.0,135 L620.0,135 L623.0,144.0 L620.0,153 L600.0,153 Z" fill="#eef3fb" stroke="#7a8599" stroke-width="1"/>
+<text x="610.0" y="148.0" fill="#1d2433" text-anchor="middle">3</text>
+<path d="M623.0,144.0 L623.4,135 L623.4,135 L623.8,144.0 L623.4,153 L623.4,153 Z" fill="#eef3fb" stroke="#7a8599" stroke-width="1"/>
+<path d="M623.8,144.0 L626.8,135 L745.0,135 L748.0,144.0 L745.0,153 L626.8,153 Z" fill="#eef3fb" stroke="#7a8599" stroke-width="1"/>
+<text x="685.9" y="148.0" fill="#1d2433" text-anchor="middle">0</text>
+<text x="112" y="178.0" fill="#1d2433" text-anchor="end">bitcnt</text>
+<path d="M120.0,174.0 L123.0,165 L219.7,165 L222.7,174.0 L219.7,183 L123.0,183 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<text x="171.4" y="178.0" fill="#1d2433" text-anchor="middle">0</text>
+<path d="M222.7,174.0 L225.7,165 L273.3,165 L276.3,174.0 L273.3,183 L225.7,183 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<text x="249.5" y="178.0" fill="#1d2433" text-anchor="middle">1</text>
+<path d="M276.3,174.0 L279.3,165 L326.9,165 L329.9,174.0 L326.9,183 L279.3,183 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<text x="303.1" y="178.0" fill="#1d2433" text-anchor="middle">2</text>
+<path d="M329.9,174.0 L332.9,165 L380.5,165 L383.5,174.0 L380.5,183 L332.9,183 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<text x="356.7" y="178.0" fill="#1d2433" text-anchor="middle">3</text>
+<path d="M383.5,174.0 L386.5,165 L434.1,165 L437.1,174.0 L434.1,183 L386.5,183 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<text x="410.3" y="178.0" fill="#1d2433" text-anchor="middle">4</text>
+<path d="M437.1,174.0 L440.1,165 L487.7,165 L490.7,174.0 L487.7,183 L440.1,183 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<text x="463.9" y="178.0" fill="#1d2433" text-anchor="middle">5</text>
+<path d="M490.7,174.0 L493.7,165 L541.3,165 L544.3,174.0 L541.3,183 L493.7,183 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<text x="517.5" y="178.0" fill="#1d2433" text-anchor="middle">6</text>
+<path d="M544.3,174.0 L547.3,165 L594.9,165 L597.9,174.0 L594.9,183 L547.3,183 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<text x="571.1" y="178.0" fill="#1d2433" text-anchor="middle">7</text>
+<path d="M597.9,174.0 L600.9,165 L745.0,165 L748.0,174.0 L745.0,183 L600.9,183 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<text x="672.9" y="178.0" fill="#1d2433" text-anchor="middle">0</text>
+<text x="112" y="208.0" fill="#1d2433" text-anchor="end">shift</text>
+<path d="M120.0,204.0 L123.0,195 L219.7,195 L222.7,204.0 L219.7,213 L123.0,213 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<text x="171.4" y="208.0" fill="#1d2433" text-anchor="middle">2A</text>
+<path d="M222.7,204.0 L225.7,195 L273.3,195 L276.3,204.0 L273.3,213 L225.7,213 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<text x="249.5" y="208.0" fill="#1d2433" text-anchor="middle">55</text>
+<path d="M276.3,204.0 L279.3,195 L326.9,195 L329.9,204.0 L326.9,213 L279.3,213 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<text x="303.1" y="208.0" fill="#1d2433" text-anchor="middle">2A</text>
+<path d="M329.9,204.0 L332.9,195 L380.5,195 L383.5,204.0 L380.5,213 L332.9,213 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<text x="356.7" y="208.0" fill="#1d2433" text-anchor="middle">55</text>
+<path d="M383.5,204.0 L386.5,195 L434.1,195 L437.1,204.0 L434.1,213 L386.5,213 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<text x="410.3" y="208.0" fill="#1d2433" text-anchor="middle">2A</text>
+<path d="M437.1,204.0 L440.1,195 L487.7,195 L490.7,204.0 L487.7,213 L440.1,213 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<text x="463.9" y="208.0" fill="#1d2433" text-anchor="middle">54</text>
+<path d="M490.7,204.0 L493.7,195 L541.3,195 L544.3,204.0 L541.3,213 L493.7,213 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<text x="517.5" y="208.0" fill="#1d2433" text-anchor="middle">29</text>
+<path d="M544.3,204.0 L547.3,195 L745.0,195 L748.0,204.0 L745.0,213 L547.3,213 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<text x="646.1" y="208.0" fill="#1d2433" text-anchor="middle">52</text>
+<text x="112" y="238.0" fill="#1d2433" text-anchor="end">valid</text>
+<path d="M120.0,243.0 L597.9,243.0 L597.9,225.0 L598.7,225.0 L598.7,243.0 L748.0,243.0" fill="none" stroke="#137a3c" stroke-width="1.6"/>
+<text x="112" y="268.0" fill="#1d2433" text-anchor="end">data</text>
+<path d="M120.0,264.0 L123.0,255 L594.9,255 L597.9,264.0 L594.9,273 L123.0,273 Z" fill="#eef3fb" stroke="#137a3c" stroke-width="1"/>
+<text x="358.9" y="268.0" fill="#1d2433" text-anchor="middle">55</text>
+<path d="M597.9,264.0 L600.9,255 L745.0,255 L748.0,264.0 L745.0,273 L600.9,273 Z" fill="#eef3fb" stroke="#137a3c" stroke-width="1"/>
+<text x="672.9" y="268.0" fill="#1d2433" text-anchor="middle">A5</text>
+<text x="112" y="298.0" fill="#1d2433" text-anchor="end">frame_end</text>
+<path d="M120.0,303.0 L687.4,303.0 L687.4,285.0 L688.3,285.0 L688.3,303.0 L748.0,303.0" fill="none" stroke="#9a5b00" stroke-width="1.6"/>
+</svg></div><figcaption>그림 2. 0xA5 = 1 0 1 0 0 1 0 1. 가운데 b3·b4가 연속 0이라 MOSI가 2.56 µs 동안 LOW로 머문다.</figcaption></figure>
+<h3>⑥ 빌드 결과</h3><p><code>mcu7 task8_tx</code>, <code>mcu7 task8_cycle</code> 모두 <b>BUILD OK</b>(STM32Cube CMake · arm-none-eabi-gcc, 경고 없음).</p>
+<h3>⑦ 보드 실습 계획</h3><ol><li><code>mcu7 task8_cycle -Flash</code> → Serial Monitor(COM5, 9600)에 <code>TX=55, result=0</code> … 확인.</li><li>오실로스코프: 3.3 V 신호라 <b>1 V/칸</b>. 한 프레임이 약 14 µs이므로 시간축은 <b>2 µs/칸</b>(20 µs 화면). 트리거는 CH1 하강 에지(CS를 볼 때) 또는 SCK 상승 에지, <b>Single</b>로 한 번 잡는다.</li><li>값 네 개를 각각 찍고 MOSI를 상승 에지마다 읽어 표에 적는다. 커서로 SCK 주기를 재서 781 kHz와 비교한다.</li><li>영상: 화면에 Serial Monitor의 TX 값과 오실로스코프 파형이 같이 보이게 찍는다.</li></ol></section>
+<section class="circuit" id="e2"><h2>2. 실험 2 · STM32_3 과제9 — MCU → MCU 수신 확인</h2>
+<p class="src">C조와 D조의 MCU 두 대를 SPI로 연결해, 마스터가 보낸 값이 슬레이브의 VCP(PC 화면)에 같게 나오는지 확인하고 역할을 바꿔 한 번 더 한다.</p>
+<h3>① 목적</h3><p>MCU 하나를 받는 쪽(슬레이브)으로 바꿔, SPI가 실제로 데이터를 전달하는지 받는 쪽 출력으로 확인한다. 과제8의 <code>result=0</code>은 "보내기를 마쳤다"는 뜻일 뿐이라, 상대가 받았는지는 받는 쪽 화면으로만 알 수 있다.</p>
+<h3>② 이론 · 설계 계산</h3><ul><li>슬레이브는 SCK를 만들지 않고 받은 SCK로 비트를 읽는다. 매뉴얼 코드는 <code>ece2_474_init()</code>에서 SPI1을 <code>HAL_SPI_DeInit</code> → <code>Mode = SPI_MODE_SLAVE</code>, <code>NSS = SPI_NSS_HARD_INPUT</code> → <code>HAL_SPI_Init</code>으로 다시 설정한다. 나머지(모드 0 · 8비트 · MSB)는 마스터와 같은 설정을 그대로 쓴다.</li><li>장치 선택 입력은 <b>PA4 = SPI1 NSS</b>(AF5). 마스터의 CS 출력 PB6과 <b>핀 번호가 다르다</b>. NSS가 HIGH이면 슬레이브는 SCK를 무시한다.</li><li><code>HAL_SPI_Receive(&amp;hspi1,&amp;rx,1,2000)</code>은 한 바이트가 올 때까지 최대 2초 기다린다. 마스터는 1초마다 보내므로 정상이면 매번 RX가 나오고, 마스터가 꺼져 있으면 2초마다 <code>RX timeout</code>이 나온다. 그래서 <b>수신 측을 먼저 실행</b>한다.</li></ul>
+<h3>③ 포트 · 보드 매핑 (역할 교대 포함)</h3><div class="tblwrap"><table class=""><thead><tr><th>신호</th><th>마스터 (송신)</th><th>슬레이브 (수신)</th><th>1차: C조→D조</th><th>2차: D조→C조</th></tr></thead><tbody><tr><td>SCK</td><td>PB3</td><td>PB3</td><td>C PB3 → D PB3</td><td>D PB3 → C PB3</td></tr><tr><td>MOSI</td><td>PA7</td><td>PA7</td><td>C PA7 → D PA7</td><td>D PA7 → C PA7</td></tr><tr><td>CS / NSS</td><td><b>PB6</b> (출력)</td><td><b>PA4</b> (입력)</td><td>C PB6 → D PA4</td><td><b>D PB6 → C PA4</b> (배선도 바꿈)</td></tr><tr><td>GND</td><td>GND</td><td>GND</td><td>공통</td><td>공통</td></tr></tbody></table></div>
+<h3>④ 핵심 코드 (매뉴얼 수신 측 그대로)</h3><pre><code>void ece2_474_init(void)
+{
+    /* LAB7 수신 측 · 수업 매뉴얼 STM32_3 그대로: SPI1을 슬레이브(NSS 하드웨어 입력)로 다시 설정 */
+    if (HAL_SPI_DeInit(&amp;hspi1) != HAL_OK)
+        Error_Handler();
+
+    hspi1.Init.Mode = SPI_MODE_SLAVE;
+    hspi1.Init.NSS = SPI_NSS_HARD_INPUT;
+    if (HAL_SPI_Init(&amp;hspi1) != HAL_OK)
+        Error_Handler();
+
+    GPIO_InitTypeDef gpio = {0};
+    gpio.Pin = SPI_NSS_RX_ece2_Pin;
+    gpio.Mode = GPIO_MODE_AF_PP;
+    gpio.Pull = GPIO_PULLUP;
+    gpio.Speed = GPIO_SPEED_FREQ_LOW;
+    gpio.Alternate = GPIO_AF5_SPI1;
+    HAL_GPIO_Init(SPI_NSS_RX_ece2_GPIO_Port, &amp;gpio);
+}</code></pre><pre><code>void polling_routine(void)
+{
+    /* LAB7 수신 측 · 수업 매뉴얼 STM32_3 그대로: 최대 2초 기다려 한 바이트 */
+    uint8_t rx = 0;
+    HAL_StatusTypeDef result =
+        HAL_SPI_Receive(&amp;hspi1, &amp;rx, 1U, 2000U);
+    if (result == HAL_OK)
+    {
+        printf(&quot;RX=%02X\r\n&quot;, (unsigned int)rx);
+    }
+    else if (result == HAL_TIMEOUT)
+    {
+        printf(&quot;RX timeout: check sender, SCK, MOSI, CS and GND\r\n&quot;);
+    }
+    else
+    {
+        printf(&quot;RX error=%d\r\n&quot;, (int)result);
+    }
+}</code></pre>
+<h3>⑤ 시뮬레이션 (송신 모의 → 수신 모의)</h3><p>과제8 순환판이 남긴 바이트 파일을 수신 코드의 <code>HAL_SPI_Receive</code>가 차례로 돌려주게 했다. 모의 HAL은 init이 SPI1을 슬레이브 + NSS 하드웨어 입력으로 바꿨는지, PA4가 AF5 풀업인지 검사한다. 파일이 끝나면 송신 측이 멈춘 상황(2초 타임아웃)이 된다.</p><pre><code># SPI1 init: MASTER, NSS=SOFT, CPOL=0 CPHA=0 (mode 0), 8-bit, MSB first, prescaler=128
+# SCK = 100 MHz / 128 = 781.25 kHz
+# SPI1 init: SLAVE, NSS=HARD_INPUT, CPOL=0 CPHA=0 (mode 0), 8-bit, MSB first, prescaler=128
+# PA4 init: mode=AF_PP pull=UP AF=5
+RX=55
+RX=A5
+RX=00
+RX=FF
+RX=55
+RX=A5
+RX=00
+RX=FF
+RX timeout: check sender, SCK, MOSI, CS and GND
+# PASS: 0 check failures</code></pre>
+<h3>⑥ 빌드 결과</h3><p><code>mcu7 task9_rx</code> <b>BUILD OK</b>.</p>
+<h3>⑦ 보드 실습 계획</h3><ol><li>D조 MCU에 <code>task9_rx</code>, C조 MCU에 <code>task8_cycle</code>을 올린다. GND부터 연결한다.</li><li>수신 측 Serial Monitor를 먼저 열고(<code>RX timeout</code>이 2초마다 나오면 정상 대기), 송신 측 리셋.</li><li>D조 화면 RX = C조 화면 TX인지 4개 값 확인 → 영상.</li><li>프로그램을 서로 바꾸고 <b>CS 선을 D조 PB6 → C조 PA4로 옮겨</b> 반복.</li></ol></section>
+<section class="circuit" id="e3"><h2>3. 실험 3 · STM32_3 과제10 — MCU → FPGA 수신 구현</h2>
+<p class="src">자기 조 MCU(마스터)가 보낸 SPI 바이트를 FPGA 슬레이브 회로가 받아, FPGA UART(F6)로 PC에 "RX=55"처럼 출력해 MCU 송신값과 비교한다. FPGA 회로는 직접 작성.</p>
+<h3>① 목적</h3><p>FPGA에 SPI 받는 회로를 만든다. FPGA는 자기 50 MHz 박자로 움직이는데, MCU가 보내는 SCK는 FPGA와 무관한 박자다. 남이 치는 북소리를 내 시계로 매우 자주 확인하면서 "방금 북이 울렸다"를 알아차리는 방식으로 받는다.</p>
+<h3>② 이론 · 설계 계산</h3><h4>(1) SCK를 클록으로 쓰지 않는 이유</h4><p>SCK를 그대로 플립플롭 클록에 넣으면 FPGA 안에 클록이 두 개가 되고, 받은 값을 50 MHz 쪽 UART로 옮길 때 또 동기화가 필요하다. 대신 SCK · MOSI · CS를 모두 50 MHz로 <b>샘플링</b>하고 상승 에지를 "앞 클록 0, 지금 1"로 찾는다. 이렇게 하면 회로 전체가 한 클록으로 움직인다.</p>
+<h4>(2) 샘플링이 충분히 빠른가</h4>$$\frac{T_{SCK}}{2} = 640\ \text{ns} = 32\ T_{clk}\ (20\ \text{ns})$$<p>SCK의 HIGH · LOW가 각각 32클록 유지되므로 에지를 놓칠 수 없다. 2단 동기화로 생기는 지연은 40~60 ns(2~3클록)이다. SCK와 MOSI가 <b>같은 2단</b>을 거치므로 둘의 시간 관계가 그대로 유지된다. MOSI는 하강 에지에서 바뀌어 상승 에지까지 640 ns 동안 안정하므로, 동기화된 상승 에지에서 읽는 MOSI는 항상 올바른 비트다. 이론상 HIGH·LOW가 각각 3클록 이상이면 되므로 약 8 MHz까지 받을 수 있다(수업 조건 1 MHz 이하의 8배 여유).</p>
+<h4>(3) 동기화가 필요한 이유</h4><p>외부 신호가 플립플롭의 셋업·홀드 시간 안에 바뀌면 출력이 잠시 0도 1도 아닌 상태(준안정)가 될 수 있다. 첫 플립플롭이 흔들려도 한 클록(20 ns) 동안 안정될 시간을 주고 두 번째 플립플롭에서 다시 읽으면 그 확률이 무시할 만큼 작아진다. 두 플립플롭에 <code>ASYNC_REG</code> 속성을 붙여 Vivado가 서로 가까이 배치하게 했다.</p>
+<h4>(4) 수신 상태 규칙</h4><div class="tblwrap"><table class=""><thead><tr><th>조건 (동기화 후)</th><th>동작</th></tr></thead><tbody><tr><td>CS = HIGH</td><td>bitcnt = 0, 바이트 번호 = 0. 방금 HIGH가 됐으면 <code>frame_end</code>, 비트가 덜 찼으면 <code>frame_abort</code>도 1클록</td></tr><tr><td>CS가 막 LOW가 됨</td><td><code>frame_start</code>, bitcnt = 0</td></tr><tr><td>CS = LOW, SCK 상승</td><td>shift ← {shift, MOSI}. bitcnt = 7이면 <code>data = {shift, MOSI}</code>, <code>valid</code> 1클록, bitcnt = 0, 바이트 번호 + 1</td></tr><tr><td>CS = LOW, 그 밖</td><td>유지</td></tr></tbody></table></div>
+<h4>(5) UART 출력 시간</h4>$$T_{line} = \frac{7\ \text{글자} \times 10\ \text{비트}}{9600.6\ \text{bps}} = 7.29\ \text{ms}\ \ (\texttt{"RX=55\\r\\n"})$$<p>MCU는 1초마다 보내므로 UART는 0.7%만 바쁘다. 그래도 프레임이 몰려 오는 경우(4바이트 프레임은 16글자 = 16.7 ms)를 위해 64칸 FIFO를 두었다.</p>
+<h3>③ 포트 · 보드 매핑</h3><div class="tblwrap"><table class=""><thead><tr><th>포트</th><th>방향</th><th>FPGA 핀</th><th>연결</th></tr></thead><tbody><tr><td>clk_50mhz</td><td>입력</td><td>B6</td><td>보드 클록 (CLOCK SELECT = 50 MHz)</td></tr><tr><td>rst_p</td><td>입력</td><td>K4</td><td>키패드 1 (누르면 리셋)</td></tr><tr><td>spi_sck</td><td>입력</td><td><b>F8</b> (BDIO I/O 00, J10)</td><td>← MCU PB3</td></tr><tr><td>spi_mosi</td><td>입력</td><td><b>E8</b> (I/O 01)</td><td>← MCU PA7</td></tr><tr><td>spi_cs_n</td><td>입력</td><td><b>A7</b> (I/O 02)</td><td>← MCU PB6</td></tr><tr><td>uart_txd</td><td>출력</td><td>F6</td><td>보드 USB-UART(FTDI) → PC COM6</td></tr><tr><td>led[7:0]</td><td>출력</td><td>L4 M4 M2 N7 M7 M3 M1 N5</td><td>LED1 = b7 … LED8 = b0</td></tr><tr><td>GND</td><td>—</td><td>J10 아래쪽 GND</td><td>↔ MCU GND</td></tr></tbody></table></div>
+<p>CS 입력에는 내부 풀업, SCK에는 내부 풀다운을 걸었다. 선이 빠져도 "선택 안 됨 · 대기 LOW"로 머물러 잡음 바이트가 생기지 않는다(LAB6에서 PORT ENABLE ON으로 핀이 떠서 잡음을 받은 경험). PORT A ENABLE(DIP SW5-2)은 <b>OFF</b>여야 핀이 연결된다.</p>
+<h3>④ RTL</h3><h4>spi_slave_rx.v — SPI 수신기</h4><pre><code>`timescale 1ns/1ps
+// LAB7 과제10 · SPI 슬레이브 수신기 (모드 0, MSB 먼저, 8비트 단위, MISO 없음)
+//
+//  - 외부 SCK·MOSI·CS는 FPGA 클록(50 MHz)과 무관하게 바뀌므로 각각 2단 플립플롭으로 동기화한다.
+//  - 동기화된 SCK가 0 -&gt; 1로 바뀐 클록(상승 에지)에서 동기화된 MOSI를 시프트 레지스터에 넣는다.
+//    SCK와 MOSI가 같은 2단을 거치므로 둘 사이의 시간 관계(MOSI는 하강 에지에서 바뀜)가 그대로 유지된다.
+//  - 비트 카운터가 8을 채우면 data/valid(1클록)를 내고 카운터를 0으로 돌려 같은 CS 구간의 다음 바이트도 받는다.
+//    (기말 프로젝트의 4바이트 레지스터 맵처럼 한 프레임에 여러 바이트를 보내도 그대로 쓸 수 있다.)
+//  - CS가 HIGH가 되면 프레임이 끝난 것: 비트 카운터를 0으로(덜 찬 비트는 버림) 하고 frame_end를 낸다.
+//    덜 찬 비트가 있었으면 frame_abort도 함께 낸다.
+//  - 50 MHz에서 MCU SCK 781.25 kHz의 반주기 640 ns = 32클록이므로 매 에지를 놓치지 않는다.
+module spi_slave_rx (
+    input  wire       clk,
+    input  wire       rst_p,
+    input  wire       sck_in,       // 마스터가 만드는 클록 (대기 LOW)
+    input  wire       mosi_in,      // 마스터 -&gt; 슬레이브 데이터
+    input  wire       cs_n_in,      // LOW일 때 통신
+    output reg  [7:0] data,         // 방금 받은 바이트
+    output reg        valid,        // data가 새로 들어온 클록에 1
+    output reg  [7:0] byte_idx,     // 이 프레임에서 몇 번째 바이트인지 (0부터)
+    output reg        frame_start,  // CS 하강 (1클록)
+    output reg        frame_end,    // CS 상승 (1클록)
+    output reg        frame_abort,  // CS 상승 때 8비트가 덜 찬 비트가 남아 있었음 (1클록)
+    output wire       cs_active     // 동기화된 CS가 LOW
+);
+    (* ASYNC_REG = &quot;TRUE&quot; *) reg [1:0] sck_s;
+    (* ASYNC_REG = &quot;TRUE&quot; *) reg [1:0] mosi_s;
+    (* ASYNC_REG = &quot;TRUE&quot; *) reg [1:0] cs_s;
+    reg       sck_d, cs_d;          // 한 클록 전 값 (에지 검출)
+    reg [6:0] shift;                // 앞서 받은 7비트
+    reg [2:0] bitcnt;               // 이 바이트에서 받은 비트 수 0~7
+    reg [7:0] count;                // 이 프레임에서 완성된 바이트 수
+
+    wire sck = sck_s[1], mosi = mosi_s[1], cs_n = cs_s[1];
+    wire sck_rise = sck &amp; ~sck_d;
+    assign cs_active = ~cs_n;
+
+    always @(posedge clk) begin
+        if (rst_p) begin
+            sck_s &lt;= 2&#x27;b00; mosi_s &lt;= 2&#x27;b00; cs_s &lt;= 2&#x27;b11;
+            sck_d &lt;= 1&#x27;b0;  cs_d &lt;= 1&#x27;b1;
+            shift &lt;= 7&#x27;d0;  bitcnt &lt;= 3&#x27;d0; count &lt;= 8&#x27;d0;
+            data &lt;= 8&#x27;d0;   valid &lt;= 1&#x27;b0;  byte_idx &lt;= 8&#x27;d0;
+            frame_start &lt;= 1&#x27;b0; frame_end &lt;= 1&#x27;b0; frame_abort &lt;= 1&#x27;b0;
+        end else begin
+            // 1) 2단 동기화와 한 클록 전 값
+            sck_s  &lt;= {sck_s[0],  sck_in};
+            mosi_s &lt;= {mosi_s[0], mosi_in};
+            cs_s   &lt;= {cs_s[0],   cs_n_in};
+            sck_d  &lt;= sck;
+            cs_d   &lt;= cs_n;
+            // 2) 펄스 출력은 기본 0
+            valid &lt;= 1&#x27;b0; frame_start &lt;= 1&#x27;b0; frame_end &lt;= 1&#x27;b0; frame_abort &lt;= 1&#x27;b0;
+
+            if (cs_n) begin
+                // CS HIGH: 통신 없음. 프레임이 막 끝났으면 알리고 덜 찬 비트는 버린다.
+                if (!cs_d) begin
+                    frame_end   &lt;= 1&#x27;b1;
+                    frame_abort &lt;= (bitcnt != 3&#x27;d0);
+                end
+                bitcnt &lt;= 3&#x27;d0;
+                count  &lt;= 8&#x27;d0;
+            end else if (cs_d) begin
+                // CS가 막 LOW가 됨: 새 프레임 시작
+                frame_start &lt;= 1&#x27;b1;
+                bitcnt &lt;= 3&#x27;d0;
+                count  &lt;= 8&#x27;d0;
+            end else if (sck_rise) begin
+                // SCK 상승 에지: MOSI 한 비트 읽기 (MSB 먼저 -&gt; 왼쪽으로 민다)
+                if (bitcnt == 3&#x27;d7) begin
+                    data     &lt;= {shift, mosi};
+                    valid    &lt;= 1&#x27;b1;
+                    byte_idx &lt;= count;
+                    count    &lt;= count + 8&#x27;d1;
+                    bitcnt   &lt;= 3&#x27;d0;
+                end else begin
+                    shift  &lt;= {shift[5:0], mosi};
+                    bitcnt &lt;= bitcnt + 3&#x27;d1;
+                end
+            end
+        end
+    end
+endmodule</code></pre>
+<h4>spi_uart_log.v — 받은 바이트를 글자 줄로 바꿔 UART로 출력</h4><pre><code>`timescale 1ns/1ps
+// LAB7 공용 · SPI 바이트를 사람이 읽는 글자 한 줄로 바꿔 FPGA USB-UART(F6)로 보내는 기록기
+//
+//  한 프레임(CS LOW 구간) = 한 줄.  예) 한 바이트 0x55  -&gt; &quot;RX=55\r\n&quot;   (MCU 수신 예제의 출력과 같은 모양)
+//                                     네 바이트        -&gt; &quot;RX=12 34 56 78\r\n&quot;
+//                                     8비트가 덜 찬 채 CS 해제 -&gt; 줄 끝에 &quot; ?&quot; (예: &quot;RX=?\r\n&quot;)
+//  0x00·0xFF·0xA5처럼 화면에 안 보이는 값도 16진수 글자로 보이므로 Serial Monitor에서 바로 비교할 수 있다.
+//
+//  SPI 한 바이트는 10~16 us, UART 한 글자는 1.04 ms라 UART가 훨씬 느리다.
+//  그래서 받은 것(토큰)을 FIFO에 먼저 쌓고, 출력기는 UART가 빌 때마다 하나씩 꺼내 글자로 바꾼다.
+//    토큰 = {종류[1:0], 바이트[7:0]}   종류 0: 바이트, 1: 프레임 끝, 2: 덜 찬 채 끝
+module spi_uart_log #(
+    parameter integer DIV      = 5208,      // 50 MHz / 9600
+    parameter [7:0]   P0       = &quot;R&quot;,       // 줄 머리 두 글자 (&quot;RX&quot; 또는 &quot;TX&quot;)
+    parameter [7:0]   P1       = &quot;X&quot;,
+    parameter integer AW       = 6          // FIFO 깊이 2^AW = 64 토큰
+)(
+    input  wire       clk,
+    input  wire       rst_p,
+    input  wire       byte_valid,
+    input  wire [7:0] byte_data,
+    input  wire       frame_end,
+    input  wire       frame_abort,
+    output wire       uart_txd,
+    output reg        overflow           // FIFO가 넘친 적이 있으면 1 (리셋까지 유지)
+);
+    // ---------- 토큰 FIFO ----------
+    reg [9:0] mem [0:(1&lt;&lt;AW)-1];
+    reg [AW:0] wp, rp;
+    wire empty = (wp == rp);
+    wire full  = (wp[AW] != rp[AW]) &amp;&amp; (wp[AW-1:0] == rp[AW-1:0]);
+    // 같은 클록에 바이트와 프레임 끝이 함께 올 수는 없다(바이트 완성은 SCK 에지, 끝은 CS 상승).
+    wire       push = byte_valid | frame_end;
+    wire [9:0] tok  = byte_valid ? {2&#x27;d0, byte_data} : {(frame_abort ? 2&#x27;d2 : 2&#x27;d1), 8&#x27;d0};
+    reg        pop;
+
+    always @(posedge clk) begin
+        if (rst_p) begin wp &lt;= 0; rp &lt;= 0; overflow &lt;= 1&#x27;b0; end
+        else begin
+            if (push) begin
+                if (!full) begin mem[wp[AW-1:0]] &lt;= tok; wp &lt;= wp + 1&#x27;b1; end
+                else overflow &lt;= 1&#x27;b1;
+            end
+            if (pop) rp &lt;= rp + 1&#x27;b1;
+        end
+    end
+
+    // ---------- 16진수 한 자리 -&gt; ASCII ----------
+    function [7:0] hexc(input [3:0] n);
+        hexc = (n &lt; 4&#x27;d10) ? (8&#x27;h30 + {4&#x27;d0, n}) : (8&#x27;h41 + {4&#x27;d0, n} - 8&#x27;d10);
+    endfunction
+
+    // ---------- 출력기: 토큰 하나를 최대 6글자로 바꿔 차례로 UART에 넘김 ----------
+    reg  [7:0] buf0, buf1, buf2, buf3, buf4, buf5;
+    reg  [2:0] blen, bpos;
+    reg        line_open;                   // 이번 줄에 &quot;RX=&quot; 를 이미 썼는가
+    reg        tx_valid; reg [7:0] tx_data;
+    wire       tx_ready;
+    wire [9:0] head = mem[rp[AW-1:0]];
+
+    function [7:0] pick(input [2:0] i, input [7:0] a, b, c, d, e, f);
+        case (i) 3&#x27;d0: pick = a; 3&#x27;d1: pick = b; 3&#x27;d2: pick = c; 3&#x27;d3: pick = d; 3&#x27;d4: pick = e; default: pick = f; endcase
+    endfunction
+
+    always @(posedge clk) begin
+        if (rst_p) begin
+            blen &lt;= 0; bpos &lt;= 0; line_open &lt;= 1&#x27;b0; pop &lt;= 1&#x27;b0;
+            tx_valid &lt;= 1&#x27;b0; tx_data &lt;= 8&#x27;h00;
+            {buf0, buf1, buf2, buf3, buf4, buf5} &lt;= 48&#x27;d0;
+        end else begin
+            pop &lt;= 1&#x27;b0; tx_valid &lt;= 1&#x27;b0;
+            if (bpos != blen) begin
+                // 글자 보내는 중: UART가 비면 다음 글자
+                if (tx_ready &amp;&amp; !tx_valid) begin
+                    tx_data  &lt;= pick(bpos, buf0, buf1, buf2, buf3, buf4, buf5);
+                    tx_valid &lt;= 1&#x27;b1;
+                    bpos     &lt;= bpos + 3&#x27;d1;
+                end
+            end else if (!empty &amp;&amp; !pop) begin
+                // 다음 토큰을 글자로 바꾼다
+                pop &lt;= 1&#x27;b1; bpos &lt;= 3&#x27;d0;
+                case (head[9:8])
+                    2&#x27;d0: begin                              // 바이트
+                        if (!line_open) begin {buf0,buf1,buf2,buf3,buf4} &lt;= {P0, P1, &quot;=&quot;, hexc(head[7:4]), hexc(head[3:0])}; blen &lt;= 3&#x27;d5; end
+                        else            begin {buf0,buf1,buf2}           &lt;= {&quot; &quot;,         hexc(head[7:4]), hexc(head[3:0])}; blen &lt;= 3&#x27;d3; end
+                        line_open &lt;= 1&#x27;b1;
+                    end
+                    2&#x27;d1: begin                              // 정상 끝
+                        if (line_open) begin {buf0,buf1} &lt;= {8&#x27;h0D, 8&#x27;h0A}; blen &lt;= 3&#x27;d2; end
+                        else blen &lt;= 3&#x27;d0;                   // 바이트 없이 CS만 내려갔다 올라감: 출력 없음
+                        line_open &lt;= 1&#x27;b0;
+                    end
+                    default: begin                           // 덜 찬 비트를 남기고 끝
+                        if (line_open) begin {buf0,buf1,buf2,buf3}           &lt;= {&quot; &quot;, &quot;?&quot;, 8&#x27;h0D, 8&#x27;h0A};           blen &lt;= 3&#x27;d4; end
+                        else           begin {buf0,buf1,buf2,buf3,buf4,buf5} &lt;= {P0, P1, &quot;=&quot;, &quot;?&quot;, 8&#x27;h0D, 8&#x27;h0A}; blen &lt;= 3&#x27;d6; end
+                        line_open &lt;= 1&#x27;b0;
+                    end
+                endcase
+            end
+        end
+    end
+
+    uart_tx #(.DIV(DIV)) u_tx (.clk(clk), .rst_p(rst_p), .valid(tx_valid), .data(tx_data),
+                               .ready(tx_ready), .tx(uart_txd));
+endmodule</code></pre>
+<h4>spi_rx_top.v — 보드 최상위</h4><pre><code>`timescale 1ns/1ps
+// LAB7 과제10 · MCU(SPI 마스터) -&gt; FPGA(SPI 슬레이브) 수신, 받은 값을 PC로 출력
+//
+//  spi_sck / spi_mosi / spi_cs_n : MCU PB3 / PA7 / PB6에서 오는 신호. 확장 포트 BDIO(PORT A)로 받는다.
+//  uart_txd : 받은 바이트를 &quot;RX=55\r\n&quot; 모양 글자로 보드 USB-UART(F6)를 통해 PC에 출력
+//  led      : 마지막으로 받은 바이트 (LED1 = 최상위 비트 b7 ... LED8 = b0, 1이면 켜짐)
+//  같은 회로를 과제12(FPGA -&gt; FPGA)의 수신 쪽으로도 그대로 쓴다.
+module spi_rx_top #(
+    parameter integer CLK_HZ = 50_000_000,
+    parameter integer BAUD   = 9_600
+)(
+    input  wire       clk_50mhz,
+    input  wire       rst_p,          // 키패드 1 (누르면 HIGH)
+    input  wire       spi_sck,
+    input  wire       spi_mosi,
+    input  wire       spi_cs_n,
+    output wire       uart_txd,
+    output wire [7:0] led
+);
+    localparam integer DIV = (CLK_HZ + BAUD/2) / BAUD;   // 5208 클록/비트 (9600.6 bps)
+
+    wire [7:0] rx_data, rx_idx;
+    wire rx_valid, f_start, f_end, f_abort, cs_on, ovf;
+    reg  [7:0] last;
+
+    spi_slave_rx u_spi (
+        .clk(clk_50mhz), .rst_p(rst_p),
+        .sck_in(spi_sck), .mosi_in(spi_mosi), .cs_n_in(spi_cs_n),
+        .data(rx_data), .valid(rx_valid), .byte_idx(rx_idx),
+        .frame_start(f_start), .frame_end(f_end), .frame_abort(f_abort), .cs_active(cs_on));
+
+    spi_uart_log #(.DIV(DIV), .P0(&quot;R&quot;), .P1(&quot;X&quot;)) u_log (
+        .clk(clk_50mhz), .rst_p(rst_p),
+        .byte_valid(rx_valid), .byte_data(rx_data),
+        .frame_end(f_end), .frame_abort(f_abort),
+        .uart_txd(uart_txd), .overflow(ovf));
+
+    always @(posedge clk_50mhz)
+        if (rst_p) last &lt;= 8&#x27;h00;
+        else if (rx_valid) last &lt;= rx_data;
+
+    assign led = last;
+endmodule</code></pre>
+<p><code>uart_tx</code>는 LAB3-07 · LAB6 과제6에서 보드로 검증한 <code>uart.v</code>를 그대로 쓴다(9600.6 bps).</p>
+<h3>⑤ 시뮬레이션</h3><p>TB(<code>LAB7-01/sim/tb.sv</code>)는 MCU의 SPI1 마스터를 파형으로 흉내 낸다(781.25 kHz, 모드 0, CS LOW → 첫 상승 2 µs, 끝 → CS HIGH 1.5 µs). 보내는 바이트는 <b>과제8 MCU 모의 실행이 남긴 파일</b>(55 A5 00 FF ×2)을 그대로 읽는다. FPGA 클록 위상은 3.7 ns 어긋나게 두었다. PC 쪽 UART 수신 모델이 F6의 글자를 줄 단위로 모아 기대값과 비교한다.</p>
+<div class="tblwrap"><table class=""><thead><tr><th>#</th><th>시나리오</th><th>확인할 것</th></tr></thead><tbody><tr><td>1</td><td>MCU 모의 실행 바이트 8개, 1프레임 1바이트</td><td>수신 바이트 · 순서 · 개수, PC 줄 "RX=55" …</td></tr><tr><td>2</td><td>3비트만 보내고 CS 해제</td><td>덜 찬 비트 버림 → "RX=?", 바로 다음 0x3C 정상</td></tr><tr><td>3</td><td>CS LOW 그대로 4바이트 12 34 56 78</td><td>바이트 번호 0~3, 한 줄 "RX=12 34 56 78"</td></tr><tr><td>4</td><td>CS HIGH인 동안 SCK 펄스 20개</td><td>무시 (다른 장치 통신·잡음)</td></tr><tr><td>5</td><td>SCK 1 MHz와 100 kHz</td><td>속도와 무관하게 정상</td></tr><tr><td>끝</td><td>UART 출력이 다 나올 때까지</td><td>FIFO 넘침 없음, LED = 마지막 값 0x7E</td></tr></tbody></table></div>
+<p><b>XSim 결과</b> (<code>results/xsim_result.txt</code>, Icarus와 숫자가 모두 같음)</p><pre><code>MCU 모의 실행이 보낸 바이트 8개 (sim/spi1_tx_task8_cycle.hex)
+17.034 us  FPGA SPI 수신 #0 = 0x55 (프레임 안 0번째)   LED=01010101
+230.134 us  FPGA SPI 수신 #1 = 0xa5 (프레임 안 0번째)   LED=10100101
+443.234 us  FPGA SPI 수신 #2 = 0x00 (프레임 안 0번째)   LED=00000000
+656.334 us  FPGA SPI 수신 #3 = 0xff (프레임 안 0번째)   LED=11111111
+869.434 us  FPGA SPI 수신 #4 = 0x55 (프레임 안 0번째)   LED=01010101
+1082.534 us  FPGA SPI 수신 #5 = 0xa5 (프레임 안 0번째)   LED=10100101
+1295.634 us  FPGA SPI 수신 #6 = 0x00 (프레임 안 0번째)   LED=00000000
+1508.734 us  FPGA SPI 수신 #7 = 0xff (프레임 안 0번째)   LED=11111111
+1748.534 us  FPGA SPI 수신 #8 = 0x3c (프레임 안 0번째)   LED=00111100
+1811.634 us  FPGA SPI 수신 #9 = 0x12 (프레임 안 0번째)   LED=00010010
+1821.874 us  FPGA SPI 수신 #10 = 0x34 (프레임 안 1번째)   LED=00110100
+1832.114 us  FPGA SPI 수신 #11 = 0x56 (프레임 안 2번째)   LED=01010110
+1842.354 us  FPGA SPI 수신 #12 = 0x78 (프레임 안 3번째)   LED=01111000
+1927.454 us  FPGA SPI 수신 #13 = 0xc3 (프레임 안 0번째)   LED=11000011
+1988.454 us  FPGA SPI 수신 #14 = 0x81 (프레임 안 0번째)   LED=10000001
+2116.814 us  FPGA SPI 수신 #15 = 0x7e (프레임 안 0번째)   LED=01111110
+7256.455 us  PC(FPGA COM) &lt;- &quot;RX=55&quot;
+14547.935 us  PC(FPGA COM) &lt;- &quot;RX=A5&quot;
+21839.415 us  PC(FPGA COM) &lt;- &quot;RX=00&quot;
+29130.895 us  PC(FPGA COM) &lt;- &quot;RX=FF&quot;
+36422.375 us  PC(FPGA COM) &lt;- &quot;RX=55&quot;
+43713.855 us  PC(FPGA COM) &lt;- &quot;RX=A5&quot;
+51005.335 us  PC(FPGA COM) &lt;- &quot;RX=00&quot;
+58296.815 us  PC(FPGA COM) &lt;- &quot;RX=FF&quot;
+64546.655 us  PC(FPGA COM) &lt;- &quot;RX=?&quot;
+71838.135 us  PC(FPGA COM) &lt;- &quot;RX=3C&quot;
+88504.375 us  PC(FPGA COM) &lt;- &quot;RX=12 34 56 78&quot;
+95795.855 us  PC(FPGA COM) &lt;- &quot;RX=C3&quot;
+103087.335 us  PC(FPGA COM) &lt;- &quot;RX=81&quot;
+110378.815 us  PC(FPGA COM) &lt;- &quot;RX=7E&quot;
+PASS spi_rx_top: 16 bytes, 14 lines (partial frame discarded, 4-byte frame, SCK noise with CS high ignored, 1 MHz / 100 kHz ok)</code></pre>
+<figure><div class="svgwrap"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 186" width="100%" font-family="Consolas, D2Coding, monospace" font-size="11">
+<rect x="0" y="0" width="760" height="186" fill="#ffffff"/>
+<text x="120" y="14" fill="#1d2433" font-size="12.5" font-weight="bold">과제10 · 받은 0x55를 &quot;RX=55\r\n&quot; 7글자로 PC에 출력 (9600 bps, 글자당 1.04 ms)</text>
+<line x1="120.0" y1="36" x2="120.0" y2="164" stroke="#e3e7ef" stroke-width="1"/>
+<text x="120.0" y="177" fill="#5b6478" text-anchor="middle">0</text>
+<line x1="204.9" y1="36" x2="204.9" y2="164" stroke="#e3e7ef" stroke-width="1"/>
+<text x="204.9" y="177" fill="#5b6478" text-anchor="middle">1</text>
+<line x1="289.7" y1="36" x2="289.7" y2="164" stroke="#e3e7ef" stroke-width="1"/>
+<text x="289.7" y="177" fill="#5b6478" text-anchor="middle">2</text>
+<line x1="374.6" y1="36" x2="374.6" y2="164" stroke="#e3e7ef" stroke-width="1"/>
+<text x="374.6" y="177" fill="#5b6478" text-anchor="middle">3</text>
+<line x1="459.5" y1="36" x2="459.5" y2="164" stroke="#e3e7ef" stroke-width="1"/>
+<text x="459.5" y="177" fill="#5b6478" text-anchor="middle">4</text>
+<line x1="544.3" y1="36" x2="544.3" y2="164" stroke="#e3e7ef" stroke-width="1"/>
+<text x="544.3" y="177" fill="#5b6478" text-anchor="middle">5</text>
+<line x1="629.2" y1="36" x2="629.2" y2="164" stroke="#e3e7ef" stroke-width="1"/>
+<text x="629.2" y="177" fill="#5b6478" text-anchor="middle">6</text>
+<line x1="714.1" y1="36" x2="714.1" y2="164" stroke="#e3e7ef" stroke-width="1"/>
+<text x="714.1" y="177" fill="#5b6478" text-anchor="middle">7</text>
+<text x="756" y="177" fill="#5b6478" text-anchor="end">ms</text>
+<line x1="121.5" y1="36" x2="121.5" y2="164" stroke="#c0392b" stroke-width="1" stroke-dasharray="3,3"/>
+<text x="123.5" y="33" fill="#c0392b" font-size="10">R</text>
+<line x1="209.8" y1="36" x2="209.8" y2="164" stroke="#c0392b" stroke-width="1" stroke-dasharray="3,3"/>
+<text x="211.8" y="33" fill="#c0392b" font-size="10">X</text>
+<line x1="298.2" y1="36" x2="298.2" y2="164" stroke="#c0392b" stroke-width="1" stroke-dasharray="3,3"/>
+<text x="300.2" y="33" fill="#c0392b" font-size="10">=</text>
+<line x1="386.6" y1="36" x2="386.6" y2="164" stroke="#c0392b" stroke-width="1" stroke-dasharray="3,3"/>
+<text x="388.6" y="33" fill="#c0392b" font-size="10">5</text>
+<line x1="475.0" y1="36" x2="475.0" y2="164" stroke="#c0392b" stroke-width="1" stroke-dasharray="3,3"/>
+<text x="477.0" y="33" fill="#c0392b" font-size="10">5</text>
+<line x1="563.4" y1="36" x2="563.4" y2="164" stroke="#c0392b" stroke-width="1" stroke-dasharray="3,3"/>
+<text x="565.4" y="33" fill="#c0392b" font-size="10">CR</text>
+<line x1="651.8" y1="36" x2="651.8" y2="164" stroke="#c0392b" stroke-width="1" stroke-dasharray="3,3"/>
+<text x="653.8" y="33" fill="#c0392b" font-size="10">LF</text>
+<text x="112" y="58.0" fill="#1d2433" text-anchor="end">CS</text>
+<path d="M120.0,45.0 L120.5,45.0 L120.5,63.0 L121.6,63.0 L121.6,45.0 L138.6,45.0 L138.6,63.0 L139.7,63.0 L139.7,45.0 L156.7,45.0 L156.7,63.0 L157.8,63.0 L157.8,45.0 L174.8,45.0 L174.8,63.0 L175.9,63.0 L175.9,45.0 L192.8,45.0 L192.8,63.0 L194.0,63.0 L194.0,45.0 L210.9,45.0 L210.9,63.0 L212.0,63.0 L212.0,45.0 L229.0,45.0 L229.0,63.0 L230.1,63.0 L230.1,45.0 L247.1,45.0 L247.1,63.0 L248.2,63.0 L248.2,45.0 L265.2,45.0 L265.2,63.0 L265.8,63.0 L265.8,45.0 L267.5,45.0 L267.5,63.0 L268.6,63.0 L268.6,45.0 L272.8,45.0 L272.8,63.0 L276.5,63.0 L276.5,45.0 L282.6,45.0 L282.6,63.0 L283.7,63.0 L283.7,45.0 L288.0,45.0 L288.0,63.0 L288.9,63.0 L288.9,45.0 L293.2,45.0 L293.2,63.0 L300.2,63.0 L300.2,45.0 L748.0,45.0" fill="none" stroke="#0b5fc0" stroke-width="1.6"/>
+<text x="112" y="88.0" fill="#1d2433" text-anchor="end">valid</text>
+<path d="M120.0,84.0 L120.0,84.0 L120.0,93.0 L121.4,93.0 L121.4,75.0 L121.4,75.0 L121.4,93.0 L139.5,93.0 L139.5,75.0 L139.5,75.0 L139.5,93.0 L157.6,93.0 L157.6,75.0 L157.6,75.0 L157.6,93.0 L175.7,93.0 L175.7,75.0 L175.7,75.0 L175.7,93.0 L193.8,93.0 L193.8,75.0 L193.8,75.0 L193.8,93.0 L211.9,93.0 L211.9,75.0 L211.9,75.0 L211.9,93.0 L230.0,93.0 L230.0,75.0 L230.0,75.0 L230.0,93.0 L248.0,93.0 L248.0,75.0 L248.0,75.0 L248.0,93.0 L268.4,93.0 L268.4,75.0 L268.4,75.0 L268.4,93.0 L273.7,93.0 L273.7,75.0 L273.7,75.0 L273.7,93.0 L274.6,93.0 L274.6,75.0 L274.6,75.0 L274.6,93.0 L275.5,93.0 L275.5,75.0 L275.5,75.0 L275.5,93.0 L276.3,93.0 L276.3,75.0 L276.4,75.0 L276.4,93.0 L283.6,93.0 L283.6,75.0 L283.6,75.0 L283.6,93.0 L288.7,93.0 L288.7,75.0 L288.7,75.0 L288.7,93.0 L299.6,93.0 L299.6,75.0 L299.6,75.0 L299.6,93.0 L748.0,93.0" fill="none" stroke="#137a3c" stroke-width="1.6"/>
+<text x="112" y="118.0" fill="#1d2433" text-anchor="end">UART TX (F6)</text>
+<path d="M120.0,114.0 L120.0,114.0 L120.0,105.0 L121.5,105.0 L121.5,123.0 L139.1,123.0 L139.1,105.0 L148.0,105.0 L148.0,123.0 L165.6,123.0 L165.6,105.0 L174.5,105.0 L174.5,123.0 L183.3,123.0 L183.3,105.0 L192.2,105.0 L192.2,123.0 L201.0,123.0 L201.0,105.0 L209.8,105.0 L209.8,123.0 L245.2,123.0 L245.2,105.0 L262.9,105.0 L262.9,123.0 L271.7,123.0 L271.7,105.0 L280.6,105.0 L280.6,123.0 L289.4,123.0 L289.4,105.0 L298.2,105.0 L298.2,123.0 L307.1,123.0 L307.1,105.0 L315.9,105.0 L315.9,123.0 L324.8,123.0 L324.8,105.0 L360.1,105.0 L360.1,123.0 L377.8,123.0 L377.8,105.0 L386.6,105.0 L386.6,123.0 L395.5,123.0 L395.5,105.0 L404.3,105.0 L404.3,123.0 L413.2,123.0 L413.2,105.0 L422.0,105.0 L422.0,123.0 L430.8,123.0 L430.8,105.0 L448.5,105.0 L448.5,123.0 L466.2,123.0 L466.2,105.0 L475.0,105.0 L475.0,123.0 L483.9,123.0 L483.9,105.0 L492.7,105.0 L492.7,123.0 L501.6,123.0 L501.6,105.0 L510.4,105.0 L510.4,123.0 L519.2,123.0 L519.2,105.0 L536.9,105.0 L536.9,123.0 L554.6,123.0 L554.6,105.0 L563.4,105.0 L563.4,123.0 L572.3,123.0 L572.3,105.0 L581.1,105.0 L581.1,123.0 L590.0,123.0 L590.0,105.0 L607.6,105.0 L607.6,123.0 L643.0,123.0 L643.0,105.0 L651.8,105.0 L651.8,123.0 L669.5,123.0 L669.5,105.0 L678.4,105.0 L678.4,123.0 L687.2,123.0 L687.2,105.0 L696.0,105.0 L696.0,123.0 L731.4,123.0 L731.4,105.0 L740.2,105.0 L740.2,123.0 L748.0,123.0" fill="none" stroke="#9a5b00" stroke-width="1.6"/>
+<text x="112" y="148.0" fill="#1d2433" text-anchor="end">LED</text>
+<path d="M120.0,144.0 L120.0,135 L120.0,135 L120.0,144.0 L120.0,153 L120.0,153 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<path d="M120.0,144.0 L120.7,135 L120.7,135 L121.4,144.0 L120.7,153 L120.7,153 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<path d="M121.4,144.0 L124.4,135 L136.5,135 L139.5,144.0 L136.5,153 L124.4,153 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<text x="130.5" y="148.0" fill="#1d2433" text-anchor="middle">55</text>
+<path d="M139.5,144.0 L142.5,135 L154.6,135 L157.6,144.0 L154.6,153 L142.5,153 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<text x="148.6" y="148.0" fill="#1d2433" text-anchor="middle">A5</text>
+<path d="M157.6,144.0 L160.6,135 L172.7,135 L175.7,144.0 L172.7,153 L160.6,153 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<text x="166.7" y="148.0" fill="#1d2433" text-anchor="middle">00</text>
+<path d="M175.7,144.0 L178.7,135 L190.8,135 L193.8,144.0 L190.8,153 L178.7,153 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<text x="184.7" y="148.0" fill="#1d2433" text-anchor="middle">FF</text>
+<path d="M193.8,144.0 L196.8,135 L208.9,135 L211.9,144.0 L208.9,153 L196.8,153 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<text x="202.8" y="148.0" fill="#1d2433" text-anchor="middle">55</text>
+<path d="M211.9,144.0 L214.9,135 L227.0,135 L230.0,144.0 L227.0,153 L214.9,153 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<text x="220.9" y="148.0" fill="#1d2433" text-anchor="middle">A5</text>
+<path d="M230.0,144.0 L233.0,135 L245.0,135 L248.0,144.0 L245.0,153 L233.0,153 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<text x="239.0" y="148.0" fill="#1d2433" text-anchor="middle">00</text>
+<path d="M248.0,144.0 L251.0,135 L265.4,135 L268.4,144.0 L265.4,153 L251.0,153 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<text x="258.2" y="148.0" fill="#1d2433" text-anchor="middle">FF</text>
+<path d="M268.4,144.0 L271.1,135 L271.1,135 L273.7,144.0 L271.1,153 L271.1,153 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<path d="M273.7,144.0 L274.2,135 L274.2,135 L274.6,144.0 L274.2,153 L274.2,153 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<path d="M274.6,144.0 L275.0,135 L275.0,135 L275.5,144.0 L275.0,153 L275.0,153 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<path d="M275.5,144.0 L275.9,135 L275.9,135 L276.4,144.0 L275.9,153 L275.9,153 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<path d="M276.4,144.0 L279.4,135 L280.6,135 L283.6,144.0 L280.6,153 L279.4,153 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<path d="M283.6,144.0 L286.2,135 L286.2,135 L288.7,144.0 L286.2,153 L286.2,153 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<path d="M288.7,144.0 L291.7,135 L296.6,135 L299.6,144.0 L296.6,153 L291.7,153 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<path d="M299.6,144.0 L302.6,135 L745.0,135 L748.0,144.0 L745.0,153 L302.6,153 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<text x="523.8" y="148.0" fill="#1d2433" text-anchor="middle">7E</text>
+</svg></div><figcaption>그림 3. 받은 0x55를 F6로 "R X = 5 5 CR LF" 7글자로 보내는 데 7.29 ms가 걸린다. 그 사이 TB가 보낸 다음 프레임들(A5 · 00 · FF …, CS 펄스)은 FIFO에 쌓였다가 차례로 출력된다(LED는 마지막 수신값).</figcaption></figure>
+<p>그림 1 · 2의 아래 줄이 수신 회로 내부다. 동기화된 SCK(2비트 시프트 값 3 = "방금 두 번 연속 1")가 바뀐 클록마다 bitcnt가 1씩 늘고, shift에 01 → 02 → 05 → 0A → 15 → 2A처럼 비트가 왼쪽에서 들어온다. 8번째 상승 에지에서 data = 55, valid가 1클록 나온다. frame_end는 CS가 올라간 뒤 동기화 지연만큼 늦게 나온다.</p>
+<h3>⑥ 합성 · 구현 결과 (보드 핀 XDC, <code>build7 1</code>)</h3><div class="tblwrap"><table class=""><thead><tr><th>항목</th><th>값</th><th>설명</th></tr></thead><tbody><tr><td>Slice LUTs</td><td>160 / 48,000 (0.33%)</td><td>FIFO 64×10은 LUT RAM</td></tr><tr><td>Slice Registers</td><td>141</td><td></td></tr><tr><td>Bonded IOB</td><td>14</td><td>클록 1 + 리셋 1 + SPI 3 + UART 1 + LED 8</td></tr><tr><td>WNS / WHS</td><td><b>+14.907 ns</b> / +0.036 ns</td><td>50 MHz(20 ns) 셋업·홀드 모두 만족</td></tr><tr><td>비트스트림</td><td><code>LAB7_bit/LAB7-01_spi_rx.bit</code></td><td>실험 전에 미리 생성</td></tr></tbody></table></div>
+<h3>⑦ 보드 실습 계획</h3><ol><li>FPGA: CLOCK SELECT 50 MHz(F), PORT A ENABLE OFF 확인 → <code>prog7 1</code>. 노트북 USB가 2개라 비트스트림을 올린 뒤 JTAG을 빼고 FTDI를 꽂는다(COM6).</li><li>MCU: <code>mcu7 task8_cycle -Flash</code>. 배선 PB3 → F8, PA7 → E8, PB6 → A7, GND ↔ GND.</li><li>Serial Monitor 두 개: MCU(COM5) <code>TX=55, result=0</code> · FPGA(COM6) <code>RX=55</code>가 1초마다 같은 값인지, LED가 01010101인지 확인.</li><li>안 나오면 순서대로: COM6 존재(FTDI Load VCP) → MCU 파형(과제8) → CLOCK SELECT → PORT ENABLE OFF → 핀·GND. "RX=?"가 나오면 SCK 선 접촉 불량을 의심한다.</li></ol></section>
+<section class="circuit" id="e4"><h2>4. 실험 4 · STM32_3 과제11 — FPGA → MCU 송신 구현</h2>
+<p class="src">FPGA를 SPI 마스터로 만들어 1 MHz 이하의 SCK로 1초마다 한 바이트를 보내고, 오실로스코프로 파형을 본 뒤 슬레이브 MCU의 VCP 출력과 비교한다. FPGA 회로는 직접 작성.</p>
+<h3>① 목적</h3><p>이번에는 FPGA가 박자를 치는 쪽이다. SCK · MOSI · CS를 모두 FPGA가 만들고, 모드 0 규칙(첫 비트는 미리, 나머지는 하강 에지에서)을 정확히 지키는지 파형 단위로 검사한다.</p>
+<h3>② 이론 · 설계 계산</h3>$$f_{SCK} = \frac{f_{clk}}{2\,N_{half}} = \frac{50\ \text{MHz}}{2 \times 50} = 500\ \text{kHz}\ \le 1\ \text{MHz}$$<p>반주기 50클록 = 1 µs. MCU 슬레이브는 SPI 클록이 PCLK/4 이하이면 받을 수 있어 500 kHz는 충분히 느리다. 한 프레임의 CS LOW 시간은</p>$$T_{CS} = \underbrace{1}_{\text{CS}\to\text{첫 상승}} + \underbrace{7.5 \times 2}_{\text{첫 상승}\to\text{마지막 하강}} + \underbrace{1}_{\text{마지막 하강}\to\text{CS}} = 17\ \mu\text{s}$$
+<div class="tblwrap"><table class=""><thead><tr><th>상태</th><th>하는 일</th><th>머무는 시간</th></tr></thead><tbody><tr><td>IDLE</td><td>start가 오면 CS ↓, <b>MOSI = b7</b>(첫 상승 전에 미리), left = 8</td><td>—</td></tr><tr><td>SETUP</td><td>시간이 차면 SCK ↑ (슬레이브가 b7을 읽음)</td><td>1 µs</td></tr><tr><td>HIGH</td><td>SCK ↓. 남은 비트가 있으면 <b>이 순간 MOSI를 다음 비트로</b>, 마지막이면 HOLD로</td><td>1 µs</td></tr><tr><td>LOW</td><td>SCK ↑ (다음 비트 읽힘)</td><td>1 µs</td></tr><tr><td>HOLD</td><td>CS ↑, MOSI = 0, done</td><td>1 µs</td></tr><tr><td>GAP</td><td>CS HIGH 최소 유지 후 IDLE</td><td>1 µs</td></tr></tbody></table></div>
+<p>SCK · MOSI · CS가 모두 플립플롭 출력에서 바로 나가므로 조합 논리 글리치가 없다. 보낼 값은 DIP SW1~SW8이며 2단 동기화 후 송신 시작 순간에 붙잡는다(전송 중 스위치를 움직여도 그 프레임은 바뀌지 않음).</p>
+<h3>③ 포트 · 보드 매핑</h3><div class="tblwrap"><table class=""><thead><tr><th>포트</th><th>방향</th><th>FPGA 핀</th><th>연결</th></tr></thead><tbody><tr><td>spi_sck</td><td>출력</td><td><b>F8</b> (I/O 00)</td><td>→ MCU PB3</td></tr><tr><td>spi_mosi</td><td>출력</td><td><b>E8</b> (I/O 01)</td><td>→ MCU PA7</td></tr><tr><td>spi_cs_n</td><td>출력</td><td><b>A7</b> (I/O 02)</td><td>→ MCU <b>PA4</b> (NSS)</td></tr><tr><td>sw[7:0]</td><td>입력</td><td>Y1 W3 U2 T1 W4 W1 V4 U4</td><td>SW1 = b7 … SW8 = b0, ON = 1</td></tr><tr><td>uart_txd</td><td>출력</td><td>F6</td><td>보낸 값 "TX=55" 기록</td></tr><tr><td>led[7:0]</td><td>출력</td><td>과제10과 같음</td><td>마지막으로 보낸 값</td></tr><tr><td>clk · rst</td><td>입력</td><td>B6 · K4</td><td></td></tr></tbody></table></div>
+<p>과제10과 <b>같은 세 핀</b>을 쓰되 방향만 반대다. 그래서 과제12에서는 두 보드의 F8 · E8 · A7끼리 그대로 잇는다. 과제10 비트스트림이 올라간 상태에서 MCU 마스터 출력을 연결하는 것은 문제없지만, 과제11 비트스트림(FPGA 출력)에 MCU <b>출력</b>을 연결하면 두 출력이 맞붙으므로 MCU에는 반드시 수신 코드(<code>task9_rx</code>)를 먼저 올린다.</p>
+<h3>④ RTL</h3><h4>spi_master_tx.v — SPI 송신기</h4><pre><code>`timescale 1ns/1ps
+// LAB7 과제11 · SPI 마스터 송신기 (모드 0, MSB 먼저, MISO 없음)
+//
+//  start 펄스가 오면 tx_data(NBYTES 바이트, 위쪽 바이트부터)를 한 프레임으로 보낸다.
+//    1) CS를 LOW로 내리면서 MOSI에 첫 비트(최상위 비트)를 미리 놓는다.        -&gt; &quot;첫 상승 에지 전에 MSB 준비&quot;
+//    2) CS_SETUP 클록 뒤 SCK를 올린다 (상승 에지: 슬레이브가 MOSI를 읽는 순간).
+//    3) HALF_DIV 클록 뒤 SCK를 내리면서 MOSI를 다음 비트로 바꾼다.             -&gt; &quot;하강 에지에서 다음 비트&quot;
+//    4) 마지막 비트의 하강 에지 뒤 CS_HOLD 클록 기다렸다가 CS를 HIGH로 올린다.
+//    5) CS HIGH를 HALF_DIV 클록 이상 유지한 뒤 다음 start를 받는다.
+//  SCK 주파수 = CLK / (2 x HALF_DIV).  50 MHz, HALF_DIV = 50 -&gt; 500 kHz (조건: 1 MHz 이하)
+//  모든 출력은 플립플롭에서 바로 나가므로 글리치가 없다.
+module spi_master_tx #(
+    parameter integer HALF_DIV = 50,          // SCK 반주기 클록 수
+    parameter integer NBYTES   = 1,           // 한 프레임 바이트 수 (기말 프로젝트: 4)
+    parameter integer CS_SETUP = HALF_DIV,    // CS 하강 -&gt; 첫 SCK 상승
+    parameter integer CS_HOLD  = HALF_DIV     // 마지막 SCK 하강 -&gt; CS 상승
+)(
+    input  wire                  clk,
+    input  wire                  rst_p,
+    input  wire                  start,       // IDLE일 때 1클록 펄스
+    input  wire [8*NBYTES-1:0]   tx_data,
+    output wire                  busy,
+    output reg                   done,        // 프레임이 끝나 CS가 올라간 클록에 1
+    output reg                   sck,
+    output reg                   mosi,
+    output reg                   cs_n
+);
+    localparam integer NBITS = 8 * NBYTES;
+    localparam [2:0] S_IDLE = 3&#x27;d0, S_SETUP = 3&#x27;d1, S_HIGH = 3&#x27;d2, S_LOW = 3&#x27;d3, S_HOLD = 3&#x27;d4, S_GAP = 3&#x27;d5;
+
+    reg [2:0]          state;
+    reg [NBITS-1:0]    shreg;                 // 맨 위 비트가 지금 MOSI에 나가 있는 비트
+    reg [15:0]         left;                  // 남은 비트 수 (지금 나가 있는 비트 포함)
+    reg [15:0]         timer;
+
+    assign busy = (state != S_IDLE);
+
+    always @(posedge clk) begin
+        if (rst_p) begin
+            state &lt;= S_IDLE; shreg &lt;= {NBITS{1&#x27;b0}}; left &lt;= 16&#x27;d0; timer &lt;= 16&#x27;d0;
+            sck &lt;= 1&#x27;b0; mosi &lt;= 1&#x27;b0; cs_n &lt;= 1&#x27;b1; done &lt;= 1&#x27;b0;
+        end else begin
+            done &lt;= 1&#x27;b0;
+            if (timer != 16&#x27;d0) timer &lt;= timer - 16&#x27;d1;
+            else case (state)
+                S_IDLE: if (start) begin
+                    shreg &lt;= tx_data;
+                    mosi  &lt;= tx_data[NBITS-1];            // MSB를 미리 놓는다
+                    cs_n  &lt;= 1&#x27;b0;
+                    left  &lt;= NBITS;
+                    timer &lt;= CS_SETUP - 1;
+                    state &lt;= S_SETUP;
+                end
+                S_SETUP, S_LOW: begin                      // SCK 상승
+                    sck   &lt;= 1&#x27;b1;
+                    timer &lt;= HALF_DIV - 1;
+                    state &lt;= S_HIGH;
+                end
+                S_HIGH: begin                              // SCK 하강
+                    sck &lt;= 1&#x27;b0;
+                    if (left == 16&#x27;d1) begin               // 방금 마지막 비트를 읽혔다
+                        timer &lt;= CS_HOLD - 1;
+                        state &lt;= S_HOLD;
+                    end else begin                         // 다음 비트로 바꾼다
+                        shreg &lt;= {shreg[NBITS-2:0], 1&#x27;b0};
+                        mosi  &lt;= shreg[NBITS-2];
+                        left  &lt;= left - 16&#x27;d1;
+                        timer &lt;= HALF_DIV - 1;
+                        state &lt;= S_LOW;
+                    end
+                end
+                S_HOLD: begin                              // CS 해제
+                    cs_n  &lt;= 1&#x27;b1;
+                    mosi  &lt;= 1&#x27;b0;
+                    done  &lt;= 1&#x27;b1;
+                    timer &lt;= HALF_DIV - 1;
+                    state &lt;= S_GAP;
+                end
+                default: state &lt;= S_IDLE;                  // S_GAP: CS HIGH 최소 유지 시간 끝
+            endcase
+        end
+    end
+endmodule</code></pre>
+<h4>spi_tx_top.v — 보드 최상위</h4><pre><code>`timescale 1ns/1ps
+// LAB7 과제11 · FPGA(SPI 마스터) -&gt; MCU(SPI 슬레이브) 송신, 1초마다 한 바이트
+//
+//  보낼 값 = DIP 스위치 SW1~SW8 (SW1 = 최상위 비트 b7, ON = 1).  예) 0x55 = SW2·SW4·SW6·SW8 ON
+//    -&gt; 당일 다시 빌드하지 않고 0x55 · 0xA5 · 0x00 · 0xFF를 바꿔 가며 확인할 수 있다.
+//  spi_sck / spi_mosi / spi_cs_n : 확장 포트 BDIO(PORT A)로 내보내 MCU PB3 / PA7 / PA4(NSS)에 연결
+//  SCK = 50 MHz / (2 x 50) = 500 kHz
+//  uart_txd : 보낸 값을 &quot;TX=55\r\n&quot; 모양으로 PC에 출력 (과제12에서 송신 쪽 기록용)
+//  led      : 마지막으로 보낸 바이트
+//  같은 회로를 과제12(FPGA -&gt; FPGA)의 송신 쪽으로도 그대로 쓴다.
+module spi_tx_top #(
+    parameter integer CLK_HZ   = 50_000_000,
+    parameter integer BAUD     = 9_600,
+    parameter integer PERIOD   = 50_000_000    // 송신 간격(클록 수) = 1초. TB에서만 줄여 쓴다.
+)(
+    input  wire       clk_50mhz,
+    input  wire       rst_p,
+    input  wire [7:0] sw,
+    output wire       spi_sck,
+    output wire       spi_mosi,
+    output wire       spi_cs_n,
+    output wire       uart_txd,
+    output wire [7:0] led
+);
+    localparam integer DIV  = (CLK_HZ + BAUD/2) / BAUD;
+    localparam integer HALF = CLK_HZ / 1_000_000;            // 50 MHz -&gt; 50클록 = 1 us 반주기 -&gt; 500 kHz
+
+    // DIP 스위치 동기화 (기계식 입력)
+    (* ASYNC_REG = &quot;TRUE&quot; *) reg [7:0] sw_s0, sw_s1;
+    always @(posedge clk_50mhz) begin sw_s0 &lt;= sw; sw_s1 &lt;= sw_s0; end
+
+    // 1초 타이머
+    reg [31:0] cnt;
+    reg        start;
+    reg  [7:0] cur;
+    wire       busy, done;
+    always @(posedge clk_50mhz) begin
+        if (rst_p) begin cnt &lt;= 0; start &lt;= 1&#x27;b0; cur &lt;= 8&#x27;h00; end
+        else begin
+            start &lt;= 1&#x27;b0;
+            if (cnt == PERIOD - 1) begin
+                cnt &lt;= 0;
+                if (!busy) begin start &lt;= 1&#x27;b1; cur &lt;= sw_s1; end
+            end else cnt &lt;= cnt + 1;
+        end
+    end
+
+    spi_master_tx #(.HALF_DIV(HALF), .NBYTES(1)) u_spi (
+        .clk(clk_50mhz), .rst_p(rst_p), .start(start), .tx_data(sw_s1),
+        .busy(busy), .done(done), .sck(spi_sck), .mosi(spi_mosi), .cs_n(spi_cs_n));
+
+    // 보낸 값 기록: start 때 바이트, done 때 줄 끝
+    spi_uart_log #(.DIV(DIV), .P0(&quot;T&quot;), .P1(&quot;X&quot;)) u_log (
+        .clk(clk_50mhz), .rst_p(rst_p),
+        .byte_valid(start), .byte_data(sw_s1),
+        .frame_end(done), .frame_abort(1&#x27;b0),
+        .uart_txd(uart_txd), .overflow());
+
+    assign led = cur;
+endmodule</code></pre>
+<h3>⑤ 시뮬레이션</h3><p>TB(<code>LAB7-02/sim/tb.sv</code>)는 STM32 슬레이브처럼 SCK 상승 에지에서 MOSI를 읽고, 모든 에지마다 규칙을 검사한다. 송신 간격만 1 s → 10 ms로 줄였다(매개변수 <code>PERIOD</code>, 보드 빌드는 1 s).</p>
+<div class="tblwrap"><table class=""><thead><tr><th>검사</th><th>내용</th></tr></thead><tbody><tr><td>(a)</td><td>CS가 내려가고 올라가는 순간 SCK = LOW</td></tr><tr><td>(b)</td><td>SCK는 CS LOW일 때만 움직임</td></tr><tr><td>(c)</td><td>MOSI는 CS 하강 또는 SCK 하강과 같은 시각에만 바뀜</td></tr><tr><td>(d)</td><td>CS가 내려간 직후 MOSI = 최상위 비트</td></tr><tr><td>(e)</td><td>한 프레임 상승 에지 8번, 읽은 값 = 그때 스위치 값</td></tr><tr><td>(f)</td><td>SCK 주기 측정 → 1 MHz 이하</td></tr><tr><td>(g)</td><td>CS → 첫 상승, 마지막 하강 → CS, 프레임 간격 측정</td></tr><tr><td>(h)</td><td>FPGA 자신의 UART 줄 "TX=xx" = 보낸 값</td></tr></tbody></table></div>
+<p><b>XSim 결과</b></p><pre><code>spi_tx_top 기본 송신 간격 = 50000000 클록 = 1.000 s (TB에서는 500000 클록)
+10018.010 us  MCU(슬레이브) 수신 = 0x55  (CS LOW 17.00 us, CS-&gt;첫 상승 1.00 us, 마지막 하강-&gt;CS 1.00 us)  LED=01010101
+17240.431 us  PC(FPGA COM) &lt;- &quot;TX=55&quot;
+20001.010 us  프레임 간격 10.000 ms
+20018.010 us  MCU(슬레이브) 수신 = 0xa5  (CS LOW 17.00 us, CS-&gt;첫 상승 1.00 us, 마지막 하강-&gt;CS 1.00 us)  LED=10100101
+27240.431 us  PC(FPGA COM) &lt;- &quot;TX=A5&quot;
+30001.010 us  프레임 간격 10.000 ms
+30018.010 us  MCU(슬레이브) 수신 = 0x00  (CS LOW 17.00 us, CS-&gt;첫 상승 1.00 us, 마지막 하강-&gt;CS 1.00 us)  LED=00000000
+37240.431 us  PC(FPGA COM) &lt;- &quot;TX=00&quot;
+40001.010 us  프레임 간격 10.000 ms
+40018.010 us  MCU(슬레이브) 수신 = 0xff  (CS LOW 17.00 us, CS-&gt;첫 상승 1.00 us, 마지막 하강-&gt;CS 1.00 us)  LED=11111111
+47240.431 us  PC(FPGA COM) &lt;- &quot;TX=FF&quot;
+50001.010 us  프레임 간격 10.000 ms
+50018.010 us  MCU(슬레이브) 수신 = 0x3c  (CS LOW 17.00 us, CS-&gt;첫 상승 1.00 us, 마지막 하강-&gt;CS 1.00 us)  LED=00111100
+57240.431 us  PC(FPGA COM) &lt;- &quot;TX=3C&quot;
+60001.010 us  프레임 간격 10.000 ms
+60018.010 us  MCU(슬레이브) 수신 = 0x81  (CS LOW 17.00 us, CS-&gt;첫 상승 1.00 us, 마지막 하강-&gt;CS 1.00 us)  LED=10000001
+67240.431 us  PC(FPGA COM) &lt;- &quot;TX=81&quot;
+SCK 주기 2000.0~2000.0 ns -&gt; 500.0 kHz (조건 1 MHz 이하)
+CS-&gt;첫 상승 최소 1000.0 ns, 마지막 하강-&gt;CS 최소 1000.0 ns
+PASS spi_tx_top: 6 frames, mode 0 rules (a)-(h) ok, SCK 500 kHz</code></pre>
+<figure><div class="svgwrap"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 276" width="100%" font-family="Consolas, D2Coding, monospace" font-size="11">
+<rect x="0" y="0" width="760" height="276" fill="#ffffff"/>
+<text x="120" y="14" fill="#1d2433" font-size="12.5" font-weight="bold">과제11 · FPGA 마스터 송신 0x55 (SCK 500 kHz, XSim)</text>
+<line x1="182.5" y1="36" x2="182.5" y2="254" stroke="#e3e7ef" stroke-width="1"/>
+<text x="182.5" y="267" fill="#5b6478" text-anchor="middle">10002</text>
+<line x1="245.3" y1="36" x2="245.3" y2="254" stroke="#e3e7ef" stroke-width="1"/>
+<text x="245.3" y="267" fill="#5b6478" text-anchor="middle">10004</text>
+<line x1="308.1" y1="36" x2="308.1" y2="254" stroke="#e3e7ef" stroke-width="1"/>
+<text x="308.1" y="267" fill="#5b6478" text-anchor="middle">10006</text>
+<line x1="370.9" y1="36" x2="370.9" y2="254" stroke="#e3e7ef" stroke-width="1"/>
+<text x="370.9" y="267" fill="#5b6478" text-anchor="middle">10008</text>
+<line x1="433.7" y1="36" x2="433.7" y2="254" stroke="#e3e7ef" stroke-width="1"/>
+<text x="433.7" y="267" fill="#5b6478" text-anchor="middle">10010</text>
+<line x1="496.5" y1="36" x2="496.5" y2="254" stroke="#e3e7ef" stroke-width="1"/>
+<text x="496.5" y="267" fill="#5b6478" text-anchor="middle">10012</text>
+<line x1="559.3" y1="36" x2="559.3" y2="254" stroke="#e3e7ef" stroke-width="1"/>
+<text x="559.3" y="267" fill="#5b6478" text-anchor="middle">10014</text>
+<line x1="622.1" y1="36" x2="622.1" y2="254" stroke="#e3e7ef" stroke-width="1"/>
+<text x="622.1" y="267" fill="#5b6478" text-anchor="middle">10016</text>
+<line x1="684.9" y1="36" x2="684.9" y2="254" stroke="#e3e7ef" stroke-width="1"/>
+<text x="684.9" y="267" fill="#5b6478" text-anchor="middle">10018</text>
+<text x="756" y="267" fill="#5b6478" text-anchor="end">µs</text>
+<line x1="182.8" y1="36" x2="182.8" y2="254" stroke="#c0392b" stroke-width="1" stroke-dasharray="3,3"/>
+<text x="184.8" y="33" fill="#c0392b" font-size="10">b7=0</text>
+<line x1="245.6" y1="36" x2="245.6" y2="254" stroke="#c0392b" stroke-width="1" stroke-dasharray="3,3"/>
+<text x="247.6" y="33" fill="#c0392b" font-size="10">b6=1</text>
+<line x1="308.4" y1="36" x2="308.4" y2="254" stroke="#c0392b" stroke-width="1" stroke-dasharray="3,3"/>
+<text x="310.4" y="33" fill="#c0392b" font-size="10">b5=0</text>
+<line x1="371.2" y1="36" x2="371.2" y2="254" stroke="#c0392b" stroke-width="1" stroke-dasharray="3,3"/>
+<text x="373.2" y="33" fill="#c0392b" font-size="10">b4=1</text>
+<line x1="434.0" y1="36" x2="434.0" y2="254" stroke="#c0392b" stroke-width="1" stroke-dasharray="3,3"/>
+<text x="436.0" y="33" fill="#c0392b" font-size="10">b3=0</text>
+<line x1="496.8" y1="36" x2="496.8" y2="254" stroke="#c0392b" stroke-width="1" stroke-dasharray="3,3"/>
+<text x="498.8" y="33" fill="#c0392b" font-size="10">b2=1</text>
+<line x1="559.6" y1="36" x2="559.6" y2="254" stroke="#c0392b" stroke-width="1" stroke-dasharray="3,3"/>
+<text x="561.6" y="33" fill="#c0392b" font-size="10">b1=0</text>
+<line x1="622.4" y1="36" x2="622.4" y2="254" stroke="#c0392b" stroke-width="1" stroke-dasharray="3,3"/>
+<text x="624.4" y="33" fill="#c0392b" font-size="10">b0=1</text>
+<text x="112" y="58.0" fill="#1d2433" text-anchor="end">start</text>
+<path d="M120.0,63.0 L150.8,63.0 L150.8,45.0 L151.4,45.0 L151.4,63.0 L748.0,63.0" fill="none" stroke="#7a8599" stroke-width="1.6"/>
+<text x="112" y="88.0" fill="#1d2433" text-anchor="end">CS → PA4</text>
+<path d="M120.0,75.0 L151.4,75.0 L151.4,93.0 L685.2,93.0 L685.2,75.0 L748.0,75.0" fill="none" stroke="#0b5fc0" stroke-width="1.6"/>
+<text x="112" y="118.0" fill="#1d2433" text-anchor="end">SCK → PB3</text>
+<path d="M120.0,123.0 L182.8,123.0 L182.8,105.0 L214.2,105.0 L214.2,123.0 L245.6,123.0 L245.6,105.0 L277.0,105.0 L277.0,123.0 L308.4,123.0 L308.4,105.0 L339.8,105.0 L339.8,123.0 L371.2,123.0 L371.2,105.0 L402.6,105.0 L402.6,123.0 L434.0,123.0 L434.0,105.0 L465.4,105.0 L465.4,123.0 L496.8,123.0 L496.8,105.0 L528.2,105.0 L528.2,123.0 L559.6,123.0 L559.6,105.0 L591.0,105.0 L591.0,123.0 L622.4,123.0 L622.4,105.0 L653.8,105.0 L653.8,123.0 L748.0,123.0" fill="none" stroke="#0b5fc0" stroke-width="1.6"/>
+<text x="112" y="148.0" fill="#1d2433" text-anchor="end">MOSI → PA7</text>
+<path d="M120.0,153.0 L214.2,153.0 L214.2,135.0 L277.0,135.0 L277.0,153.0 L339.8,153.0 L339.8,135.0 L402.6,135.0 L402.6,153.0 L465.4,153.0 L465.4,135.0 L528.2,135.0 L528.2,153.0 L591.0,153.0 L591.0,135.0 L685.2,135.0 L685.2,153.0 L748.0,153.0" fill="none" stroke="#0b5fc0" stroke-width="1.6"/>
+<text x="112" y="178.0" fill="#1d2433" text-anchor="end">state</text>
+<path d="M120.0,174.0 L123.0,165 L148.4,165 L151.4,174.0 L148.4,183 L123.0,183 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<path d="M151.4,174.0 L154.4,165 L179.8,165 L182.8,174.0 L179.8,183 L154.4,183 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<path d="M182.8,174.0 L185.8,165 L211.2,165 L214.2,174.0 L211.2,183 L185.8,183 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<path d="M214.2,174.0 L217.2,165 L242.6,165 L245.6,174.0 L242.6,183 L217.2,183 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<text x="229.9" y="178.0" fill="#1d2433" text-anchor="middle">LOW</text>
+<path d="M245.6,174.0 L248.6,165 L274.0,165 L277.0,174.0 L274.0,183 L248.6,183 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<path d="M277.0,174.0 L280.0,165 L305.4,165 L308.4,174.0 L305.4,183 L280.0,183 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<text x="292.7" y="178.0" fill="#1d2433" text-anchor="middle">LOW</text>
+<path d="M308.4,174.0 L311.4,165 L336.8,165 L339.8,174.0 L336.8,183 L311.4,183 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<path d="M339.8,174.0 L342.8,165 L368.2,165 L371.2,174.0 L368.2,183 L342.8,183 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<text x="355.5" y="178.0" fill="#1d2433" text-anchor="middle">LOW</text>
+<path d="M371.2,174.0 L374.2,165 L399.6,165 L402.6,174.0 L399.6,183 L374.2,183 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<path d="M402.6,174.0 L405.6,165 L431.0,165 L434.0,174.0 L431.0,183 L405.6,183 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<text x="418.3" y="178.0" fill="#1d2433" text-anchor="middle">LOW</text>
+<path d="M434.0,174.0 L437.0,165 L462.4,165 L465.4,174.0 L462.4,183 L437.0,183 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<path d="M465.4,174.0 L468.4,165 L493.8,165 L496.8,174.0 L493.8,183 L468.4,183 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<text x="481.1" y="178.0" fill="#1d2433" text-anchor="middle">LOW</text>
+<path d="M496.8,174.0 L499.8,165 L525.2,165 L528.2,174.0 L525.2,183 L499.8,183 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<path d="M528.2,174.0 L531.2,165 L556.6,165 L559.6,174.0 L556.6,183 L531.2,183 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<text x="543.9" y="178.0" fill="#1d2433" text-anchor="middle">LOW</text>
+<path d="M559.6,174.0 L562.6,165 L588.0,165 L591.0,174.0 L588.0,183 L562.6,183 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<path d="M591.0,174.0 L594.0,165 L619.4,165 L622.4,174.0 L619.4,183 L594.0,183 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<text x="606.7" y="178.0" fill="#1d2433" text-anchor="middle">LOW</text>
+<path d="M622.4,174.0 L625.4,165 L650.8,165 L653.8,174.0 L650.8,183 L625.4,183 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<path d="M653.8,174.0 L656.8,165 L682.2,165 L685.2,174.0 L682.2,183 L656.8,183 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<path d="M685.2,174.0 L688.2,165 L713.6,165 L716.6,174.0 L713.6,183 L688.2,183 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<text x="700.9" y="178.0" fill="#1d2433" text-anchor="middle">GAP</text>
+<path d="M716.6,174.0 L719.6,165 L745.0,165 L748.0,174.0 L745.0,183 L719.6,183 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<text x="112" y="208.0" fill="#1d2433" text-anchor="end">left</text>
+<path d="M120.0,204.0 L123.0,195 L148.4,195 L151.4,204.0 L148.4,213 L123.0,213 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<text x="135.7" y="208.0" fill="#1d2433" text-anchor="middle">0</text>
+<path d="M151.4,204.0 L154.4,195 L211.2,195 L214.2,204.0 L211.2,213 L154.4,213 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<text x="182.8" y="208.0" fill="#1d2433" text-anchor="middle">8</text>
+<path d="M214.2,204.0 L217.2,195 L274.0,195 L277.0,204.0 L274.0,213 L217.2,213 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<text x="245.6" y="208.0" fill="#1d2433" text-anchor="middle">7</text>
+<path d="M277.0,204.0 L280.0,195 L336.8,195 L339.8,204.0 L336.8,213 L280.0,213 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<text x="308.4" y="208.0" fill="#1d2433" text-anchor="middle">6</text>
+<path d="M339.8,204.0 L342.8,195 L399.6,195 L402.6,204.0 L399.6,213 L342.8,213 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<text x="371.2" y="208.0" fill="#1d2433" text-anchor="middle">5</text>
+<path d="M402.6,204.0 L405.6,195 L462.4,195 L465.4,204.0 L462.4,213 L405.6,213 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<text x="434.0" y="208.0" fill="#1d2433" text-anchor="middle">4</text>
+<path d="M465.4,204.0 L468.4,195 L525.2,195 L528.2,204.0 L525.2,213 L468.4,213 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<text x="496.8" y="208.0" fill="#1d2433" text-anchor="middle">3</text>
+<path d="M528.2,204.0 L531.2,195 L588.0,195 L591.0,204.0 L588.0,213 L531.2,213 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<text x="559.6" y="208.0" fill="#1d2433" text-anchor="middle">2</text>
+<path d="M591.0,204.0 L594.0,195 L745.0,195 L748.0,204.0 L745.0,213 L594.0,213 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<text x="669.5" y="208.0" fill="#1d2433" text-anchor="middle">1</text>
+<text x="112" y="238.0" fill="#1d2433" text-anchor="end">done</text>
+<path d="M120.0,243.0 L685.2,243.0 L685.2,225.0 L685.8,225.0 L685.8,243.0 L748.0,243.0" fill="none" stroke="#137a3c" stroke-width="1.6"/>
+</svg></div><figcaption>그림 4. FPGA 송신 0x55. CS가 내려가는 순간 MOSI에 b7(=0)이 이미 나와 있고, 이후 MOSI는 SCK 하강 에지에서만 바뀐다. 상승 에지(빨간 점선) 8번에서 읽히는 값이 0 1 0 1 0 1 0 1. left는 지금 나가 있는 비트를 포함한 남은 비트 수.</figcaption></figure>
+<figure><div class="svgwrap"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 186" width="100%" font-family="Consolas, D2Coding, monospace" font-size="11">
+<rect x="0" y="0" width="760" height="186" fill="#ffffff"/>
+<text x="120" y="14" fill="#1d2433" font-size="12.5" font-weight="bold">과제11 · 주기마다 한 바이트 송신 + &quot;TX=55&quot; 기록 (TB에서만 1 s → 10 ms로 단축)</text>
+<line x1="120.0" y1="36" x2="120.0" y2="164" stroke="#e3e7ef" stroke-width="1"/>
+<text x="120.0" y="177" fill="#5b6478" text-anchor="middle">0</text>
+<line x1="245.6" y1="36" x2="245.6" y2="164" stroke="#e3e7ef" stroke-width="1"/>
+<text x="245.6" y="177" fill="#5b6478" text-anchor="middle">5</text>
+<line x1="371.2" y1="36" x2="371.2" y2="164" stroke="#e3e7ef" stroke-width="1"/>
+<text x="371.2" y="177" fill="#5b6478" text-anchor="middle">10</text>
+<line x1="496.8" y1="36" x2="496.8" y2="164" stroke="#e3e7ef" stroke-width="1"/>
+<text x="496.8" y="177" fill="#5b6478" text-anchor="middle">15</text>
+<line x1="622.4" y1="36" x2="622.4" y2="164" stroke="#e3e7ef" stroke-width="1"/>
+<text x="622.4" y="177" fill="#5b6478" text-anchor="middle">20</text>
+<text x="756" y="177" fill="#5b6478" text-anchor="end">ms</text>
+<text x="112" y="58.0" fill="#1d2433" text-anchor="end">DIP SW</text>
+<path d="M120.0,54.0 L123.0,45 L494.3,45 L497.3,54.0 L494.3,63 L123.0,63 Z" fill="#eef3fb" stroke="#7a8599" stroke-width="1"/>
+<text x="308.6" y="58.0" fill="#1d2433" text-anchor="middle">55</text>
+<path d="M497.3,54.0 L500.3,45 L745.0,45 L748.0,54.0 L745.0,63 L500.3,63 Z" fill="#eef3fb" stroke="#7a8599" stroke-width="1"/>
+<text x="622.6" y="58.0" fill="#1d2433" text-anchor="middle">A5</text>
+<text x="112" y="88.0" fill="#1d2433" text-anchor="end">CS</text>
+<path d="M120.0,84.0 L120.0,84.0 L120.0,75.0 L371.2,75.0 L371.2,93.0 L371.7,93.0 L371.7,75.0 L622.4,75.0 L622.4,93.0 L622.9,93.0 L622.9,75.0 L748.0,75.0" fill="none" stroke="#0b5fc0" stroke-width="1.6"/>
+<text x="112" y="118.0" fill="#1d2433" text-anchor="end">UART TX (F6)</text>
+<path d="M120.0,114.0 L120.0,114.0 L120.0,105.0 L371.2,105.0 L371.2,123.0 L379.1,123.0 L379.1,105.0 L381.7,105.0 L381.7,123.0 L384.3,123.0 L384.3,105.0 L386.9,105.0 L386.9,123.0 L389.5,123.0 L389.5,105.0 L392.2,105.0 L392.2,123.0 L394.8,123.0 L394.8,105.0 L397.4,105.0 L397.4,123.0 L407.9,123.0 L407.9,105.0 L413.1,105.0 L413.1,123.0 L415.7,123.0 L415.7,105.0 L418.3,105.0 L418.3,123.0 L420.9,123.0 L420.9,105.0 L423.6,105.0 L423.6,123.0 L426.2,123.0 L426.2,105.0 L428.8,105.0 L428.8,123.0 L431.4,123.0 L431.4,105.0 L441.9,105.0 L441.9,123.0 L447.1,123.0 L447.1,105.0 L449.7,105.0 L449.7,123.0 L452.3,123.0 L452.3,105.0 L455.0,105.0 L455.0,123.0 L457.6,123.0 L457.6,105.0 L460.2,105.0 L460.2,123.0 L462.8,123.0 L462.8,105.0 L468.0,105.0 L468.0,123.0 L473.3,123.0 L473.3,105.0 L475.9,105.0 L475.9,123.0 L478.5,123.0 L478.5,105.0 L481.1,105.0 L481.1,123.0 L483.7,123.0 L483.7,105.0 L486.4,105.0 L486.4,123.0 L489.0,123.0 L489.0,105.0 L494.2,105.0 L494.2,123.0 L499.4,123.0 L499.4,105.0 L502.1,105.0 L502.1,123.0 L504.7,123.0 L504.7,105.0 L507.3,105.0 L507.3,123.0 L509.9,123.0 L509.9,105.0 L515.1,105.0 L515.1,123.0 L525.6,123.0 L525.6,105.0 L528.2,105.0 L528.2,123.0 L533.5,123.0 L533.5,105.0 L536.1,105.0 L536.1,123.0 L538.7,123.0 L538.7,105.0 L541.3,105.0 L541.3,123.0 L551.8,123.0 L551.8,105.0 L622.4,105.0 L622.4,123.0 L630.3,123.0 L630.3,105.0 L632.9,105.0 L632.9,123.0 L635.5,123.0 L635.5,105.0 L638.1,105.0 L638.1,123.0 L640.7,123.0 L640.7,105.0 L643.4,105.0 L643.4,123.0 L646.0,123.0 L646.0,105.0 L648.6,105.0 L648.6,123.0 L659.1,123.0 L659.1,105.0 L664.3,105.0 L664.3,123.0 L666.9,123.0 L666.9,105.0 L669.5,105.0 L669.5,123.0 L672.1,123.0 L672.1,105.0 L674.8,105.0 L674.8,123.0 L677.4,123.0 L677.4,105.0 L680.0,105.0 L680.0,123.0 L682.6,123.0 L682.6,105.0 L693.1,105.0 L693.1,123.0 L698.3,123.0 L698.3,105.0 L700.9,105.0 L700.9,123.0 L703.5,123.0 L703.5,105.0 L706.2,105.0 L706.2,123.0 L719.2,123.0 L719.2,105.0 L721.9,105.0 L721.9,123.0 L724.5,123.0 L724.5,105.0 L727.1,105.0 L727.1,123.0 L729.7,123.0 L729.7,105.0 L732.3,105.0 L732.3,123.0 L734.9,123.0 L734.9,105.0 L737.6,105.0 L737.6,123.0 L740.2,123.0 L740.2,105.0 L745.4,105.0 L745.4,123.0 L748.0,123.0" fill="none" stroke="#9a5b00" stroke-width="1.6"/>
+<text x="112" y="148.0" fill="#1d2433" text-anchor="end">LED</text>
+<path d="M120.0,144.0 L120.0,135 L120.0,135 L120.0,144.0 L120.0,153 L120.0,153 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<path d="M120.0,144.0 L123.0,135 L368.2,135 L371.2,144.0 L368.2,153 L123.0,153 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<text x="245.6" y="148.0" fill="#1d2433" text-anchor="middle">00</text>
+<path d="M371.2,144.0 L374.2,135 L619.4,135 L622.4,144.0 L619.4,153 L374.2,153 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<text x="496.8" y="148.0" fill="#1d2433" text-anchor="middle">55</text>
+<path d="M622.4,144.0 L625.4,135 L745.0,135 L748.0,144.0 L745.0,153 L625.4,153 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<text x="685.2" y="148.0" fill="#1d2433" text-anchor="middle">A5</text>
+</svg></div><figcaption>그림 5. 주기마다 한 프레임(CS 펄스)을 보내고, 보낸 값을 F6로 "TX=55"처럼 기록한다. DIP 스위치를 0x55 → 0xA5로 바꾸면 다음 프레임부터 값이 바뀐다.</figcaption></figure>
+<p><b>MCU 쪽 공동 시뮬레이션</b>: TB의 슬레이브 모델이 받은 바이트(<code>sim/fpga_spi_tx.hex</code>)를 과제9의 MCU 수신 코드 모의 실행에 넣었다. 수신 MCU의 VCP 출력 예상:</p><pre><code># SPI1 init: MASTER, NSS=SOFT, CPOL=0 CPHA=0 (mode 0), 8-bit, MSB first, prescaler=128
+# SCK = 100 MHz / 128 = 781.25 kHz
+# SPI1 init: SLAVE, NSS=HARD_INPUT, CPOL=0 CPHA=0 (mode 0), 8-bit, MSB first, prescaler=128
+# PA4 init: mode=AF_PP pull=UP AF=5
+RX=55
+RX=A5
+RX=00
+RX=FF
+RX=3C
+RX=81
+RX timeout: check sender, SCK, MOSI, CS and GND
+# PASS: 0 check failures</code></pre>
+<h3>⑥ 합성 · 구현 결과 (<code>build7 2</code>)</h3><div class="tblwrap"><table class=""><thead><tr><th>항목</th><th>값</th><th>설명</th></tr></thead><tbody><tr><td>Slice LUTs</td><td>207 (0.43%)</td><td>1초 카운터 32비트 + 송신기 + 기록기</td></tr><tr><td>Slice Registers</td><td>202</td><td></td></tr><tr><td>Bonded IOB</td><td>22</td><td>과제10의 14 + DIP 스위치 8</td></tr><tr><td>WNS / WHS</td><td><b>+14.323 ns</b> / +0.082 ns</td><td></td></tr><tr><td>비트스트림</td><td><code>LAB7_bit/LAB7-02_spi_tx.bit</code></td><td></td></tr></tbody></table></div>
+<h3>⑦ 보드 실습 계획</h3><ol><li><code>prog7 2</code> → DIP 스위치 0x55(SW2 · SW4 · SW6 · SW8 ON).</li><li><b>MCU 연결 전에</b> 오실로스코프로 F8 · E8 · A7 확인: 시간축 2 µs/칸, CS 하강 트리거, Single. SCK 주기 2 µs, 상승 에지 8번, CS LOW 17 µs.</li><li>MCU에 <code>mcu7 task9_rx -Flash</code> → Serial Monitor에 <code>RX timeout</code>이 나오는지 확인 → F8 → PB3, E8 → PA7, <b>A7 → PA4</b>, GND 연결.</li><li>MCU 화면 <code>RX=55</code> 1초마다 확인, 스위치를 A5 · 00 · FF로 바꿔 반복 → 영상(스위치 · LED · Serial Monitor가 함께 보이게).</li></ol></section>
+<section class="circuit" id="e5"><h2>5. 실험 5 · STM32_3 과제12 — FPGA → FPGA 송수신 확인</h2>
+<p class="src">C조와 D조의 FPGA 두 대를 연결해, 한쪽은 과제11 송신 회로, 다른 쪽은 과제10 수신 회로로 값을 주고받고 수신 FPGA의 UART로 확인한 뒤 역할을 바꾼다.</p>
+<h3>① 목적</h3><p>직접 만든 송신기와 수신기가 서로 통하는지 확인한다. 두 보드는 각자 다른 수정 발진기를 쓰므로 50 MHz가 정확히 같지 않다.</p>
+<h3>② 이론</h3><p>UART는 양쪽이 각자 시계로 비트 폭을 재므로 클록 차이가 쌓이면 틀린다(LAB6에서 0.6% 차이를 확인). SPI는 <b>마스터가 SCK로 박자를 직접 보내기</b> 때문에, 슬레이브의 클록이 조금 빠르거나 느려도 SCK 에지를 찾는 샘플링 속도만 충분하면 된다. 수신기는 SCK 반주기(1 µs = 50클록)마다 에지를 찾으므로 ±100 ppm(0.01%)은 전혀 영향이 없다.</p>
+<h3>③ 연결</h3><div class="tblwrap"><table class=""><thead><tr><th>신호</th><th>송신 보드 (spi_tx_top)</th><th>수신 보드 (spi_rx_top)</th></tr></thead><tbody><tr><td>SCK</td><td>F8 출력</td><td>F8 입력</td></tr><tr><td>MOSI</td><td>E8 출력</td><td>E8 입력</td></tr><tr><td>CS</td><td>A7 출력</td><td>A7 입력</td></tr><tr><td>GND</td><td>J10 GND</td><td>J10 GND</td></tr></tbody></table></div><p>역할 교대 = <b>비트스트림만 서로 바꾼다</b>. 핀이 같아서 배선은 그대로 둔다. 두 보드 모두 PORT A ENABLE OFF.</p>
+<h3>④ 시뮬레이션</h3><p>TB(<code>LAB7-03/sim/tb.sv</code>)는 과제11 회로(보드 A)와 과제10 회로(보드 B)를 점퍼선 지연 3 ns로 잇고, 두 클록을 +100 ppm / −100 ppm으로 다르게(위상도 7.3 ns 어긋나게) 둔다. <code>+define+SWAP</code>은 클록 차이를 반대로 한 역할 교대판이다. 두 보드의 UART 줄을 모아 A의 "TX=xx"와 B의 "RX=xx" 값이 같은 순서로 일치하는지 검사한다.</p>
+<p><b>정방향 (XSim)</b></p><pre><code>보드 A(마스터) 클록 100 ppm, 보드 B(슬레이브) 클록 -100 ppm, 선 지연 3 ns
+17238.806 us  보드 A COM &lt;- &quot;TX=55&quot;
+17255.125 us  보드 B COM &lt;- &quot;RX=55&quot;   LED=01010101
+27237.806 us  보드 A COM &lt;- &quot;TX=A5&quot;
+27254.125 us  보드 B COM &lt;- &quot;RX=A5&quot;   LED=10100101
+37236.806 us  보드 A COM &lt;- &quot;TX=00&quot;
+37253.125 us  보드 B COM &lt;- &quot;RX=00&quot;   LED=00000000
+47235.806 us  보드 A COM &lt;- &quot;TX=FF&quot;
+47252.125 us  보드 B COM &lt;- &quot;RX=FF&quot;   LED=11111111
+57234.806 us  보드 A COM &lt;- &quot;TX=C3&quot;
+57251.124 us  보드 B COM &lt;- &quot;RX=C3&quot;   LED=11000011
+PASS FPGA-&gt;FPGA: 5 frames, B 수신 = A 송신</code></pre><p><b>역할 교대 (XSim)</b></p><pre><code>보드 A(마스터) 클록 -100 ppm, 보드 B(슬레이브) 클록 100 ppm, 선 지연 3 ns
+17242.057 us  보드 A COM &lt;- &quot;TX=55&quot;
+17255.872 us  보드 B COM &lt;- &quot;RX=55&quot;   LED=01010101
+27243.057 us  보드 A COM &lt;- &quot;TX=A5&quot;
+27256.872 us  보드 B COM &lt;- &quot;RX=A5&quot;   LED=10100101
+37244.057 us  보드 A COM &lt;- &quot;TX=00&quot;
+37257.872 us  보드 B COM &lt;- &quot;RX=00&quot;   LED=00000000
+47245.057 us  보드 A COM &lt;- &quot;TX=FF&quot;
+47258.871 us  보드 B COM &lt;- &quot;RX=FF&quot;   LED=11111111
+57246.057 us  보드 A COM &lt;- &quot;TX=C3&quot;
+57259.871 us  보드 B COM &lt;- &quot;RX=C3&quot;   LED=11000011
+PASS FPGA-&gt;FPGA (역할 교대): 5 frames, B 수신 = A 송신</code></pre>
+<figure><div class="svgwrap"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 306" width="100%" font-family="Consolas, D2Coding, monospace" font-size="11">
+<rect x="0" y="0" width="760" height="306" fill="#ffffff"/>
+<text x="120" y="14" fill="#1d2433" font-size="12.5" font-weight="bold">과제12 · 보드 A(마스터, +100 ppm) → 보드 B(슬레이브, −100 ppm), 0x55 (XSim)</text>
+<line x1="151.1" y1="36" x2="151.1" y2="284" stroke="#e3e7ef" stroke-width="1"/>
+<text x="151.1" y="297" fill="#5b6478" text-anchor="middle">10002</text>
+<line x1="213.9" y1="36" x2="213.9" y2="284" stroke="#e3e7ef" stroke-width="1"/>
+<text x="213.9" y="297" fill="#5b6478" text-anchor="middle">10004</text>
+<line x1="276.7" y1="36" x2="276.7" y2="284" stroke="#e3e7ef" stroke-width="1"/>
+<text x="276.7" y="297" fill="#5b6478" text-anchor="middle">10006</text>
+<line x1="339.5" y1="36" x2="339.5" y2="284" stroke="#e3e7ef" stroke-width="1"/>
+<text x="339.5" y="297" fill="#5b6478" text-anchor="middle">10008</text>
+<line x1="402.3" y1="36" x2="402.3" y2="284" stroke="#e3e7ef" stroke-width="1"/>
+<text x="402.3" y="297" fill="#5b6478" text-anchor="middle">10010</text>
+<line x1="465.1" y1="36" x2="465.1" y2="284" stroke="#e3e7ef" stroke-width="1"/>
+<text x="465.1" y="297" fill="#5b6478" text-anchor="middle">10012</text>
+<line x1="527.9" y1="36" x2="527.9" y2="284" stroke="#e3e7ef" stroke-width="1"/>
+<text x="527.9" y="297" fill="#5b6478" text-anchor="middle">10014</text>
+<line x1="590.7" y1="36" x2="590.7" y2="284" stroke="#e3e7ef" stroke-width="1"/>
+<text x="590.7" y="297" fill="#5b6478" text-anchor="middle">10016</text>
+<line x1="653.5" y1="36" x2="653.5" y2="284" stroke="#e3e7ef" stroke-width="1"/>
+<text x="653.5" y="297" fill="#5b6478" text-anchor="middle">10018</text>
+<line x1="716.3" y1="36" x2="716.3" y2="284" stroke="#e3e7ef" stroke-width="1"/>
+<text x="716.3" y="297" fill="#5b6478" text-anchor="middle">10020</text>
+<text x="756" y="297" fill="#5b6478" text-anchor="end">µs</text>
+<text x="112" y="58.0" fill="#1d2433" text-anchor="end">A CS</text>
+<path d="M120.0,45.0 L151.4,45.0 L151.4,63.0 L685.3,63.0 L685.3,45.0 L748.0,45.0" fill="none" stroke="#0b5fc0" stroke-width="1.6"/>
+<text x="112" y="88.0" fill="#1d2433" text-anchor="end">A SCK</text>
+<path d="M120.0,93.0 L182.8,93.0 L182.8,75.0 L214.2,75.0 L214.2,93.0 L245.6,93.0 L245.6,75.0 L277.0,75.0 L277.0,93.0 L308.4,93.0 L308.4,75.0 L339.8,75.0 L339.8,93.0 L371.2,93.0 L371.2,75.0 L402.6,75.0 L402.6,93.0 L434.0,93.0 L434.0,75.0 L465.4,75.0 L465.4,93.0 L496.8,93.0 L496.8,75.0 L528.2,75.0 L528.2,93.0 L559.6,93.0 L559.6,75.0 L591.0,75.0 L591.0,93.0 L622.4,93.0 L622.4,75.0 L653.9,75.0 L653.9,93.0 L748.0,93.0" fill="none" stroke="#0b5fc0" stroke-width="1.6"/>
+<text x="112" y="118.0" fill="#1d2433" text-anchor="end">A MOSI</text>
+<path d="M120.0,123.0 L214.2,123.0 L214.2,105.0 L277.0,105.0 L277.0,123.0 L339.8,123.0 L339.8,105.0 L402.6,105.0 L402.6,123.0 L465.4,123.0 L465.4,105.0 L528.2,105.0 L528.2,123.0 L591.0,123.0 L591.0,105.0 L685.3,105.0 L685.3,123.0 L748.0,123.0" fill="none" stroke="#0b5fc0" stroke-width="1.6"/>
+<text x="112" y="148.0" fill="#1d2433" text-anchor="end">선 끝 SCK</text>
+<path d="M120.0,153.0 L182.9,153.0 L182.9,135.0 L214.3,135.0 L214.3,153.0 L245.7,153.0 L245.7,135.0 L277.1,135.0 L277.1,153.0 L308.5,153.0 L308.5,135.0 L339.9,135.0 L339.9,153.0 L371.3,153.0 L371.3,135.0 L402.7,135.0 L402.7,153.0 L434.1,153.0 L434.1,135.0 L465.5,135.0 L465.5,153.0 L496.9,153.0 L496.9,135.0 L528.3,135.0 L528.3,153.0 L559.7,153.0 L559.7,135.0 L591.1,135.0 L591.1,153.0 L622.5,153.0 L622.5,135.0 L653.9,135.0 L653.9,153.0 L748.0,153.0" fill="none" stroke="#7a8599" stroke-width="1.6"/>
+<text x="112" y="178.0" fill="#1d2433" text-anchor="end">B bitcnt</text>
+<path d="M120.0,174.0 L123.0,165 L181.3,165 L184.3,174.0 L181.3,183 L123.0,183 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<text x="152.1" y="178.0" fill="#1d2433" text-anchor="middle">0</text>
+<path d="M184.3,174.0 L187.3,165 L244.1,165 L247.1,174.0 L244.1,183 L187.3,183 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<text x="215.7" y="178.0" fill="#1d2433" text-anchor="middle">1</text>
+<path d="M247.1,174.0 L250.1,165 L306.9,165 L309.9,174.0 L306.9,183 L250.1,183 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<text x="278.5" y="178.0" fill="#1d2433" text-anchor="middle">2</text>
+<path d="M309.9,174.0 L312.9,165 L369.7,165 L372.7,174.0 L369.7,183 L312.9,183 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<text x="341.3" y="178.0" fill="#1d2433" text-anchor="middle">3</text>
+<path d="M372.7,174.0 L375.7,165 L432.4,165 L435.4,174.0 L432.4,183 L375.7,183 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<text x="404.0" y="178.0" fill="#1d2433" text-anchor="middle">4</text>
+<path d="M435.4,174.0 L438.4,165 L495.2,165 L498.2,174.0 L495.2,183 L438.4,183 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<text x="466.8" y="178.0" fill="#1d2433" text-anchor="middle">5</text>
+<path d="M498.2,174.0 L501.2,165 L558.0,165 L561.0,174.0 L558.0,183 L501.2,183 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<text x="529.6" y="178.0" fill="#1d2433" text-anchor="middle">6</text>
+<path d="M561.0,174.0 L564.0,165 L620.8,165 L623.8,174.0 L620.8,183 L564.0,183 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<text x="592.4" y="178.0" fill="#1d2433" text-anchor="middle">7</text>
+<path d="M623.8,174.0 L626.8,165 L745.0,165 L748.0,174.0 L745.0,183 L626.8,183 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<text x="685.9" y="178.0" fill="#1d2433" text-anchor="middle">0</text>
+<text x="112" y="208.0" fill="#1d2433" text-anchor="end">B valid</text>
+<path d="M120.0,213.0 L623.8,213.0 L623.8,195.0 L624.5,195.0 L624.5,213.0 L748.0,213.0" fill="none" stroke="#137a3c" stroke-width="1.6"/>
+<text x="112" y="238.0" fill="#1d2433" text-anchor="end">B data</text>
+<path d="M120.0,234.0 L123.0,225 L620.8,225 L623.8,234.0 L620.8,243 L123.0,243 Z" fill="#eef3fb" stroke="#137a3c" stroke-width="1"/>
+<text x="371.9" y="238.0" fill="#1d2433" text-anchor="middle">00</text>
+<path d="M623.8,234.0 L626.8,225 L745.0,225 L748.0,234.0 L745.0,243 L626.8,243 Z" fill="#eef3fb" stroke="#137a3c" stroke-width="1"/>
+<text x="685.9" y="238.0" fill="#1d2433" text-anchor="middle">55</text>
+<text x="112" y="268.0" fill="#1d2433" text-anchor="end">B LED</text>
+<path d="M120.0,264.0 L123.0,255 L621.5,255 L624.5,264.0 L621.5,273 L123.0,273 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<text x="372.2" y="268.0" fill="#1d2433" text-anchor="middle">00</text>
+<path d="M624.5,264.0 L627.5,255 L745.0,255 L748.0,264.0 L745.0,273 L627.5,273 Z" fill="#eef3fb" stroke="#0b5fc0" stroke-width="1"/>
+<text x="686.2" y="268.0" fill="#1d2433" text-anchor="middle">55</text>
+</svg></div><figcaption>그림 6. 보드 A가 보낸 0x55를 보드 B가 받는 모습. 선 끝 SCK는 3 ns 늦게 도착하고, 보드 B는 자기 클록으로 동기화한 뒤 8번째 에지에서 data = 55를 낸다.</figcaption></figure>
+<h3>⑤ 보드 실습 계획</h3><ol><li>C조 <code>prog7 2</code>(송신), D조는 우리 <code>LAB7-01_spi_rx.bit</code>를 올리거나 D조 자신의 수신 회로를 쓴다.</li><li>GND 먼저, F8 · E8 · A7 연결. 수신 보드 FTDI → COM 포트에서 <code>RX=55</code>, 송신 보드 LED와 비교.</li><li>비트스트림을 바꿔 역할 교대 → 영상.</li></ol></section>
+<section id="disc"><h2>고찰</h2><ol>
+<li><b>SPI가 UART보다 단순한 이유.</b> UART는 양쪽이 같은 속도를 약속하고 각자 시계로 비트 가운데를 맞춰야 한다(LAB6 수신기는 1.5비트 기다렸다 읽는 상태 기계). SPI는 클록 선을 따로 보내므로, 수신기는 "SCK가 올라갔나?"만 보면 된다. 그 대가로 선이 하나 더(SCK), 장치마다 CS가 하나씩 더 필요하다.</li>
+<li><b>클록을 하나로 유지한 설계.</b> SCK를 FPGA 클록으로 쓰면 회로는 더 작아 보이지만, 받은 바이트를 50 MHz 쪽 UART로 넘길 때 두 클록 영역 사이 문제가 다시 생긴다. 모든 입력을 50 MHz로 샘플링하니 회로 전체가 하나의 클록이 되었고, 타이밍 보고서도 하나의 클록만 분석하면 됐다(WNS +14.9 ns). 대신 받을 수 있는 SCK 속도가 약 8 MHz로 제한되며, 이번 실습(≤1 MHz)에는 충분하다.</li>
+<li><b>CS가 프레임의 경계를 정한다.</b> SCK 선에 잡음이 들어가 비트 하나가 더 세어지면 그 뒤 모든 바이트가 밀린다. CS가 올라갈 때 카운터를 0으로 되돌리기 때문에 잘못은 그 프레임 하나로 끝난다. TB의 "3비트 후 CS 해제" 시나리오가 이것을 확인하고, 덜 찬 프레임은 "RX=?"로 드러나게 해서 당일 배선 불량을 바로 알 수 있게 했다.</li>
+<li><b>result = 0은 전달 확인이 아니다.</b> MISO를 쓰지 않으므로 마스터는 상대가 받았는지 알 방법이 없다. 그래서 과제10은 FPGA UART, 과제9 · 11은 수신 MCU의 VCP처럼 <b>받는 쪽의 출력</b>으로만 판단하도록 모든 과제를 구성했다.</li>
+<li><b>시뮬레이션을 서로 연결했다.</b> MCU 송신 코드의 모의 실행 출력 → FPGA 수신 TB 입력, FPGA 송신 TB 출력 → MCU 수신 코드 모의 실행 입력으로 이어 붙였다. 각자 따로 맞는 것이 아니라 실제 연결 순서대로 데이터가 흘러가는지 확인한 것이다.</li>
+<li><b>두 시뮬레이터에서 생긴 차이.</b> 회로 결과는 Icarus와 XSim이 같았지만, TB 출력에서 두 가지가 달랐다. ① XSim은 <code>%+f</code> 출력 형식을 지원하지 않아 로그 한 줄이 깨졌다 → 정수 출력으로 바꿈. ② 선 지연에 <code>real</code> 변수를 쓰는 것은 표준상 상수여야 해서 <code>localparam</code>으로 바꿨다. 또 PowerShell이 시뮬레이터의 UTF-8 한글을 CP949로 읽어 결과 파일이 깨졌고, 도구에서 콘솔 인코딩을 UTF-8로 지정해 해결했다.</li>
+<li><b>모델의 한계.</b> MCU의 CS → 첫 SCK 간격(2 µs)과 끝 간격(1.5 µs)은 HAL 코드 흐름으로 짐작한 값이다. 수신 회로는 이 간격이 0이 아니기만 하면 동작하도록 만들었고, 실제 값은 과제8 오실로스코프로 재서 실험 후 보고서에서 비교한다.</li>
+</ol></section>
+<section id="refs"><h2>참고문헌</h2><ol>
+<li>[1] D. M. Harris and S. L. Harris, <i>Digital Design and Computer Architecture</i>, 2nd ed. Waltham, MA, USA: Morgan Kaufmann, 2013. ISBN 978-0-12-394424-5. — Ch. 3.5.5 동기화기(2단 플립플롭과 준안정), Ch. 8.6.3 직렬 I/O의 SPI(SCK·MOSI·MISO, 클록 극성·위상)와 UART 비교.</li>
+<li>[2] STMicroelectronics, <i>stm32g4xx-hal-driver</i>, GitHub, <a href="https://github.com/STMicroelectronics/stm32g4xx-hal-driver" target="_blank">https://github.com/STMicroelectronics/stm32g4xx-hal-driver</a>, 태그 v1.2.7. — <code>stm32g4xx_hal_spi.c</code>의 <code>HAL_SPI_Init</code> · <code>HAL_SPI_DeInit</code> · <code>HAL_SPI_Transmit</code> · <code>HAL_SPI_Receive</code>(타임아웃 시 <code>HAL_TIMEOUT</code>), <code>stm32g4xx_hal_spi.h</code>의 <code>SPI_NSS_HARD_INPUT</code> · <code>SPI_PHASE_1EDGE</code>.</li>
+</ol>
+<p class="src">수업 자료(인용 출처 수에 넣지 않음): Glaysia/ece2_474 v1.1.0의 docs/STM32_3.md(과제8~12, 제공 MCU 코드) · Core/Src/main.c(MX_SPI1_Init: 프리스케일러 128, 모드 0), 실습 교재 「Combo II DLD 장비를 이용한 디지털 논리 회로 설계」 p.73(확장 포트 BDIO 핀표). LAB3-07 · LAB6 UART 회로(본인 저장소).</p></section>
+</div></body></html>
