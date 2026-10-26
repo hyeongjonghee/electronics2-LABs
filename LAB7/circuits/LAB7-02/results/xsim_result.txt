@@ -1,0 +1,21 @@
+spi_tx_top 기본 송신 간격 = 50000000 클록 = 1.000 s (TB에서는 500000 클록)
+10018.010 us  MCU(슬레이브) 수신 = 0x55  (CS LOW 17.00 us, CS->첫 상승 1.00 us, 마지막 하강->CS 1.00 us)  LED=01010101
+17240.431 us  PC(FPGA COM) <- "TX=55"
+20001.010 us  프레임 간격 10.000 ms
+20018.010 us  MCU(슬레이브) 수신 = 0xa5  (CS LOW 17.00 us, CS->첫 상승 1.00 us, 마지막 하강->CS 1.00 us)  LED=10100101
+27240.431 us  PC(FPGA COM) <- "TX=A5"
+30001.010 us  프레임 간격 10.000 ms
+30018.010 us  MCU(슬레이브) 수신 = 0x00  (CS LOW 17.00 us, CS->첫 상승 1.00 us, 마지막 하강->CS 1.00 us)  LED=00000000
+37240.431 us  PC(FPGA COM) <- "TX=00"
+40001.010 us  프레임 간격 10.000 ms
+40018.010 us  MCU(슬레이브) 수신 = 0xff  (CS LOW 17.00 us, CS->첫 상승 1.00 us, 마지막 하강->CS 1.00 us)  LED=11111111
+47240.431 us  PC(FPGA COM) <- "TX=FF"
+50001.010 us  프레임 간격 10.000 ms
+50018.010 us  MCU(슬레이브) 수신 = 0x3c  (CS LOW 17.00 us, CS->첫 상승 1.00 us, 마지막 하강->CS 1.00 us)  LED=00111100
+57240.431 us  PC(FPGA COM) <- "TX=3C"
+60001.010 us  프레임 간격 10.000 ms
+60018.010 us  MCU(슬레이브) 수신 = 0x81  (CS LOW 17.00 us, CS->첫 상승 1.00 us, 마지막 하강->CS 1.00 us)  LED=10000001
+67240.431 us  PC(FPGA COM) <- "TX=81"
+SCK 주기 2000.0~2000.0 ns -> 500.0 kHz (조건 1 MHz 이하)
+CS->첫 상승 최소 1000.0 ns, 마지막 하강->CS 최소 1000.0 ns
+PASS spi_tx_top: 6 frames, mode 0 rules (a)-(h) ok, SCK 500 kHz

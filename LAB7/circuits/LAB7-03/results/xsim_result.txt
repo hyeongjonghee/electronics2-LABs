@@ -1,0 +1,12 @@
+보드 A(마스터) 클록 100 ppm, 보드 B(슬레이브) 클록 -100 ppm, 선 지연 3 ns
+17238.806 us  보드 A COM <- "TX=55"
+17255.125 us  보드 B COM <- "RX=55"   LED=01010101
+27237.806 us  보드 A COM <- "TX=A5"
+27254.125 us  보드 B COM <- "RX=A5"   LED=10100101
+37236.806 us  보드 A COM <- "TX=00"
+37253.125 us  보드 B COM <- "RX=00"   LED=00000000
+47235.806 us  보드 A COM <- "TX=FF"
+47252.125 us  보드 B COM <- "RX=FF"   LED=11111111
+57234.806 us  보드 A COM <- "TX=C3"
+57251.124 us  보드 B COM <- "RX=C3"   LED=11000011
+PASS FPGA->FPGA: 5 frames, B 수신 = A 송신

@@ -1,0 +1,11 @@
+# SPI1 init: MASTER, NSS=SOFT, CPOL=0 CPHA=0 (mode 0), 8-bit, MSB first, prescaler=128
+# SCK = 100 MHz / 128 = 781.25 kHz
+TX=55, result=0
+TX=A5, result=0
+TX=00, result=0
+TX=FF, result=0
+TX=55, result=0
+TX=A5, result=0
+TX=00, result=0
+TX=FF, result=0
+# PASS: 0 check failures

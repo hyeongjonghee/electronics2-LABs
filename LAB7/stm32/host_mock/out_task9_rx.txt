@@ -1,0 +1,14 @@
+# SPI1 init: MASTER, NSS=SOFT, CPOL=0 CPHA=0 (mode 0), 8-bit, MSB first, prescaler=128
+# SCK = 100 MHz / 128 = 781.25 kHz
+# SPI1 init: SLAVE, NSS=HARD_INPUT, CPOL=0 CPHA=0 (mode 0), 8-bit, MSB first, prescaler=128
+# PA4 init: mode=AF_PP pull=UP AF=5
+RX=55
+RX=A5
+RX=00
+RX=FF
+RX=55
+RX=A5
+RX=00
+RX=FF
+RX timeout: check sender, SCK, MOSI, CS and GND
+# PASS: 0 check failures

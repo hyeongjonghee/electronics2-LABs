@@ -1,0 +1,33 @@
+MCU 모의 실행이 보낸 바이트 8개 (sim/spi1_tx_task8_cycle.hex)
+   17.034 us  FPGA SPI 수신 #0 = 0x55 (프레임 안 0번째)   LED=01010101
+  230.134 us  FPGA SPI 수신 #1 = 0xa5 (프레임 안 0번째)   LED=10100101
+  443.234 us  FPGA SPI 수신 #2 = 0x00 (프레임 안 0번째)   LED=00000000
+  656.334 us  FPGA SPI 수신 #3 = 0xff (프레임 안 0번째)   LED=11111111
+  869.434 us  FPGA SPI 수신 #4 = 0x55 (프레임 안 0번째)   LED=01010101
+ 1082.534 us  FPGA SPI 수신 #5 = 0xa5 (프레임 안 0번째)   LED=10100101
+ 1295.634 us  FPGA SPI 수신 #6 = 0x00 (프레임 안 0번째)   LED=00000000
+ 1508.734 us  FPGA SPI 수신 #7 = 0xff (프레임 안 0번째)   LED=11111111
+ 1748.534 us  FPGA SPI 수신 #8 = 0x3c (프레임 안 0번째)   LED=00111100
+ 1811.634 us  FPGA SPI 수신 #9 = 0x12 (프레임 안 0번째)   LED=00010010
+ 1821.874 us  FPGA SPI 수신 #10 = 0x34 (프레임 안 1번째)   LED=00110100
+ 1832.114 us  FPGA SPI 수신 #11 = 0x56 (프레임 안 2번째)   LED=01010110
+ 1842.354 us  FPGA SPI 수신 #12 = 0x78 (프레임 안 3번째)   LED=01111000
+ 1927.454 us  FPGA SPI 수신 #13 = 0xc3 (프레임 안 0번째)   LED=11000011
+ 1988.454 us  FPGA SPI 수신 #14 = 0x81 (프레임 안 0번째)   LED=10000001
+ 2116.814 us  FPGA SPI 수신 #15 = 0x7e (프레임 안 0번째)   LED=01111110
+ 7256.455 us  PC(FPGA COM) <- "RX=55"
+14547.935 us  PC(FPGA COM) <- "RX=A5"
+21839.415 us  PC(FPGA COM) <- "RX=00"
+29130.895 us  PC(FPGA COM) <- "RX=FF"
+36422.375 us  PC(FPGA COM) <- "RX=55"
+43713.855 us  PC(FPGA COM) <- "RX=A5"
+51005.335 us  PC(FPGA COM) <- "RX=00"
+58296.815 us  PC(FPGA COM) <- "RX=FF"
+64546.655 us  PC(FPGA COM) <- "RX=?"
+71838.135 us  PC(FPGA COM) <- "RX=3C"
+88504.375 us  PC(FPGA COM) <- "RX=12 34 56 78"
+95795.855 us  PC(FPGA COM) <- "RX=C3"
+103087.335 us  PC(FPGA COM) <- "RX=81"
+110378.815 us  PC(FPGA COM) <- "RX=7E"
+PASS spi_rx_top: 16 bytes, 14 lines (partial frame discarded, 4-byte frame, SCK noise with CS high ignored, 1 MHz / 100 kHz ok)
+sim/tb.sv:123: $finish called at 111628737071 (1ps)

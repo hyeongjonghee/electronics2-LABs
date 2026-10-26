@@ -1,0 +1,6 @@
+SYNTH done top=spi_rx_top
+IMPL done
+UTIL Slice LUTs = 160
+UTIL Slice Registers = 141
+UTIL Bonded IOB = 14
+RESULT wns=14.907 whs=0.036 bit=1

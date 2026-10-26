@@ -1,0 +1,187 @@
+$date
+	Mon Oct 26 23:40:44 2026
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module tb $end
+$var wire 1 ! a_sck $end
+$upscope $end
+$scope module tb $end
+$var wire 1 " a_mosi $end
+$upscope $end
+$scope module tb $end
+$var wire 1 # a_cs $end
+$upscope $end
+$scope module tb $end
+$var wire 1 $ w_sck $end
+$upscope $end
+$scope module tb $end
+$var wire 1 % w_mosi $end
+$upscope $end
+$scope module tb $end
+$var wire 1 & w_cs $end
+$upscope $end
+$scope module tb $end
+$var wire 8 ' b_led [7:0] $end
+$upscope $end
+$scope module tb $end
+$scope module board_b $end
+$scope module u_spi $end
+$var reg 3 ( bitcnt [2:0] $end
+$upscope $end
+$upscope $end
+$upscope $end
+$scope module tb $end
+$scope module board_b $end
+$scope module u_spi $end
+$var reg 1 ) valid $end
+$upscope $end
+$upscope $end
+$upscope $end
+$scope module tb $end
+$scope module board_b $end
+$scope module u_spi $end
+$var reg 8 * data [7:0] $end
+$upscope $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#9990000000
+$dumpon
+b0 *
+0)
+b0 (
+b0 '
+1&
+0%
+0$
+1#
+0"
+0!
+$end
+#10000009899
+0#
+#10000012899
+0&
+#10001009799
+1!
+#10001012799
+1$
+#10001057305
+b1 (
+#10002009699
+1"
+0!
+#10002012699
+1%
+0$
+#10003009599
+1!
+#10003012599
+1$
+#10003057505
+b10 (
+#10004009499
+0"
+0!
+#10004012499
+0%
+0$
+#10005009399
+1!
+#10005012399
+1$
+#10005057705
+b11 (
+#10006009299
+1"
+0!
+#10006012299
+1%
+0$
+#10007009199
+1!
+#10007012199
+1$
+#10007057905
+b100 (
+#10008009099
+0"
+0!
+#10008012099
+0%
+0$
+#10009008999
+1!
+#10009011999
+1$
+#10009058105
+b101 (
+#10010008899
+1"
+0!
+#10010011899
+1%
+0$
+#10011008799
+1!
+#10011011799
+1$
+#10011058305
+b110 (
+#10012008699
+0"
+0!
+#10012011699
+0%
+0$
+#10013008599
+1!
+#10013011599
+1$
+#10013058505
+b111 (
+#10014008499
+1"
+0!
+#10014011499
+1%
+0$
+#10015008399
+1!
+#10015011399
+1$
+#10015058705
+b0 (
+1)
+b1010101 *
+#10015078707
+b1010101 '
+0)
+#10016008299
+0!
+#10016011299
+0$
+#10017008199
+0"
+1#
+#10017011199
+0%
+1&
+#10040000000
+$dumpoff
+bx *
+x)
+bx (
+bx '
+x&
+x%
+x$
+x#
+x"
+x!
+$end
