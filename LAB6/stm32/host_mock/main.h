@@ -16,5 +16,7 @@ extern PERIPH_TypeDef mock_tim6, mock_usart2, mock_usart3;
 #define BUTTON_ece2_Pin            0x2000U
 #define GPIO_IN_PULLUP_ece2_Pin    0x0001U
 #define GPIO_IN_PULLDOWN_ece2_Pin  0x0002U
+uint32_t HAL_GetTick(void);
+HAL_StatusTypeDef HAL_UART_Receive_IT(UART_HandleTypeDef *h, uint8_t *p, uint16_t n);
 HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *h, const uint8_t *p, uint16_t n, uint32_t t);
 #endif

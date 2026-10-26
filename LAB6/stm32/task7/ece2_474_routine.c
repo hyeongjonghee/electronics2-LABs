@@ -12,8 +12,17 @@
 /* UART 인터럽트 수신 실습 때 필요한 버퍼의 주석을 해제합니다.
  * 파일 범위에 두면 수신 완료 함수에서도 같은 버퍼를 사용할 수 있습니다.
  */
-// static uint8_t uart2_rx_ece2;
+static uint8_t uart2_rx_ece2;
 // static uint8_t uart3_rx_ece2;
+
+/* 여러 글자를 한 번에 받아도 놓치지 않도록 PC 수신 바이트를 모아 두는 링 버퍼(256바이트).
+ * 인터럽트(uart2_isr_p6)가 넣고, 메인 루프(polling_routine)가 꺼냅니다.
+ * head는 ISR만, tail은 메인 루프만 바꾸므로 8비트 인덱스 하나씩이면 충돌하지 않습니다. */
+#define RX_BUF_SIZE 256U
+static volatile uint8_t rx_buf[RX_BUF_SIZE];
+static volatile uint8_t rx_head = 0U;   /* 다음에 넣을 위치 (ISR) */
+static volatile uint8_t rx_tail = 0U;   /* 다음에 꺼낼 위치 (메인 루프) */
+static volatile uint32_t rx_overflow = 0U;
 
 /* 주변장치 초기화가 끝난 뒤, 메인 루프에 들어가기 전에 한 번 호출됩니다. */
 void ece2_474_init(void)
@@ -35,7 +44,7 @@ void ece2_474_init(void)
      * 수신 완료 함수에서 HAL_UART_Receive_IT를 다시 호출해야 다음 입력도 받습니다.
      * getchar·fgets·scanf로 같은 UART를 읽는 방식과 함께 사용하지 않습니다.
      */
-    // HAL_UART_Receive_IT(&huart2, &uart2_rx_ece2, 1U);
+    HAL_UART_Receive_IT(&huart2, &uart2_rx_ece2, 1U);   /* 과제6·7: PC 수신을 인터럽트로 */
 
     /* UART3: FPGA에서 한 바이트를 받으면 uart3_isr_p5()를 호출합니다.
      * 위의 uart3_rx_ece2 버퍼도 주석을 해제해야 합니다.
@@ -49,30 +58,46 @@ void ece2_474_init(void)
 }
 
 /* 메인 루프에서 반복해서 호출됩니다. */
-/* STM32_2_과제7: PC -> MCU -> FPGA
- * MCU는 과제6처럼 받은 바이트를 FPGA로 전달하고, 어떤 LED 명령인지 함께 출력합니다.
- * LED 제어 판단은 FPGA가 합니다: '0'(0x30) 끄기, '1'(0x31) 켜기, '2'(0x32) 반전, 그 밖은 유지.
+/* STM32_2_과제7 (여러 글자 지원): PC -> MCU -> FPGA
+ * 과제6과 같은 방식으로 받은 바이트를 모두 FPGA로 전달합니다.
+ * LED 판단은 FPGA가 합니다: '0' 끄기, '1' 켜기, '2' 반전, 그 밖은 유지.
+ * 한 묶음이 끝나면 보낸 명령과, 그 명령들을 차례로 적용했을 때 LED1이 어떻게 되어야 하는지를 출력합니다.
+ * (예상 상태는 MCU가 계산한 참고값이며, 실제 판단·표시는 FPGA LED가 합니다)
  */
-static const char *led_command_name(uint8_t data)
-{
-    switch (data)
-    {
-    case '0': return "LED 끄기";
-    case '1': return "LED 켜기";
-    case '2': return "LED 반전";
-    default:  return "명령 아님(유지)";
-    }
-}
-
 void polling_routine(void)
 {
-    int ch = getchar();
-    if (ch != EOF)
+    static char line[RX_BUF_SIZE + 1U];
+    static uint32_t count = 0U;
+    static uint32_t fail = 0U;
+    static uint32_t last_ms = 0U;     /* 마지막으로 바이트를 꺼낸 시각 */
+    static uint8_t expect_led = 0U;   /* FPGA 리셋 직후 0이라고 가정 */
+
+    if (rx_tail != rx_head)
     {
-        uint8_t data = (uint8_t)ch;
-        HAL_StatusTypeDef result = HAL_UART_Transmit(&huart3, &data, 1U, 100U);
-        printf("명령 0x%02X -> %s  전송 결과: %d\r\n",
-               (unsigned int)data, led_command_name(data), (int)result);
+        uint8_t data = rx_buf[rx_tail];
+        rx_tail = (uint8_t)(rx_tail + 1U);
+        last_ms = HAL_GetTick();
+        if (HAL_UART_Transmit(&huart3, &data, 1U, 100U) != HAL_OK)
+        {
+            fail++;
+        }
+        if (data == '0') expect_led = 0U;
+        else if (data == '1') expect_led = 1U;
+        else if (data == '2') expect_led ^= 1U;
+        if (count < RX_BUF_SIZE)
+        {
+            line[count] = (data >= 0x20U && data <= 0x7EU) ? (char)data : '.';
+            count++;
+        }
+    }
+    else if (count > 0U && (HAL_GetTick() - last_ms) >= 20U)   /* 20 ms 동안 새 바이트 없음 = 한 묶음 끝 */
+    {
+        line[count] = '\0';
+        printf("명령 \"%s\" (%lu바이트) -> 예상 LED1: %s  (전송 실패 %lu, 버퍼 넘침 %lu)\r\n",
+               line, (unsigned long)count, expect_led ? "켜짐" : "꺼짐",
+               (unsigned long)fail, (unsigned long)rx_overflow);
+        count = 0U;
+        fail = 0U;
     }
 }
 
@@ -99,7 +124,18 @@ static void tim6_isr_p4(void)
  */
 static void uart2_isr_p6(void)
 {
-    /* 실습 코드 작성: PC 수신 버퍼를 처리하고 다음 수신을 요청합니다. */
+    /* 받은 1바이트를 링 버퍼에 넣고 바로 다음 수신을 요청합니다(짧게 끝냄). */
+    uint8_t next = (uint8_t)(rx_head + 1U);
+    if (next != rx_tail)
+    {
+        rx_buf[rx_head] = uart2_rx_ece2;
+        rx_head = next;
+    }
+    else
+    {
+        rx_overflow++;   /* 버퍼가 가득 참: 이 바이트는 버림 */
+    }
+    HAL_UART_Receive_IT(&huart2, &uart2_rx_ece2, 1U);
 }
 
 /* 4. FPGA 통신 UART3의 요청한 수신이 완료되면 호출됩니다. 우선순위: 5.
@@ -161,5 +197,14 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
     else if (huart->Instance == USART3)
     {
         uart3_isr_p5();
+    }
+}
+
+/* 수신 중 오버런·잡음 등 오류가 나면 HAL이 수신을 멈추므로, 여기서 다시 시작합니다. */
+void HAL_UART_ErrorCallback(UART_HandleTypeDef *huart)
+{
+    if (huart->Instance == USART2)
+    {
+        HAL_UART_Receive_IT(&huart2, &uart2_rx_ece2, 1U);
     }
 }

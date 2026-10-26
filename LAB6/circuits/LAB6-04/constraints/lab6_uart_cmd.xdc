@@ -1,5 +1,5 @@
 # Combo II-DLD S75 / LAB6-04 uart_cmd_top (과제6·7 공용)
-# mcu_rxd = BDIO_00(F8) 기본값 -> 당일 장비 핀맵·커넥터 위치 확인 후 setpin6 4 mcu_rxd <핀>.  PORT ENABLE 스위치 ON 필요.
+# mcu_rxd = BDIO_00(F8, PORT A I/O 00, 교재 p.73).  PORT A ENABLE(DIP SW5-2)은 OFF여야 연결됨(버스 스위치 BE 활성 LOW). CLOCK SELECT = 50 MHz.
 set_property PACKAGE_PIN B6 [get_ports clk_50mhz]
 set_property PACKAGE_PIN K4 [get_ports rst_p]
 set_property PACKAGE_PIN F8 [get_ports mcu_rxd]

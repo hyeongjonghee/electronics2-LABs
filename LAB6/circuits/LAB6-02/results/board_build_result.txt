@@ -1,0 +1,6 @@
+SYNTH done top=sram_board_top
+IMPL done
+UTIL Slice LUTs = 11
+UTIL Slice Registers = 8
+UTIL Bonded IOB = 56
+RESULT wns=16.899 whs=0.160 bit=1

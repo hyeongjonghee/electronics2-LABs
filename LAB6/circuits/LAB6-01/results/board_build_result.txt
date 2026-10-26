@@ -3,4 +3,4 @@ IMPL done
 UTIL Slice LUTs = 411
 UTIL Slice Registers = 125
 UTIL Bonded IOB = 13
-RESULT wns=12.860 whs=0.115 bit=1
+RESULT wns=13.281 whs=0.099 bit=1

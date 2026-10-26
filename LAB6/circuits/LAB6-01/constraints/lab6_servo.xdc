@@ -1,10 +1,10 @@
 # Combo II-DLD S75 / LAB6-01 servo_board_top
-# 확인됨: clk B6, DIP SW1 Y1, keypad 4 N1 / 6 N6, LED1~8.  servo 출력 핀은 당일 교재 핀표로 교체(setpin6 1 servo <핀>)
+# 확인됨: clk B6, DIP SW1 Y1, keypad 4 N1 / 6 N6, LED1~8.  servo = AA22 (교재 실습 25 핀표, 2026-10-26 실험에서 E8 -> AA22)
 set_property PACKAGE_PIN B6 [get_ports clk_50mhz]
 set_property PACKAGE_PIN Y1 [get_ports rst_p]
 set_property PACKAGE_PIN N1 [get_ports btn_left]
 set_property PACKAGE_PIN N6 [get_ports btn_right]
-set_property PACKAGE_PIN E8 [get_ports servo]
+set_property PACKAGE_PIN AA22 [get_ports servo]
 set_property PACKAGE_PIN N5 [get_ports {led[0]}]
 set_property PACKAGE_PIN M1 [get_ports {led[1]}]
 set_property PACKAGE_PIN M3 [get_ports {led[2]}]

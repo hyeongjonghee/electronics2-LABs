@@ -12,8 +12,17 @@
 /* UART 인터럽트 수신 실습 때 필요한 버퍼의 주석을 해제합니다.
  * 파일 범위에 두면 수신 완료 함수에서도 같은 버퍼를 사용할 수 있습니다.
  */
-// static uint8_t uart2_rx_ece2;
+static uint8_t uart2_rx_ece2;
 // static uint8_t uart3_rx_ece2;
+
+/* 여러 글자를 한 번에 받아도 놓치지 않도록 PC 수신 바이트를 모아 두는 링 버퍼(256바이트).
+ * 인터럽트(uart2_isr_p6)가 넣고, 메인 루프(polling_routine)가 꺼냅니다.
+ * head는 ISR만, tail은 메인 루프만 바꾸므로 8비트 인덱스 하나씩이면 충돌하지 않습니다. */
+#define RX_BUF_SIZE 256U
+static volatile uint8_t rx_buf[RX_BUF_SIZE];
+static volatile uint8_t rx_head = 0U;   /* 다음에 넣을 위치 (ISR) */
+static volatile uint8_t rx_tail = 0U;   /* 다음에 꺼낼 위치 (메인 루프) */
+static volatile uint32_t rx_overflow = 0U;
 
 /* 주변장치 초기화가 끝난 뒤, 메인 루프에 들어가기 전에 한 번 호출됩니다. */
 void ece2_474_init(void)
@@ -35,7 +44,7 @@ void ece2_474_init(void)
      * 수신 완료 함수에서 HAL_UART_Receive_IT를 다시 호출해야 다음 입력도 받습니다.
      * getchar·fgets·scanf로 같은 UART를 읽는 방식과 함께 사용하지 않습니다.
      */
-    // HAL_UART_Receive_IT(&huart2, &uart2_rx_ece2, 1U);
+    HAL_UART_Receive_IT(&huart2, &uart2_rx_ece2, 1U);   /* 과제6·7: PC 수신을 인터럽트로 */
 
     /* UART3: FPGA에서 한 바이트를 받으면 uart3_isr_p5()를 호출합니다.
      * 위의 uart3_rx_ece2 버퍼도 주석을 해제해야 합니다.
@@ -49,29 +58,42 @@ void ece2_474_init(void)
 }
 
 /* 메인 루프에서 반복해서 호출됩니다. */
-/* STM32_2_과제6: PC -> MCU -> FPGA -> PC
- * PC에서 받은 한 바이트를 UART3(PC10, 9600 8N1)로 FPGA에 그대로 전달합니다.
- * FPGA는 받은 문자를 자기 USB-UART로 PC에 다시 내보냅니다(두 COM 포트 비교).
+/* STM32_2_과제6 (여러 글자 지원): PC -> MCU -> FPGA -> PC
+ * PC에서 받은 바이트를 UART2 수신 인터럽트로 링 버퍼에 모으고,
+ * 메인 루프에서 하나씩 꺼내 UART3(PC10, 9600 8N1)로 FPGA에 그대로 전달합니다.
+ * 20 ms 동안 새 바이트가 없으면(한 묶음 전송이 끝나면) 보낸 내용을 한 줄로 출력합니다.
+ * getchar는 쓰지 않습니다(UART2 인터럽트 수신과 함께 쓰지 않음).
  */
 void polling_routine(void)
 {
-    int ch = getchar();
-    if (ch != EOF)
+    static char line[RX_BUF_SIZE + 1U];
+    static uint32_t count = 0U;
+    static uint32_t fail = 0U;
+    static uint32_t last_ms = 0U;     /* 마지막으로 바이트를 꺼낸 시각 */
+
+    if (rx_tail != rx_head)
     {
-        uint8_t data = (uint8_t)ch;
-        /* 1바이트 송신, 최대 100 ms 대기. 결과 0(HAL_OK)은 "MCU가 다 보냈다"는 뜻일 뿐,
-         * FPGA가 받았는지는 FPGA 쪽 COM 포트 출력으로 따로 확인합니다. */
-        HAL_StatusTypeDef result = HAL_UART_Transmit(&huart3, &data, 1U, 100U);
-        if (data >= 0x20U && data <= 0x7EU)
+        uint8_t data = rx_buf[rx_tail];
+        rx_tail = (uint8_t)(rx_tail + 1U);
+        last_ms = HAL_GetTick();
+        if (HAL_UART_Transmit(&huart3, &data, 1U, 100U) != HAL_OK)
         {
-            printf("FPGA로 보냄: '%c' (0x%02X)  전송 결과: %d\r\n",
-                   (char)data, (unsigned int)data, (int)result);
+            fail++;
         }
-        else
+        if (count < RX_BUF_SIZE)
         {
-            printf("FPGA로 보냄: (제어 문자) (0x%02X)  전송 결과: %d\r\n",
-                   (unsigned int)data, (int)result);
+            /* 화면에 찍히지 않는 제어 문자(CR·LF 등)는 '.'로 표시 */
+            line[count] = (data >= 0x20U && data <= 0x7EU) ? (char)data : '.';
+            count++;
         }
+    }
+    else if (count > 0U && (HAL_GetTick() - last_ms) >= 20U)   /* 20 ms 동안 새 바이트 없음 = 한 묶음 끝 */
+    {
+        line[count] = '\0';
+        printf("FPGA로 보냄: \"%s\" (%lu바이트, 전송 실패 %lu, 버퍼 넘침 %lu)\r\n",
+               line, (unsigned long)count, (unsigned long)fail, (unsigned long)rx_overflow);
+        count = 0U;
+        fail = 0U;
     }
 }
 
@@ -98,7 +120,18 @@ static void tim6_isr_p4(void)
  */
 static void uart2_isr_p6(void)
 {
-    /* 실습 코드 작성: PC 수신 버퍼를 처리하고 다음 수신을 요청합니다. */
+    /* 받은 1바이트를 링 버퍼에 넣고 바로 다음 수신을 요청합니다(짧게 끝냄). */
+    uint8_t next = (uint8_t)(rx_head + 1U);
+    if (next != rx_tail)
+    {
+        rx_buf[rx_head] = uart2_rx_ece2;
+        rx_head = next;
+    }
+    else
+    {
+        rx_overflow++;   /* 버퍼가 가득 참: 이 바이트는 버림 */
+    }
+    HAL_UART_Receive_IT(&huart2, &uart2_rx_ece2, 1U);
 }
 
 /* 4. FPGA 통신 UART3의 요청한 수신이 완료되면 호출됩니다. 우선순위: 5.
@@ -160,5 +193,14 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
     else if (huart->Instance == USART3)
     {
         uart3_isr_p5();
+    }
+}
+
+/* 수신 중 오버런·잡음 등 오류가 나면 HAL이 수신을 멈추므로, 여기서 다시 시작합니다. */
+void HAL_UART_ErrorCallback(UART_HandleTypeDef *huart)
+{
+    if (huart->Instance == USART2)
+    {
+        HAL_UART_Receive_IT(&huart2, &uart2_rx_ece2, 1U);
     }
 }

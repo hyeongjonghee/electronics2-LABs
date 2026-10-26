@@ -4,11 +4,11 @@ module tb;
     reg clk=0; always #10 clk = ~clk;                   // 50 MHz
     reg wr=0, rd=0; reg [3:0] address=0, data_in=0;
     wire c_cs, c_oe, c_we; wire [17:0] c_a; wire [15:0] c_bus; wire [7:0] c_led;
-    wire b_cs, b_oe, b_we, b_ub, b_lb; wire [17:0] b_a; wire [15:0] b_bus; wire [7:0] b_led;
+    wire b_cs, b_oe, b_we; wire [17:0] b_a; wire [15:0] b_bus; wire [7:0] b_led;
     sram           class_dut(wr, rd, address, data_in, c_cs, c_oe, c_we, c_a, c_bus, c_led);
     async_sram_model chip_class(c_cs, c_oe, c_we, 1'b0, 1'b0, c_a, c_bus);
-    sram_board_top board_dut(clk, wr, rd, address, data_in, b_cs, b_oe, b_we, b_ub, b_lb, b_a, b_bus, b_led);
-    async_sram_model chip_board(b_cs, b_oe, b_we, b_ub, b_lb, b_a, b_bus);
+    sram_board_top board_dut(clk, wr, rd, address, data_in, b_cs, b_oe, b_we, b_a, b_bus, b_led);
+    async_sram_model chip_board(b_cs, b_oe, b_we, 1'b0, 1'b0, b_a, b_bus);   // UB/LB = 보드에서 GND
     integer i, class_bad = 0;
     initial begin
         #1000;
